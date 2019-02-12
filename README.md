@@ -7,9 +7,9 @@ There is an open-sourced Java project which was created as a part of the subject
 ## Authors
 
 * **Yehor Safonov** - *programming, wiki documentation, Git management, Graphical user interface;*
-* **David Karger** - *programming, testing, RNG modules;*
 * **Pavel Mazánek** - *programming, RNG modules, documentation, research;*
-* **David Pecl** - *RNG modules architecture, documentation, research;*
+* **David Karger** - *programming, testing, RNG modules;*
+* **David Pecl** - *RNG modules architecture, documentation, research.*
 
 
 ## License
