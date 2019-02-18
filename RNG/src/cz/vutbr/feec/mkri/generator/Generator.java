@@ -5,16 +5,18 @@ public class Generator {
 	
 	private int minimumNumber;
 	private int maximumNumber;
-	private int randomNumber;
 	
-	public Generator(int min, int max){
-		minimumNumber = min;
-		maximumNumber = max;
-		randomNumber = ThreadLocalRandom.current().nextInt(minimumNumber, maximumNumber + 1);
+	public Generator(){
+		minimumNumber = 0;
+		maximumNumber = 100;
 	}
 	
+	public void setMinimumNumber(int minimumNumber) { this.minimumNumber = minimumNumber; }
+
+	public void setMaximumNumber(int maximumNumber) { this.maximumNumber = maximumNumber; }
+
 	public int getRandomNumber(){
-		return randomNumber;
+		return ThreadLocalRandom.current().nextInt(minimumNumber, maximumNumber + 1);
 	}
 }
 

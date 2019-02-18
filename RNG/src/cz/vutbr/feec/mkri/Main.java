@@ -14,20 +14,21 @@ import javafx.stage.Stage;
  * method. As a root of the RNG project is used a fxml document. The project contains
  * an application.css file, which defines custom styles for GUI.
  * 
- * @author Yehor Safonov; id185942
+ * @author Yehor Safonov; id: 185942
+ * @author David Karger; id: 186526
  */
 
 public class Main extends Application{
-
+	
 	@Override
 	public void start(Stage primaryStage) {
 		Parent root = null;
 		try {
 			root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
-		Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-		primaryStage.setScene(scene);
-		primaryStage.show();
+			Scene scene = new Scene(root);
+			
+	        primaryStage.setScene(scene);
+			primaryStage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
