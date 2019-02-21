@@ -94,14 +94,17 @@ public class MainControllers implements Initializable {
 	 * This method is called when a user moves his mouse on the generate button. While
 	 * calling a new instance of the class Generator is created.
 	 */
+	//IDEA: how long was the mouse of the area
 	public void mouseGenerate(String eventType, int areaX, int areaY, int screenX, int screenY, int mouseClicks) {
 		System.out.println("Mouse Event: " + eventType + '\n' + "Mouse X:Y - " + areaX + ':' + areaY);
 		this.mouseGenerator.setMin(Integer.parseInt(this.minNumber.getText()));
 		this.mouseGenerator.setMax(Integer.parseInt(this.maxNumber.getText()));
-		if(eventType.equals("MOUSE_CLICKED"))
+		if(eventType.equals("MOUSE_PRESSED"))
 			duration=(int)System.currentTimeMillis();
-		if(eventType.equals("MOUSE_PRESSED") || eventType.equals("MOUSE_RELEASED"))
+		else if(eventType.equals("MOUSE_RELEASED"))
 			this.randomNumber.setText(Integer.toString(this.mouseGenerator.getRandomNumber(eventType,areaX,areaY,screenX,screenY,mouseClicks,(int)System.currentTimeMillis()-duration)));
+		else
+			this.randomNumber.setText(Integer.toString(this.mouseGenerator.getRandomNumber(eventType,areaX,areaY,screenX,screenY,mouseClicks,0)));		
 	}
 	
 	/*

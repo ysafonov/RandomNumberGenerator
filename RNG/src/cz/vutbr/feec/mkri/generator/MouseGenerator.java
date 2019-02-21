@@ -21,12 +21,10 @@ public class MouseGenerator {
 	/*
 	 * Some values to create some more salt to the generation.
 	 */
-	private final int MOUSE_CLICKED = 101;
-	private final int MOUSE_PRESSED = 101;
 	private final int MOUSE_RELEASED = 101;
-	private final int MOUSE_MOVED = 101;
-	private final int MOUSE_ENTERED = 101;
-	private final int MOUSE_EXITED = 101;
+	private final int MOUSE_MOVED = 722;
+	private final int MOUSE_ENTERED = 441;
+	private final int MOUSE_EXITED = 327;
 	
 	private int min;
 	private int max;
@@ -62,33 +60,40 @@ public class MouseGenerator {
 	//TODO: add other types with possible other calculation and use mouseClicks and duration
 	public int getRandomNumber(String type, int areaX, int areaY, int screenX, int screenY, int mouseClicks, int duration) {
 		int sum = 0;
-		//switch(type) {
-		//case "MOUSE_MOVED":
+		switch(type) {
+		case "MOUSE_MOVED":
 			for (int i = 0; i < previousAreaX.length; i++)
 				sum += ((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *A)/MOUSE_MOVED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *B)/MOUSE_MOVED;
-		/*	break;
-		case "MOUSE_CLICKED":
-			break;
-		case "MOUSE_PRESSED":
 			break;
 		case "MOUSE_RELEASED":
+			for (int i = 0; i < previousAreaX.length; i++)
+				sum += duration*((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *A)/MOUSE_RELEASED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *B)/MOUSE_RELEASED;
 			break;
 		case "MOUSE_ENTERED":
+			for (int i = 0; i < previousAreaX.length; i++)
+				sum += ((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *A)/MOUSE_ENTERED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *B)/MOUSE_ENTERED;
 			break;
 		case "MOUSE_EXITED":
+			for (int i = 0; i < previousAreaX.length; i++)
+				sum += ((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *A)/MOUSE_EXITED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *B)/MOUSE_EXITED;
 			break;
 		default:
 			sum = areaX*areaY*screenX*screenY;
 			break;
-		}*/
+		}
 		this.previousAreaX[this.position] = areaX;
 		this.previousAreaY[this.position] = areaY;
 		this.previousScreenX[this.position] = screenX;
 		this.previousScreenY[this.position] = screenY;
 		this.position = (this.position+1)%this.previousAreaX.length;
-		if(sum>min)
-			return (sum)%(this.max-this.min)+min;
-		else
-			return Math.abs(sum)%(this.max-this.min)+min;
+		if(this.min != 0) {
+			if(sum>this.min)
+				return sum%this.max;
+			if(sum<this.min)
+				while(sum<this.min)
+					sum+=Math.abs(this.min);
+			return sum;
+		}
+		return Math.abs(sum)%this.max;
 	}
 }
