@@ -3,13 +3,10 @@ package cz.vutbr.feec.mkri;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import cz.vutbr.feec.mkri.generator.Generator;
 import cz.vutbr.feec.mkri.generator.MouseGenerator;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -43,24 +40,19 @@ public class MainControllers implements Initializable {
 	private final int RETENTION = 25;
 
 	@FXML
-	private Button generateButton;
-	@FXML
 	private Label randomNumber;
 	@FXML
 	private TextField minNumber;
 	@FXML
 	private TextField maxNumber;
 	@FXML
-	private CheckBox useMouse;
-	@FXML
 	private Label mouseAreaText;
 	@FXML
 	private Rectangle mouseArea;
 	
-	private Generator generator;
 	private MouseGenerator mouseGenerator;
 	
-	private int duration = 0;
+	private int click_duration = 0;
 	/*
 	 * This method is called when the application starts.
 	 * 
@@ -69,39 +61,32 @@ public class MainControllers implements Initializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		this.generator = new Generator();
 		this.mouseGenerator = new MouseGenerator(this.RETENTION);
-		this.unChecked();
 		
 		this.mouseArea.setOnMouseClicked(mouseHandler);
         this.mouseArea.setOnMouseDragged(mouseHandler);
-        mouseArea.setOnMouseEntered(mouseHandler);
-        mouseArea.setOnMouseExited(mouseHandler);
-        mouseArea.setOnMouseMoved(mouseHandler);
-        mouseArea.setOnMousePressed(mouseHandler);
-        mouseArea.setOnMouseReleased(mouseHandler);
-	}
-	
-	/*
-	 * This method is called when a user clicks on the generate button. While
-	 * calling a new instance of the class Generator is created.
-	 */
-	public void generate() {
-		randomNumber.setText(Integer.toString(generator.getRandomNumber()));
+        this.mouseArea.setOnMouseEntered(mouseHandler);
+        this.mouseArea.setOnMouseExited(mouseHandler);
+        this.mouseArea.setOnMouseMoved(mouseHandler);
+        this.mouseArea.setOnMousePressed(mouseHandler);
+        this.mouseArea.setOnMouseReleased(mouseHandler);
 	}
 	
 	/*
 	 * This method is called when a user moves his mouse on the generate button. While
 	 * calling a new instance of the class Generator is created.
 	 */
+	//IDEA: how long was the mouse of the area
 	public void mouseGenerate(String eventType, int areaX, int areaY, int screenX, int screenY, int mouseClicks) {
 		System.out.println("Mouse Event: " + eventType + '\n' + "Mouse X:Y - " + areaX + ':' + areaY);
 		this.mouseGenerator.setMin(Integer.parseInt(this.minNumber.getText()));
 		this.mouseGenerator.setMax(Integer.parseInt(this.maxNumber.getText()));
-		if(eventType.equals("MOUSE_CLICKED"))
-			duration=(int)System.currentTimeMillis();
-		if(eventType.equals("MOUSE_PRESSED") || eventType.equals("MOUSE_RELEASED"))
-			this.randomNumber.setText(Integer.toString(this.mouseGenerator.getRandomNumber(eventType,areaX,areaY,screenX,screenY,mouseClicks,(int)System.currentTimeMillis()-duration)));
+		if(eventType.equals("MOUSE_PRESSED"))
+			click_duration=(int)System.currentTimeMillis();
+		else if(eventType.equals("MOUSE_RELEASED"))
+			this.randomNumber.setText(Integer.toString(this.mouseGenerator.getRandomNumber(eventType,areaX,areaY,screenX,screenY,mouseClicks,(int)System.currentTimeMillis()-click_duration)));
+		else
+			this.randomNumber.setText(Integer.toString(this.mouseGenerator.getRandomNumber(eventType,areaX,areaY,screenX,screenY,mouseClicks,0)));		
 	}
 	
 	/*
@@ -112,7 +97,7 @@ public class MainControllers implements Initializable {
 		// TODO
 		System.out.println("TODO: Generate Menu Action");
 	}
-
+	
 	/*
 	 * This method is called when a user clicks on the Compare button (Bar menu item).
 	 * After the click a user should be able to compare different RNGs.
@@ -121,7 +106,7 @@ public class MainControllers implements Initializable {
 		// TODO
 		System.out.println("TODO: Compare Menu Action");
 	}
-
+	
 	/*
 	 * This method is called when a user clicks on the information button (Bar menu item).
 	 */
@@ -129,41 +114,12 @@ public class MainControllers implements Initializable {
 		// TODO
 		System.out.println("TODO: Info Menu Action");
 	}
-
+	
 	/*
 	 * This method is called when a user clicks on the help button (Bar menu item).
 	 */
 	public void helpMenu() {
 		// TODO
 		System.out.println("TODO: Help Menu Action");
-	}
-
-	/*
-	 * This method is called when the CheckBox useMouse is selected or unselected.
-	 * This method then calls isChecked or unChecked depending on the status of the CheckBox.
-	 */
-	public void checkMouse() {
-		if(this.useMouse.isSelected()) {
-			System.out.println("Mouse input is selected.");
-			this.isChecked();
-		}
-		else {
-			System.out.println("Mouse input is not selected.");
-			this.unChecked();
-		}
-	}
-	
-	// Method to enable the mouse detection movement area
-	private void isChecked() {
-		this.mouseArea.setVisible(true);
-		this.mouseAreaText.setVisible(true);
-		this.mouseArea.setDisable(false);
-	}
-	
-	// Method to enable the mouse detection movement area
-	private void unChecked() {
-		this.mouseAreaText.setVisible(false);
-		this.mouseArea.setVisible(false);
-		this.mouseArea.setDisable(true);
 	}
 }
