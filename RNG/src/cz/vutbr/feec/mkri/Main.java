@@ -7,7 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
 /**
  * This java class represents project's main class. The class implements 
  * two methods the {@link #main(String[])} method and the {@link #start(Stage)} 
@@ -37,4 +36,5 @@ public class Main extends Application{
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
 }

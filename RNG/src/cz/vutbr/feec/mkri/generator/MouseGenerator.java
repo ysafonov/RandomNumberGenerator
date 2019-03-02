@@ -18,6 +18,8 @@ public class MouseGenerator {
 	 * - TBA
 	 */
 	
+	private ComponentGenerator com_gen;
+	
 	private final int A = 186526;
 	private final int B = 185942;
 	
@@ -45,6 +47,9 @@ public class MouseGenerator {
 	private int position;
 	
 	public MouseGenerator(int retention) {
+		this.com_gen = new ComponentGenerator();
+		this.com_gen.start();
+		
 		this.min = 0;
 		this.max = 100;
 		this.previousAreaX = new int [retention];
@@ -95,6 +100,9 @@ public class MouseGenerator {
 		this.previousScreenY[this.position] = screenY;
 		this.position = (this.position+1)%this.previousAreaX.length;
 		
+		//Getting information from components slows the generation MASSIVLY:
+		//this.com_gen.getRandom(1);
+		
 		sum = this.calculate_MD5(sum);
 		if(this.min != 0) {
 			if(sum>this.min)
@@ -107,7 +115,7 @@ public class MouseGenerator {
 		return Math.abs(sum)%this.max;
 	}
 	
-	private int calculate_MD5(int input) {
+	public int calculate_MD5(int input) {
 		try { return (new BigInteger(this.md.digest(String.valueOf(input).getBytes()))).intValue(); }
 		catch(Exception e) { e.printStackTrace(); }
 		return 0;
