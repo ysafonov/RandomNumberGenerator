@@ -8,16 +8,22 @@ import com.profesorfalken.jsensors.JSensors;
 import com.profesorfalken.jsensors.model.components.*;
 import com.profesorfalken.jsensors.model.sensors.*;
 
-/*
+/**
  * This Class gathers the Users Computer Component information and returns them a number.
- * 
  * The returning random number is generated using an MD5 hash.
+ * 
+ * @author Yehor Safonov; id: 185942
+ * @author David Karger; id: 186526
+ * 
+ * Author of the jSensors library:
+ * @author @profesorfalken
+ * {https://github.com/profesorfalken/jSensors}
  */
 
 /*
  * Component.name = Returns serial name of the component 
- *                  Example: "Intel Core I7-9700L", "NVIDIA GeForce GCX 1080" and "WDC WDS500G2B0B"
- *                  (last one is a Western Digital 500GB M.2 SSD)
+ *                  Examples: "Intel Core I7-9700K", "NVIDIA GeForce GCX 1080" and "WDC WDS500G2B0B"
+ *                  (last one is a Western Digital 500GB M.2 SSD disk)
  * 
  * Processor sensors (cpu.sensors.*):
  *  - temperatures [List<Temperature>] = Temperatures of each core
@@ -45,7 +51,10 @@ import com.profesorfalken.jsensors.model.sensors.*;
  *  - fans
  */
 
-// Pridat vlaknovani, aby bylo generovani v hlavni funkci rychlejsi
+/*
+ * Getting information from components slows the generation MASSIVLY.
+ * So its gathered in another thread.
+ */
 
 public class ComponentGenerator extends Thread {
 	
