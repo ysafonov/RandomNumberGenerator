@@ -7,12 +7,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
 /**
- * This java class represents project's main class. The class implements 
+ * This java class represents project's main class.The class implements 
  * two methods the {@link #main(String[])} method and the {@link #start(Stage)} 
- * method. As a root of the RNG project is used a fxml document. The project contains
- * an application.css file, which defines custom styles for GUI.
+ * method. As a root of the RNG project a fxml document is used.
  * 
  * @author Yehor Safonov; id: 185942
  * @author David Karger; id: 186526
@@ -37,4 +35,5 @@ public class Main extends Application{
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
 }
