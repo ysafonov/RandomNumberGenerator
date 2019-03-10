@@ -5,7 +5,7 @@ There is an open-sourced Java project which was created as a part of the subject
 
 ## Project description
 
-This section provides information about application structure, its use cases and uml class diagrams.
+This section provides information about the application structure, its use cases and uml class diagrams.
 See project's [wiki description](https://github.com/ysafonov/RandomNumberGenerator/wiki) for more details.
 
 ## Authors
