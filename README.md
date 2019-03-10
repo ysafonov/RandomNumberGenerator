@@ -3,6 +3,10 @@
 
 There is an open-sourced Java project which was created as a part of the subject Cryptography in informatics ([MKRI](https://www.vutbr.cz/en/students/courses/detail/133999)) at The Faculty of Electrical Engineering, [Brno University of Technology](https://www.vutbr.cz/en/) (BUT). This project represents the application for generating random numbers which are widely used in modern cryptography.
 
+## Project description
+
+This section provides information about application structure, its use cases and uml class diagrams.
+See project's [wiki description](https://github.com/ysafonov/RandomNumberGenerator/wiki) for more details.
 
 ## Authors
 
@@ -10,10 +14,6 @@ There is an open-sourced Java project which was created as a part of the subject
 * **Pavel Mazánek** - *programming, RNG modules, documentation, research;*
 * **David Karger** - *programming, testing, RNG modules;*
 * **David Pecl** - *RNG modules architecture, documentation, research.*
-
-## Project description
-
-This section provides information about application structure, its use cases and uml class diagrams.
 
 ## License
 
