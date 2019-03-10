@@ -11,6 +11,11 @@ There is an open-sourced Java project which was created as a part of the subject
 * **David Karger** - *programming, testing, RNG modules;*
 * **David Pecl** - *RNG modules architecture, documentation, research.*
 
+## Project description
+
+This section provides information about application structure, its use cases and uml class diagrams
+
+![Use Case Diagram](https://github.com/ysafonov/RandomNumberGenerator/tree/master/Diagrams/class-diagram.png)
 
 ## License
 
