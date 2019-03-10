@@ -22,13 +22,14 @@ public class MouseGenerator {
 	/*
 	 * Variable used for operating the hardware sensors
 	 */
-	//private ComponentGenerator com_gen;
+	// private ComponentGenerator componentGenerator;
 	
 	/*
 	 * Variables for making the output more random
 	 */
-	private final int A = 186526;
-	private final int B = 185942;
+	private final int initialSeedA = 186526;
+	private final int initialSeedB = 185942;
+
 	
 	/*
 	 * Some values to create some more salt to the generation.
@@ -41,8 +42,8 @@ public class MouseGenerator {
 	/*
 	 * The limits of the output
 	 */
-	private int min;
-	private int max;
+	private int minBoundNumber;
+	private int maxBoundNumber;
 	
 	/*
 	 * Java.Security class for Cryptographic algorithms
@@ -65,12 +66,12 @@ public class MouseGenerator {
 	public MouseGenerator(int retention) {
 		
 		// Initialization of the Hardware sensor operating class
-		//this.com_gen = new ComponentGenerator();
+		// this.componentGenerator = new ComponentGenerator();
 		// Starting a new thread that operates a method for data retrieval from hardware sensors.
-		//this.com_gen.start();
+		// this.componentGenerator.start();
 		
-		this.min = -100;
-		this.max = 100;
+		this.minBoundNumber = -100;
+		this.maxBoundNumber = 100;
 		
 		this.previousAreaX = new int [retention];
 		this.previousScreenX = new int [retention];
@@ -85,8 +86,8 @@ public class MouseGenerator {
 	}
 	
 	// Set the range of the random number
-	public void setMin(int min) { this.min = min; }
-	public void setMax(int max) { this.max = max; }
+	public void setMinBoundNumber(int min) { this.minBoundNumber = min; }
+	public void setMaxBoundNumber(int max) { this.maxBoundNumber = max; }
 	
 	/*
 	 * This method generates random numbers based on previous inputs.
@@ -105,27 +106,27 @@ public class MouseGenerator {
 		case "MOUSE_MOVED":
 			if(mouseClicks==0) {
 				for (int i = 0; i < previousAreaX.length; i++)
-					sum += ((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *A)/MOUSE_MOVED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *B)/MOUSE_MOVED;
+					sum += ((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *initialSeedA)/MOUSE_MOVED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *initialSeedB)/MOUSE_MOVED;
 			} else {
 				for (int i = 0; i < previousAreaX.length; i++)
-					sum += mouseClicks*((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *A)/MOUSE_MOVED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *B)/MOUSE_MOVED;
+					sum += mouseClicks*((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *initialSeedA)/MOUSE_MOVED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *initialSeedB)/MOUSE_MOVED;
 			}
 			break;
 			
 		// A mouse button has been released
 		case "MOUSE_RELEASED":
 			for (int i = 0; i < previousAreaX.length; i++)
-				sum += duration*mouseClicks*mouseButton*((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *A)/MOUSE_RELEASED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *B)/MOUSE_RELEASED;
+				sum += duration*mouseClicks*mouseButton*((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *initialSeedA)/MOUSE_RELEASED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *initialSeedB)/MOUSE_RELEASED;
 			break;
 			
 		// Mouse has entered the area
 		case "MOUSE_ENTERED":
 			if(mouseClicks==0) {
 				for (int i = 0; i < previousAreaX.length; i++)
-					sum += duration*(((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *A)/MOUSE_ENTERED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *B)/MOUSE_ENTERED);
+					sum += duration*(((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *initialSeedA)/MOUSE_ENTERED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *initialSeedB)/MOUSE_ENTERED);
 			} else {
 				for (int i = 0; i < previousAreaX.length; i++)
-					sum += duration*mouseClicks*((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *A)/MOUSE_ENTERED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *B)/MOUSE_ENTERED;
+					sum += duration*mouseClicks*((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *initialSeedA)/MOUSE_ENTERED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *initialSeedB)/MOUSE_ENTERED;
 			}
 			break;
 			
@@ -133,10 +134,10 @@ public class MouseGenerator {
 		case "MOUSE_EXITED":
 			if(mouseClicks==0) {
 				for (int i = 0; i < previousAreaX.length; i++)
-					sum += duration*((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *A)/MOUSE_EXITED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *B)/MOUSE_EXITED;
+					sum += duration*((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *initialSeedA)/MOUSE_EXITED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *initialSeedB)/MOUSE_EXITED;
 			} else {
 				for (int i = 0; i < previousAreaX.length; i++)
-					sum += mouseClicks*duration*(((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *A)/MOUSE_EXITED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *B)/MOUSE_EXITED);
+					sum += mouseClicks*duration*(((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *initialSeedA)/MOUSE_EXITED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *initialSeedB)/MOUSE_EXITED);
 			}
 			break;
 			
@@ -165,16 +166,16 @@ public class MouseGenerator {
 		/*
 		 * Regulating output to be inside the minimum and maximum numbers inputed in the GUI
 		 */
-		if(this.min != 0) {
-			if(sum>this.min)
-				return sum%this.max;
-			if(sum<this.min)
-				while(sum<this.min)
-					sum+=Math.abs(this.min);
+		if(this.minBoundNumber != 0) {
+			if(sum>this.minBoundNumber)
+				return sum%this.maxBoundNumber;
+			if(sum<this.minBoundNumber)
+				while(sum<this.minBoundNumber)
+					sum+=Math.abs(this.minBoundNumber);
 			return sum;
 		}
 		
-		return Math.abs(sum)%this.max;
+		return Math.abs(sum)%this.maxBoundNumber;
 	}
 	
 	/*

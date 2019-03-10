@@ -102,14 +102,14 @@ public class MainControllers implements Initializable {
 	 */
 	public void mouseGenerate(String eventType, int areaX, int areaY, int screenX, int screenY, int mouseClicks, int mouseButton) {
 		System.out.println("Mouse Event: " + eventType + '\n' + "Mouse X:Y - " + areaX + ':' + areaY);
-		this.mouseGenerator.setMin(Integer.parseInt(this.minNumber.getText()));
-		this.mouseGenerator.setMax(Integer.parseInt(this.maxNumber.getText()));
+		this.mouseGenerator.setMinBoundNumber(Integer.parseInt(this.minNumber.getText()));
+		this.mouseGenerator.setMaxBoundNumber(Integer.parseInt(this.maxNumber.getText()));
 		//IDEA: how long was the mouse of the area
 		switch(eventType) {
 		
 		// Used when the mouse is moved inside the area
 		case "MOUSE_MOVED":
-			this.randomNumber.setText(Integer.toString(this.mouseGenerator.getRandomNumber(eventType,areaX,areaY,screenX,screenY,mouseClicks,0,0)));
+			setRandomNumber(this.mouseGenerator.getRandomNumber(eventType,areaX,areaY,screenX,screenY,mouseClicks,0,0));
 			break;
 			
 		// Used when a button is pressed down inside the area
@@ -119,24 +119,24 @@ public class MainControllers implements Initializable {
 			
 		// Used when the pressed button is released inside the area
 		case "MOUSE_RELEASED":
-			this.randomNumber.setText(Integer.toString(this.mouseGenerator.getRandomNumber(eventType,areaX,areaY,screenX,screenY,mouseClicks,(int)System.currentTimeMillis()-click_duration, mouseButton)));
+			setRandomNumber(this.mouseGenerator.getRandomNumber(eventType,areaX,areaY,screenX,screenY,mouseClicks,(int)System.currentTimeMillis()-click_duration, mouseButton));
 			break;
 			
 		// Used when the mouse leaves the area
 		case "MOUSE_EXITED":
 			this.exit_duration=(int)System.currentTimeMillis();
-			this.randomNumber.setText(Integer.toString(this.mouseGenerator.getRandomNumber(eventType,areaX,areaY,screenX,screenY,mouseClicks,(int)System.currentTimeMillis()-area_duration, 0)));
+			setRandomNumber(this.mouseGenerator.getRandomNumber(eventType,areaX,areaY,screenX,screenY,mouseClicks,(int)System.currentTimeMillis()-area_duration, 0));
 			break;
 			
 		// Used when the mouse enters the area
 		case "MOUSE_ENTERED":
 			this.area_duration=(int)System.currentTimeMillis();
-			this.randomNumber.setText(Integer.toString(this.mouseGenerator.getRandomNumber(eventType,areaX,areaY,screenX,screenY,mouseClicks,(int)System.currentTimeMillis()-exit_duration, 0)));
+			setRandomNumber(this.mouseGenerator.getRandomNumber(eventType,areaX,areaY,screenX,screenY,mouseClicks,(int)System.currentTimeMillis()-exit_duration, 0));
 			break;
 		
 		// Just to be safe that something is generated
 		default:
-			this.randomNumber.setText(Integer.toString(this.mouseGenerator.getRandomNumber(eventType,areaX,areaY,screenX,screenY,mouseClicks,0, 0)));
+			setRandomNumber(this.mouseGenerator.getRandomNumber(eventType,areaX,areaY,screenX,screenY,mouseClicks,0, 0));
 			break;
 		}
 	}
@@ -173,5 +173,12 @@ public class MainControllers implements Initializable {
 	public void helpMenu() {
 		// TODO
 		System.out.println("TODO: Help Menu Action");
+	}
+	
+	/*
+	 * This method is used to set text field contained randomly generated value.
+	 */
+	private void setRandomNumber(int number){
+		this.randomNumber.setText(Integer.toString(number));
 	}
 }
