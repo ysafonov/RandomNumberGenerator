@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	@author Yehor Safonov; id: 185942
+	@author David Karger; id: 186526
+-->
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vutbr.feec.mkri.controllers.MainControllers">
+   <children>
+      <BorderPane prefHeight="466.0" prefWidth="600.0">
+         <top>
+            <MenuBar prefHeight="25.0" prefWidth="650.0" BorderPane.alignment="CENTER">
+               <menus>
+                  <Menu mnemonicParsing="false" text="Menu">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#generateMenu" text="Generator" />
+                        <MenuItem mnemonicParsing="false" onAction="#compareMenu" text="Comparator" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Help">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#infoMenu" text="Information" />
+                        <MenuItem mnemonicParsing="false" onAction="#helpMenu" text="Help" />
+                     </items>
+                  </Menu>
+               </menus>
+            </MenuBar>
+         </top>
+         <center>
+            <AnchorPane fx:id="rootWindow" cacheShape="false" prefHeight="118.0" prefWidth="600.0" style="-fx-background-color: #d0d0d0;" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
