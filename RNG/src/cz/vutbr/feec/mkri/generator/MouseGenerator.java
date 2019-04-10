@@ -22,7 +22,7 @@ public class MouseGenerator {
 	/*
 	 * Variable used for operating the hardware sensors
 	 */
-	// private ComponentGenerator componentGenerator;
+	private ComponentGenerator componentGenerator;
 	
 	/*
 	 * Variables for making the output more random
@@ -66,9 +66,9 @@ public class MouseGenerator {
 	public MouseGenerator(int retention) {
 		
 		// Initialization of the Hardware sensor operating class
-		// this.componentGenerator = new ComponentGenerator();
+		this.componentGenerator = new ComponentGenerator();
 		// Starting a new thread that operates a method for data retrieval from hardware sensors.
-		// this.componentGenerator.start();
+		this.componentGenerator.start();
 		
 		this.minBoundNumber = -100;
 		this.maxBoundNumber = 100;
