@@ -20,16 +20,10 @@ public class MouseGenerator {
 	 */
 	
 	/*
-	 * Variable used for operating the hardware sensors
-	 */
-	private ComponentGenerator componentGenerator;
-	
-	/*
 	 * Variables for making the output more random
 	 */
 	private final int initialSeedA = 186526;
 	private final int initialSeedB = 185942;
-
 	
 	/*
 	 * Some values to create some more salt to the generation.
@@ -38,17 +32,6 @@ public class MouseGenerator {
 	private final int MOUSE_MOVED = 722;
 	private final int MOUSE_ENTERED = 441;
 	private final int MOUSE_EXITED = 327;
-	
-	/*
-	 * The limits of the output
-	 */
-	private int minBoundNumber;
-	private int maxBoundNumber;
-	
-	/*
-	 * Java.Security class for Cryptographic algorithms
-	 */
-	private MessageDigest md;
 	
 	/*
 	 * Arrays to have numbers based on previous mouse locations.
@@ -65,14 +48,6 @@ public class MouseGenerator {
 	
 	public MouseGenerator(int retention) {
 		
-		// Initialization of the Hardware sensor operating class
-		this.componentGenerator = new ComponentGenerator();
-		// Starting a new thread that operates a method for data retrieval from hardware sensors.
-		this.componentGenerator.start();
-		
-		this.minBoundNumber = -100;
-		this.maxBoundNumber = 100;
-		
 		this.previousAreaX = new int [retention];
 		this.previousScreenX = new int [retention];
 		this.previousAreaY = new int [retention];
@@ -80,14 +55,7 @@ public class MouseGenerator {
 		
 		this.position = 0;
 		
-		// Setting the hashing algorithm
-		try { this.md = MessageDigest.getInstance("MD5"); }
-		catch(Exception e) { e.printStackTrace(); }
 	}
-	
-	// Set the range of the random number
-	public void setMinBoundNumber(int min) { this.minBoundNumber = min; }
-	public void setMaxBoundNumber(int max) { this.maxBoundNumber = max; }
 	
 	/*
 	 * This method generates random numbers based on previous inputs.
@@ -160,30 +128,7 @@ public class MouseGenerator {
 		 */
 		this.position = (this.position+1)%this.previousAreaX.length;
 		
-		//sum = this.calculate_MD5(this.com_gen.getRandom(sum));
-		sum = this.calculate_MD5(sum);
-		
-		/*
-		 * Regulating output to be inside the minimum and maximum numbers inputed in the GUI
-		 */
-		if(this.minBoundNumber != 0) {
-			if(sum>this.minBoundNumber)
-				return sum%this.maxBoundNumber;
-			if(sum<this.minBoundNumber)
-				while(sum<this.minBoundNumber)
-					sum+=Math.abs(this.minBoundNumber);
-			return sum;
-		}
-		
-		return Math.abs(sum)%this.maxBoundNumber;
+		return sum;
 	}
 	
-	/*
-	 * This method calculates the MD5 hash from the input and returns its Integer conversion
-	 */
-	public int calculate_MD5(int input) {
-		try { return (new BigInteger(this.md.digest(String.valueOf(input).getBytes()))).intValue(); }
-		catch(Exception e) { e.printStackTrace(); }
-		return 0;
-	}
 }

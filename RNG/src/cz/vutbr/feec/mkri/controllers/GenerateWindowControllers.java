@@ -3,6 +3,7 @@ package cz.vutbr.feec.mkri.controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import cz.vutbr.feec.mkri.Main;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -50,8 +51,6 @@ public class GenerateWindowControllers implements Initializable {
 	private RadioButton radioButton_SHA1;
 	@FXML
 	private RadioButton radioButton_SHA256;
-	@FXML
-	private RadioButton radioButton_SHA3;
 
 	/*
 	 * Variables for individual GUI components. About generating a random number
@@ -172,12 +171,10 @@ public class GenerateWindowControllers implements Initializable {
 		radioButton_MD5.setToggleGroup(toggleGroupTypeOfHash);
 		radioButton_SHA1.setToggleGroup(toggleGroupTypeOfHash);
 		radioButton_SHA256.setToggleGroup(toggleGroupTypeOfHash);
-		radioButton_SHA3.setToggleGroup(toggleGroupTypeOfHash);
 
-		radioButton_MD5.setId("MD5");
-		radioButton_SHA1.setId("SHA1");
-		radioButton_SHA256.setId("SHA256");
-		radioButton_SHA3.setId("SHA3");
+		//radioButton_MD5.setId("MD5");
+		//radioButton_SHA1.setId("SHA1");
+		//radioButton_SHA256.setId("SHA256");
 
 		radioButton_MD5.setSelected(true);
 
@@ -195,9 +192,9 @@ public class GenerateWindowControllers implements Initializable {
 		radioButton_Decimal.setToggleGroup(toggleGroupOutPutFormat);
 		radioButton_Hexadecimal.setToggleGroup(toggleGroupOutPutFormat);
 
-		radioButton_Binary.setId("Binary");
-		radioButton_Decimal.setId("Decimal");
-		radioButton_Hexadecimal.setId("Hexadecimal");
+		//radioButton_Binary.setId("Binary");
+		//radioButton_Decimal.setId("Decimal");
+		//radioButton_Hexadecimal.setId("Hexadecimal");
 
 		radioButton_Hexadecimal.setSelected(true);
 	}
@@ -251,14 +248,6 @@ public class GenerateWindowControllers implements Initializable {
 	}
 
 	/*
-	 * This function is responsible for generating random number. Is active in
-	 * case a user presses the bottom Generate random number.
-	 */
-	public void generateButtonPressed(ActionEvent evt) {
-		System.out.println("TODO:Generate function");
-	}
-
-	/*
 	 * This function is responsible for allowing to set group's parametrs. In
 	 * case the main checkbox is selected.
 	 */
@@ -267,7 +256,6 @@ public class GenerateWindowControllers implements Initializable {
 		radioButton_MD5.setDisable(!selected);
 		radioButton_SHA1.setDisable(!selected);
 		radioButton_SHA256.setDisable(!selected);
-		radioButton_SHA3.setDisable(!selected);
 	}
 
 	/*
@@ -371,5 +359,94 @@ public class GenerateWindowControllers implements Initializable {
 		maxNumber.setDisable(!selected);
 		minNumber_text.setDisable(!selected);
 		maxNumber_text.setDisable(!selected);
+	}
+	
+	/*
+	 * This function is responsible for generating random number. Is active in
+	 * case a user presses the bottom Generate random number.
+	 */
+	public void generateButtonPressed(ActionEvent evt) {
+		/*
+		 * Range
+		 */
+		// Use range min-max
+		Main.generator_configuration.output_range = this.checkBox_ApplyMinimumAndMaximumRange.isSelected();
+		if((this.minNumber.getText() != null && !this.minNumber.equals("")) || (this.maxNumber.getText() != null && !this.maxNumber.equals(""))) {
+			// Set minimum
+			Main.generator_configuration.range_min = Integer.parseInt(this.minNumber.getText());
+			// Set maximum
+			Main.generator_configuration.range_max = Integer.parseInt(this.maxNumber.getText());
+		}
+		else {
+			// Set minimum
+			Main.generator_configuration.range_min = Integer.MIN_VALUE;
+			// Set maximum
+			Main.generator_configuration.range_max = Integer.MAX_VALUE;
+		}
+		/*
+		 * Hash Function
+		 */
+		// Use hash function
+		Main.generator_configuration.use_hash = this.checkBox_UseHashFunctions.isSelected();
+		// Set the hash function
+		Main.generator_configuration.hash_function = ((RadioButton)this.toggleGroupTypeOfHash.getSelectedToggle()).getText();
+		
+		/*
+		 * Set
+		 */
+		// Use Set
+		Main.generator_configuration.output_sets = this.checkBox_GenerateRandomSet.isSelected();
+		// Items in set
+		Main.generator_configuration.set_items = Integer.parseInt(this.countOfItems_text.getText());
+		// Set separator
+		Main.generator_configuration.set_separator = this.choiceBox_seperatorInSet.getValue();
+		
+		/*
+		 * Advanced Options
+		 */
+		// Use saving output into file
+		Main.generator_configuration.output_file = this.checkBox_saveOutputInTxt.isSelected();
+		// Use mouse input
+		Main.generator_configuration.use_mouse = this.checkBox_useMouseSeed.isSelected();
+		// Use time
+		Main.generator_configuration.use_time_seed = this.checkBox_useTimeAndDateAsSeed.isSelected();
+		// Use hardware sensors
+		Main.generator_configuration.use_hw_sensors = this.checkBox_UseHardwareSeeds.isSelected();
+		// Use CPU sensors
+		Main.generator_configuration.use_cpu_sensors = this.checkBox_useCPUSeed.isSelected();
+		// Use GPU sensors
+		Main.generator_configuration.use_gpu_sensors = this.checkBox_useGPUSeed.isSelected();
+		// Use Disks sensors
+		Main.generator_configuration.use_disk_sensors = this.checkBox_useDisksSeed.isSelected();
+		// Use custom seed
+		Main.generator_configuration.use_custom_seed = this.checkBox_UseCustomSeed.isSelected();
+		if(this.textField_customSeed.getText() != null && !this.textField_customSeed.getText().equals(""))
+			// Set the custom seed
+			Main.generator_configuration.custom_seed = Integer.parseInt(this.textField_customSeed.getText());
+		else
+			Main.generator_configuration.custom_seed = Integer.MIN_VALUE;
+		
+		/*
+		 * Byte
+		 */
+		// Use bytes output
+		Main.generator_configuration.output_bytes = this.checkBox_GenerateRandomBytes.isSelected();
+		if(this.textField_lengthBytes.getText() != null || !this.textField_lengthBytes.getText().equals(""))
+			// Set byte length
+			Main.generator_configuration.bytes_length = Integer.parseInt(this.textField_lengthBytes.getText());
+		else
+			Main.generator_configuration.bytes_length = Integer.MAX_VALUE;
+		// Set bytes output format
+		Main.generator_configuration.bytes_format = ((RadioButton)this.toggleGroupOutPutFormat.getSelectedToggle()).getText();
+		
+		/*
+		 * Double
+		 */
+		// Use double output
+		Main.generator_configuration.output_double = this.checkBox_GenerateDoubleOutput.isSelected();
+		// Set the number of digits after comma
+		Main.generator_configuration.digits_after_comma = Integer.parseInt(this.textField_NumberOfDigitsAfterComma.getText());
+		
+		System.out.println("TODO: Open the output screen");
 	}
 }
