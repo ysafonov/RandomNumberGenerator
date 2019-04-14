@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" style="-fx-background-color: #d0d0d0;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vutbr.feec.mkri.controllers.GenerateWindowControllers">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" style="-fx-background-color: #d0d0d0;" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vutbr.feec.mkri.controllers.GenerateWindowControllers">
    <children>
       <Group layoutX="14.0" layoutY="34.0">
          <children>
@@ -61,7 +61,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </CheckBox>
-            <Label fx:id="bytes_text" disable="true" layoutX="7.0" layoutY="62.0" prefHeight="19.0" prefWidth="38.0" text="Bytes:" />
+            <Label fx:id="bytes_text" disable="true" layoutX="7.0" layoutY="63.0" prefHeight="19.0" prefWidth="38.0" text="Bytes:" />
             <TextField fx:id="textField_lengthBytes" alignment="CENTER_RIGHT" disable="true" layoutX="57.0" layoutY="61.0" prefHeight="25.0" prefWidth="150.0">
                <font>
                   <Font size="11.0" />
@@ -131,7 +131,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </CheckBox>
-            <CheckBox fx:id="checkBox_useMouseSeed" disable="true" layoutX="171.0" layoutY="33.0" mnemonicParsing="false" selected="true" text="Use mouse seed" />
+            <CheckBox fx:id="checkBox_useMouseSeed" disable="true" layoutX="10.0" layoutY="33.0" mnemonicParsing="false" selected="true" text="Use mouse seed" />
             <CheckBox fx:id="checkBox_useTimeAndDateAsSeed" disable="true" layoutX="171.0" layoutY="59.0" mnemonicParsing="false" selected="true" text="Use time" />
             <CheckBox fx:id="checkBox_useCPUSeed" disable="true" layoutX="10.0" layoutY="120.0" mnemonicParsing="false" text="CPU" />
             <CheckBox fx:id="checkBox_useDisksSeed" disable="true" layoutX="57.0" layoutY="120.0" mnemonicParsing="false" text="Disks" />

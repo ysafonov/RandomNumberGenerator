@@ -1,5 +1,6 @@
 package cz.vutbr.feec.mkri.controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -7,13 +8,19 @@ import cz.vutbr.feec.mkri.Main;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Window;
 
 /**
  * This java class represents project's main generator class. The class
@@ -27,6 +34,7 @@ public class GenerateWindowControllers implements Initializable {
 	 * Variables for individual GUI components. About applying minimum and
 	 * maximum range
 	 */
+
 	@FXML
 	private CheckBox checkBox_ApplyMinimumAndMaximumRange;
 	@FXML
@@ -73,8 +81,6 @@ public class GenerateWindowControllers implements Initializable {
 	 */
 	@FXML
 	private CheckBox checkBox_AllowAdvancedOptions;
-	@FXML
-	private CheckBox checkBox_generateOnlyPrimes;
 	@FXML
 	private CheckBox checkBox_saveOutputInTxt;
 	@FXML
@@ -150,11 +156,10 @@ public class GenerateWindowControllers implements Initializable {
 		this.setSeparator();
 		this.setListenersForMainCheckBox();
 	}
-	
-	
-    /*
-     * This method is used for setting choiseBox and its default values
-     */
+
+	/*
+	 * This method is used for setting choiseBox and its default values
+	 */
 	private void setSeparator() {
 		choiceBox_seperatorInSet.setItems(FXCollections.observableArrayList(";", "#", "&", "@"));
 		choiceBox_seperatorInSet.getSelectionModel().selectFirst();
@@ -172,9 +177,9 @@ public class GenerateWindowControllers implements Initializable {
 		radioButton_SHA1.setToggleGroup(toggleGroupTypeOfHash);
 		radioButton_SHA256.setToggleGroup(toggleGroupTypeOfHash);
 
-		//radioButton_MD5.setId("MD5");
-		//radioButton_SHA1.setId("SHA1");
-		//radioButton_SHA256.setId("SHA256");
+		// radioButton_MD5.setId("MD5");
+		// radioButton_SHA1.setId("SHA1");
+		// radioButton_SHA256.setId("SHA256");
 
 		radioButton_MD5.setSelected(true);
 
@@ -192,9 +197,9 @@ public class GenerateWindowControllers implements Initializable {
 		radioButton_Decimal.setToggleGroup(toggleGroupOutPutFormat);
 		radioButton_Hexadecimal.setToggleGroup(toggleGroupOutPutFormat);
 
-		//radioButton_Binary.setId("Binary");
-		//radioButton_Decimal.setId("Decimal");
-		//radioButton_Hexadecimal.setId("Hexadecimal");
+		// radioButton_Binary.setId("Binary");
+		// radioButton_Decimal.setId("Decimal");
+		// radioButton_Hexadecimal.setId("Hexadecimal");
 
 		radioButton_Hexadecimal.setSelected(true);
 	}
@@ -268,21 +273,19 @@ public class GenerateWindowControllers implements Initializable {
 		choiceBox_seperatorInSet.setDisable(!selected);
 		choiceBox_seperatorInSet.getSelectionModel().clearSelection();
 		countOfItems_text.setDisable(!selected);
-	    separator_text.setDisable(!selected);
-	 
+		separator_text.setDisable(!selected);
+
 	}
 
 	/*
 	 * This function is responsible for allowing to set group's parametrs. In
 	 * case the main checkbox is selected.
 	 */
-	private void activateAllowAdvancedOptions(boolean selected) {		
-		checkBox_generateOnlyPrimes.setDisable(!selected);
+	private void activateAllowAdvancedOptions(boolean selected) {
 		checkBox_saveOutputInTxt.setDisable(!selected);
 		checkBox_useMouseSeed.setDisable(!selected);
 		checkBox_useTimeAndDateAsSeed.setDisable(!selected);
-		
-		checkBox_generateOnlyPrimes.setSelected(false);
+
 		checkBox_saveOutputInTxt.setSelected(false);
 		checkBox_useMouseSeed.setSelected(true);
 		checkBox_useTimeAndDateAsSeed.setSelected(true);
@@ -305,7 +308,7 @@ public class GenerateWindowControllers implements Initializable {
 		checkBox_useGPUSeed.setDisable(!selected);
 		checkBox_useDisksSeed.setDisable(!selected);
 		checkBox_useCPUSeed.setDisable(!selected);
-		
+
 		checkBox_useGPUSeed.setSelected(false);
 		checkBox_useDisksSeed.setSelected(false);
 		checkBox_useCPUSeed.setSelected(false);
@@ -315,7 +318,7 @@ public class GenerateWindowControllers implements Initializable {
 	 * This function is responsible for allowing to set group's parametrs. In
 	 * case the main checkbox is selected.
 	 */
-	private void activateDefineTheLengthOfInput(boolean selected) {		
+	private void activateDefineTheLengthOfInput(boolean selected) {
 		textField_lengthBytes.setText(null);
 		textField_lengthBits.setText(null);
 		textField_lengthBytes.setDisable(!selected);
@@ -329,7 +332,7 @@ public class GenerateWindowControllers implements Initializable {
 	 * This function is responsible for allowing to set group's parametrs. In
 	 * case the main checkbox is selected.
 	 */
-	private void activateGenerateRandomBytes(boolean selected) {		
+	private void activateGenerateRandomBytes(boolean selected) {
 		radioButton_Hexadecimal.setSelected(true);
 		radioButton_Hexadecimal.setDisable(!selected);
 		radioButton_Decimal.setDisable(!selected);
@@ -345,7 +348,7 @@ public class GenerateWindowControllers implements Initializable {
 		this.textField_NumberOfDigitsAfterComma.setText(null);
 		this.numberOfDigitsAfterComma_text.setDisable(!selected);
 		this.textField_NumberOfDigitsAfterComma.setDisable(!selected);
-		
+
 	}
 
 	/*
@@ -360,24 +363,39 @@ public class GenerateWindowControllers implements Initializable {
 		minNumber_text.setDisable(!selected);
 		maxNumber_text.setDisable(!selected);
 	}
-	
+
 	/*
 	 * This function is responsible for generating random number. Is active in
 	 * case a user presses the bottom Generate random number.
 	 */
-	public void generateButtonPressed(ActionEvent evt) {
+	public void generateButtonPressed(ActionEvent evt) throws IOException {
+		// configureGeneratorConf();
+		if(this.checkBox_useMouseSeed.isSelected()){
+			showMouseArea(evt);
+		}else {
+			generateNumber();
+			showResult(evt);
+		}
+	}
+
+	private void generateNumber() {
+		// TODO Call MAIN CONTROLLER TO GENERATE AND STORE NUMBER
+		
+	}
+
+	private void configureGeneratorConf() {
 		/*
 		 * Range
 		 */
 		// Use range min-max
 		Main.generator_configuration.output_range = this.checkBox_ApplyMinimumAndMaximumRange.isSelected();
-		if((this.minNumber.getText() != null && !this.minNumber.equals("")) || (this.maxNumber.getText() != null && !this.maxNumber.equals(""))) {
+		if ((this.minNumber.getText() != null && !this.minNumber.equals(""))
+				|| (this.maxNumber.getText() != null && !this.maxNumber.equals(""))) {
 			// Set minimum
 			Main.generator_configuration.range_min = Integer.parseInt(this.minNumber.getText());
 			// Set maximum
 			Main.generator_configuration.range_max = Integer.parseInt(this.maxNumber.getText());
-		}
-		else {
+		} else {
 			// Set minimum
 			Main.generator_configuration.range_min = Integer.MIN_VALUE;
 			// Set maximum
@@ -389,8 +407,9 @@ public class GenerateWindowControllers implements Initializable {
 		// Use hash function
 		Main.generator_configuration.use_hash = this.checkBox_UseHashFunctions.isSelected();
 		// Set the hash function
-		Main.generator_configuration.hash_function = ((RadioButton)this.toggleGroupTypeOfHash.getSelectedToggle()).getText();
-		
+		Main.generator_configuration.hash_function = ((RadioButton) this.toggleGroupTypeOfHash.getSelectedToggle())
+				.getText();
+
 		/*
 		 * Set
 		 */
@@ -400,7 +419,7 @@ public class GenerateWindowControllers implements Initializable {
 		Main.generator_configuration.set_items = Integer.parseInt(this.countOfItems_text.getText());
 		// Set separator
 		Main.generator_configuration.set_separator = this.choiceBox_seperatorInSet.getValue();
-		
+
 		/*
 		 * Advanced Options
 		 */
@@ -420,33 +439,56 @@ public class GenerateWindowControllers implements Initializable {
 		Main.generator_configuration.use_disk_sensors = this.checkBox_useDisksSeed.isSelected();
 		// Use custom seed
 		Main.generator_configuration.use_custom_seed = this.checkBox_UseCustomSeed.isSelected();
-		if(this.textField_customSeed.getText() != null && !this.textField_customSeed.getText().equals(""))
+		if (this.textField_customSeed.getText() != null && !this.textField_customSeed.getText().equals(""))
 			// Set the custom seed
 			Main.generator_configuration.custom_seed = Integer.parseInt(this.textField_customSeed.getText());
 		else
 			Main.generator_configuration.custom_seed = Integer.MIN_VALUE;
-		
+
 		/*
 		 * Byte
 		 */
 		// Use bytes output
 		Main.generator_configuration.output_bytes = this.checkBox_GenerateRandomBytes.isSelected();
-		if(this.textField_lengthBytes.getText() != null || !this.textField_lengthBytes.getText().equals(""))
+		if (this.textField_lengthBytes.getText() != null || !this.textField_lengthBytes.getText().equals(""))
 			// Set byte length
 			Main.generator_configuration.bytes_length = Integer.parseInt(this.textField_lengthBytes.getText());
 		else
 			Main.generator_configuration.bytes_length = Integer.MAX_VALUE;
 		// Set bytes output format
-		Main.generator_configuration.bytes_format = ((RadioButton)this.toggleGroupOutPutFormat.getSelectedToggle()).getText();
-		
+		Main.generator_configuration.bytes_format = ((RadioButton) this.toggleGroupOutPutFormat.getSelectedToggle())
+				.getText();
+
 		/*
 		 * Double
 		 */
 		// Use double output
 		Main.generator_configuration.output_double = this.checkBox_GenerateDoubleOutput.isSelected();
 		// Set the number of digits after comma
-		Main.generator_configuration.digits_after_comma = Integer.parseInt(this.textField_NumberOfDigitsAfterComma.getText());
-		
-		System.out.println("TODO: Open the output screen");
+		Main.generator_configuration.digits_after_comma = Integer
+				.parseInt(this.textField_NumberOfDigitsAfterComma.getText());
+
+	}
+
+	/*
+	 * Finding and changing scene
+	 */
+	private void showMouseArea(ActionEvent event) throws IOException {
+		Parent tmp = ((Node) event.getTarget()).getScene().getRoot();
+		AnchorPane ap = (AnchorPane) tmp.lookup("#rootWindow");
+		AnchorPane pane = FXMLLoader.load(getClass().getResource("/cz/vutbr/feec/mkri/views/MouseArea.fxml"));
+		ap.getChildren().clear();
+		ap.getChildren().setAll(pane);
+	}
+	
+	/*
+	 * Finding and changing scene 
+	 */
+	private void showResult(ActionEvent event) throws IOException {
+		Parent tmp = ((Node) event.getTarget()).getScene().getRoot();
+		AnchorPane ap = (AnchorPane) tmp.lookup("#rootWindow");
+		AnchorPane pane = FXMLLoader.load(getClass().getResource("/cz/vutbr/feec/mkri/views/RandomResult.fxml"));
+		ap.getChildren().clear();
+		ap.getChildren().setAll(pane);
 	}
 }

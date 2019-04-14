@@ -7,7 +7,7 @@ package cz.vutbr.feec.mkri.generator;
  * @author xkarge02
  */
 
-public class GeneratorConfiguration {
+public abstract class GeneratorConfiguration {
 	
 	/*
 	 * Default and only primes output format
@@ -37,7 +37,7 @@ public class GeneratorConfiguration {
 	/*
 	 * Configuration seeds
 	 */
-	public boolean use_mouse = false;
+	public boolean use_mouse = true;
 	public boolean use_hw_sensors = false;
 	
 	public boolean use_cpu_sensors = false;
