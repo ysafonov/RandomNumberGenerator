@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application{
 	
-	public static GeneratorConfiguration generator_configuration;
+	public static GeneratorConfiguration generator_configuration = new GeneratorConfiguration();
 	
 	@Override
 	public void start(Stage primaryStage) {

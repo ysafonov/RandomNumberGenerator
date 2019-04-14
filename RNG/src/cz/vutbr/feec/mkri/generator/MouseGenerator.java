@@ -1,8 +1,5 @@
 package cz.vutbr.feec.mkri.generator;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-
 /**
  * This class is used for generating Random numbers based
  * on the Mouse events in an area of the GUI.

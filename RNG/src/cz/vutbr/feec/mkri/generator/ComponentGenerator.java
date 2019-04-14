@@ -67,7 +67,7 @@ public class ComponentGenerator extends Thread {
 	public void run() {
 		try {
 			while(true) {
-				System.err.println("Reloading data from HW sensors.");
+				//System.err.println("Reloading data from HW sensors.");
 				this.reloadData();
 				Thread.sleep(100);
 			}

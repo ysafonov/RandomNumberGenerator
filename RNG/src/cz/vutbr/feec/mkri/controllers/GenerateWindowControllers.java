@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import cz.vutbr.feec.mkri.Main;
+import cz.vutbr.feec.mkri.generator.MainGenerator;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -30,11 +31,15 @@ import javafx.stage.Window;
  */
 
 public class GenerateWindowControllers implements Initializable {
+	
+	// RNG generator
+	public static MainGenerator RNG = new MainGenerator();
+	
 	/*
 	 * Variables for individual GUI components. About applying minimum and
 	 * maximum range
 	 */
-
+	
 	@FXML
 	private CheckBox checkBox_ApplyMinimumAndMaximumRange;
 	@FXML
@@ -319,8 +324,8 @@ public class GenerateWindowControllers implements Initializable {
 	 * case the main checkbox is selected.
 	 */
 	private void activateDefineTheLengthOfInput(boolean selected) {
-		textField_lengthBytes.setText(null);
-		textField_lengthBits.setText(null);
+		textField_lengthBytes.setText("");
+		textField_lengthBits.setText("");
 		textField_lengthBytes.setDisable(!selected);
 		textField_lengthBits.setDisable(!selected);
 		bits_text.setDisable(!selected);
@@ -345,7 +350,7 @@ public class GenerateWindowControllers implements Initializable {
 	 * case the main checkbox is selected.
 	 */
 	private void activateGenerateDoubleOutput(boolean selected) {
-		this.textField_NumberOfDigitsAfterComma.setText(null);
+		this.textField_NumberOfDigitsAfterComma.setText("");
 		this.numberOfDigitsAfterComma_text.setDisable(!selected);
 		this.textField_NumberOfDigitsAfterComma.setDisable(!selected);
 
@@ -356,8 +361,8 @@ public class GenerateWindowControllers implements Initializable {
 	 * case the main checkbox is selected.
 	 */
 	private void activateMinimumAndMaximumRandge(boolean selected) {
-		minNumber.setText(null);
-		maxNumber.setText(null);
+		minNumber.setText("");
+		maxNumber.setText("");
 		minNumber.setDisable(!selected);
 		maxNumber.setDisable(!selected);
 		minNumber_text.setDisable(!selected);
@@ -369,46 +374,39 @@ public class GenerateWindowControllers implements Initializable {
 	 * case a user presses the bottom Generate random number.
 	 */
 	public void generateButtonPressed(ActionEvent evt) throws IOException {
-		// configureGeneratorConf();
+		configureGeneratorConf();
 		if(this.checkBox_useMouseSeed.isSelected()){
 			showMouseArea(evt);
 		}else {
-			generateNumber();
+			this.RNG.doMyThing("-1", 0, 0, 0, 0, 0, 0, 0);
 			showResult(evt);
 		}
 	}
-
-	private void generateNumber() {
-		// TODO Call MAIN CONTROLLER TO GENERATE AND STORE NUMBER
-		
-	}
-
+	
 	private void configureGeneratorConf() {
 		/*
 		 * Range
 		 */
 		// Use range min-max
 		Main.generator_configuration.output_range = this.checkBox_ApplyMinimumAndMaximumRange.isSelected();
-		if ((this.minNumber.getText() != null && !this.minNumber.equals(""))
-				|| (this.maxNumber.getText() != null && !this.maxNumber.equals(""))) {
-			// Set minimum
+		// Set minimum
+		if (!this.minNumber.getText().equals(""))
 			Main.generator_configuration.range_min = Integer.parseInt(this.minNumber.getText());
-			// Set maximum
-			Main.generator_configuration.range_max = Integer.parseInt(this.maxNumber.getText());
-		} else {
-			// Set minimum
+		else
 			Main.generator_configuration.range_min = Integer.MIN_VALUE;
-			// Set maximum
+		// Set maximum
+		if (!this.maxNumber.getText().equals(""))
+			Main.generator_configuration.range_max = Integer.parseInt(this.maxNumber.getText());
+		else
 			Main.generator_configuration.range_max = Integer.MAX_VALUE;
-		}
+		
 		/*
 		 * Hash Function
 		 */
 		// Use hash function
 		Main.generator_configuration.use_hash = this.checkBox_UseHashFunctions.isSelected();
 		// Set the hash function
-		Main.generator_configuration.hash_function = ((RadioButton) this.toggleGroupTypeOfHash.getSelectedToggle())
-				.getText();
+		Main.generator_configuration.hash_function = ((RadioButton) this.toggleGroupTypeOfHash.getSelectedToggle()).getText();
 
 		/*
 		 * Set
@@ -416,7 +414,8 @@ public class GenerateWindowControllers implements Initializable {
 		// Use Set
 		Main.generator_configuration.output_sets = this.checkBox_GenerateRandomSet.isSelected();
 		// Items in set
-		Main.generator_configuration.set_items = Integer.parseInt(this.countOfItems_text.getText());
+		if(!this.textField_numberOfItemsInsideSet.getText().equals(""))
+			Main.generator_configuration.set_items = Integer.parseInt(this.textField_numberOfItemsInsideSet.getText());
 		// Set separator
 		Main.generator_configuration.set_separator = this.choiceBox_seperatorInSet.getValue();
 
@@ -439,8 +438,8 @@ public class GenerateWindowControllers implements Initializable {
 		Main.generator_configuration.use_disk_sensors = this.checkBox_useDisksSeed.isSelected();
 		// Use custom seed
 		Main.generator_configuration.use_custom_seed = this.checkBox_UseCustomSeed.isSelected();
+		// Set the custom seed
 		if (this.textField_customSeed.getText() != null && !this.textField_customSeed.getText().equals(""))
-			// Set the custom seed
 			Main.generator_configuration.custom_seed = Integer.parseInt(this.textField_customSeed.getText());
 		else
 			Main.generator_configuration.custom_seed = Integer.MIN_VALUE;
@@ -450,14 +449,13 @@ public class GenerateWindowControllers implements Initializable {
 		 */
 		// Use bytes output
 		Main.generator_configuration.output_bytes = this.checkBox_GenerateRandomBytes.isSelected();
-		if (this.textField_lengthBytes.getText() != null || !this.textField_lengthBytes.getText().equals(""))
-			// Set byte length
+		// Set byte length
+		if (!this.textField_lengthBytes.getText().equals(""))
 			Main.generator_configuration.bytes_length = Integer.parseInt(this.textField_lengthBytes.getText());
 		else
 			Main.generator_configuration.bytes_length = Integer.MAX_VALUE;
 		// Set bytes output format
-		Main.generator_configuration.bytes_format = ((RadioButton) this.toggleGroupOutPutFormat.getSelectedToggle())
-				.getText();
+		Main.generator_configuration.bytes_format = ((RadioButton) this.toggleGroupOutPutFormat.getSelectedToggle()).getText();
 
 		/*
 		 * Double
@@ -465,9 +463,9 @@ public class GenerateWindowControllers implements Initializable {
 		// Use double output
 		Main.generator_configuration.output_double = this.checkBox_GenerateDoubleOutput.isSelected();
 		// Set the number of digits after comma
-		Main.generator_configuration.digits_after_comma = Integer
-				.parseInt(this.textField_NumberOfDigitsAfterComma.getText());
-
+		if(!this.textField_NumberOfDigitsAfterComma.getText().equals(""))
+			Main.generator_configuration.digits_after_comma = Integer.parseInt(this.textField_NumberOfDigitsAfterComma.getText());
+		
 	}
 
 	/*
