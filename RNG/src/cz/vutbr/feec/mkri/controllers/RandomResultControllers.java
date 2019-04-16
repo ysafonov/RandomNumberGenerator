@@ -2,7 +2,9 @@ package cz.vutbr.feec.mkri.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
+import cz.vutbr.feec.mkri.Main;
+import cz.vutbr.feec.mkri.generator.MainGenerator;
+import cz.vutbr.feec.mkri.generator.GeneratorConfiguration;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.text.Text;
@@ -27,8 +29,8 @@ public class RandomResultControllers implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
-		randomNumberResult.setText("Funguje to!"); 
+		 System.out.println(Main.generator_configuration.OUTPUT.toString());
+		//randomNumberResult.setText(Main.generator_configuration.OUTPUT.get(0));
 	}
 	
 
