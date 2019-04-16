@@ -1,5 +1,7 @@
 package cz.vutbr.feec.mkri.generator;
 
+import java.util.ArrayList;
+
 /**
  * This class is a configuration class.
  * Used for the Main Random Numbers Generator class.
@@ -7,7 +9,15 @@ package cz.vutbr.feec.mkri.generator;
  * @author xkarge02
  */
 
-public abstract class GeneratorConfiguration {
+public class GeneratorConfiguration {
+	
+	/*
+	 * Output of the generator in case needing more than 1 number
+	 */
+	public ArrayList<String> OUTPUT = new ArrayList<>();
+	public int output_count = 1;
+	
+	public int combine_count = 1;
 	
 	/*
 	 * Default and only primes output format

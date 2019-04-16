@@ -3,7 +3,7 @@ package cz.vutbr.feec.mkri.controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import cz.vutbr.feec.mkri.generator.MouseGenerator;
+import cz.vutbr.feec.mkri.Main;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -50,21 +50,10 @@ public class MouseAreaControllers implements Initializable {
 			);
 		}
 	};
-
-	/*
-	 * Variable for the number of previous X and Y coordinates to be saved in
-	 * the MouseGenerator class.
-	 */
-	private final int RETENTION = 25;
 	
 	@FXML
 	private Rectangle mouseArea;
-
-	/*
-	 * Variable for the RNG generation based on Mouse movement
-	 */
-	private MouseGenerator mouseGenerator;
-
+	
 	/*
 	 * Variables for timing the duration of: - how long was the button pressed
 	 * down - how long was the mouse inside the area - how long was the mouse
@@ -73,7 +62,7 @@ public class MouseAreaControllers implements Initializable {
 	private int click_duration;
 	private int area_duration;
 	private int exit_duration;
-
+	
 	/*
 	 * This method is called when the application starts.
 	 * 
@@ -82,7 +71,6 @@ public class MouseAreaControllers implements Initializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		this.mouseGenerator = new MouseGenerator(this.RETENTION);
 		this.mouseArea.setOnMouseClicked(mouseHandler);
 		this.mouseArea.setOnMouseDragged(mouseHandler);
 		this.mouseArea.setOnMouseEntered(mouseHandler);
@@ -93,7 +81,7 @@ public class MouseAreaControllers implements Initializable {
 
 		this.exit_duration = (int)System.currentTimeMillis();
 	}
-
+	
 	/*
 	 * This method is called when a user moves his mouse on the generate button.
 	 * While calling a new instance of the class Generator is created.
@@ -102,76 +90,51 @@ public class MouseAreaControllers implements Initializable {
 			int mouseButton) {
 		System.out.println("Mouse Event: " + eventType + '\n' + "Mouse X:Y - " + areaX + ':' + areaY);
 		
-		
-		
-		
-		
-		//TODO: Uncomment this section and propagate parametrs
-		
-		//this.mouseGenerator.setMinBoundNumber(Integer.parseInt(this.minNumber.getText()));
-		// this.mouseGenerator.setMaxBoundNumber(Integer.parseInt(this.maxNumber.getText()));
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		// IDEA: how long was the mouse of the area
 		switch (eventType) {
-
 		// Used when the mouse is moved inside the area
 		case "MOUSE_MOVED":
-			setRandomNumber(
-					this.mouseGenerator.getRandomNumber(eventType, areaX, areaY, screenX, screenY, mouseClicks, 0, 0));
+			GenerateWindowControllers.RNG.doMyThing(eventType, areaX, areaY, screenX, screenY, mouseClicks, 0, 0);
 			break;
-
+			
 		// Used when a button is pressed down inside the area
 		case "MOUSE_PRESSED":
 			this.click_duration = (int) System.currentTimeMillis();
 			break;
-
+			
 		// Used when the pressed button is released inside the area
 		case "MOUSE_RELEASED":
-			setRandomNumber(this.mouseGenerator.getRandomNumber(eventType, areaX, areaY, screenX, screenY, mouseClicks,
-					(int) System.currentTimeMillis() - click_duration, mouseButton));
+			GenerateWindowControllers.RNG.doMyThing(eventType, areaX, areaY, screenX, screenY, mouseClicks,(int) System.currentTimeMillis() - click_duration, mouseButton);
 			break;
-
+			
 		// Used when the mouse leaves the area
 		case "MOUSE_EXITED":
 			this.exit_duration = (int) System.currentTimeMillis();
-			setRandomNumber(this.mouseGenerator.getRandomNumber(eventType, areaX, areaY, screenX, screenY, mouseClicks,
-					(int) System.currentTimeMillis() - area_duration, 0));
+			GenerateWindowControllers.RNG.doMyThing(eventType, areaX, areaY, screenX, screenY, mouseClicks,(int) System.currentTimeMillis() - area_duration, 0);
 			break;
-
+			
 		// Used when the mouse enters the area
 		case "MOUSE_ENTERED":
 			this.area_duration = (int) System.currentTimeMillis();
-			setRandomNumber(this.mouseGenerator.getRandomNumber(eventType, areaX, areaY, screenX, screenY, mouseClicks,
-					(int) System.currentTimeMillis() - exit_duration, 0));
+			GenerateWindowControllers.RNG.doMyThing(eventType, areaX, areaY, screenX, screenY, mouseClicks,(int) System.currentTimeMillis() - exit_duration, 0);
 			break;
-
+			
 		// Just to be safe that something is generated
 		default:
-			setRandomNumber(
-					this.mouseGenerator.getRandomNumber(eventType, areaX, areaY, screenX, screenY, mouseClicks, 0, 0));
+			GenerateWindowControllers.RNG.doMyThing(eventType, areaX, areaY, screenX, screenY, mouseClicks, 0, 0);
 			break;
 		}
-	}
-
-	/*
-	 * This method is used to set text field contained randomly generated value.
-	 */
-	private void setRandomNumber(int number) {
 		
-		// TODO: Change the position
-		// this.randomNumber.setText(Integer.toString(number));
+		if(Main.generator_configuration.output_count > 1) {
+			if(Main.generator_configuration.OUTPUT.size() == Main.generator_configuration.output_count)
+				// End generator window
+				this.notifyOutput("set is ready");
+		}
+		else
+			this.notifyOutput("one number is ready");
+	}
+	
+	private void notifyOutput(String input) {
+		// Notify the number output window that one number or the hole set is ready.
 	}
 }
