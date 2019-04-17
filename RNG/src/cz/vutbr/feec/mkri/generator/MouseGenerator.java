@@ -65,53 +65,57 @@ public class MouseGenerator {
 		// Variable which value is returned after the calculation
 		int sum = 0;
 		
-		switch(type) {
-		
-		// Mouse has be moved inside the area
-		case "MOUSE_MOVED":
-			if(mouseClicks==0) {
-				for (int i = 0; i < previousAreaX.length; i++)
-					sum += ((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *initialSeedA)/MOUSE_MOVED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *initialSeedB)/MOUSE_MOVED;
-			} else {
-				for (int i = 0; i < previousAreaX.length; i++)
-					sum += mouseClicks*((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *initialSeedA)/MOUSE_MOVED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *initialSeedB)/MOUSE_MOVED;
-			}
-			break;
-			
-		// A mouse button has been released
-		case "MOUSE_RELEASED":
-			for (int i = 0; i < previousAreaX.length; i++)
-				sum += duration*mouseClicks*mouseButton*((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *initialSeedA)/MOUSE_RELEASED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *initialSeedB)/MOUSE_RELEASED;
-			break;
-			
-		// Mouse has entered the area
-		case "MOUSE_ENTERED":
-			if(mouseClicks==0) {
-				for (int i = 0; i < previousAreaX.length; i++)
-					sum += duration*(((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *initialSeedA)/MOUSE_ENTERED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *initialSeedB)/MOUSE_ENTERED);
-			} else {
-				for (int i = 0; i < previousAreaX.length; i++)
-					sum += duration*mouseClicks*((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *initialSeedA)/MOUSE_ENTERED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *initialSeedB)/MOUSE_ENTERED;
-			}
-			break;
-			
-		// Mouse has exited the area
-		case "MOUSE_EXITED":
-			if(mouseClicks==0) {
-				for (int i = 0; i < previousAreaX.length; i++)
-					sum += duration*((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *initialSeedA)/MOUSE_EXITED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *initialSeedB)/MOUSE_EXITED;
-			} else {
-				for (int i = 0; i < previousAreaX.length; i++)
-					sum += mouseClicks*duration*(((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *initialSeedA)/MOUSE_EXITED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *initialSeedB)/MOUSE_EXITED);
-			}
-			break;
-			
-		// Just to be safe and something is returned
-		default:
+		if(this.position==0) {
 			sum = areaX*areaY*screenX*screenY;
-			break;
 		}
+		else {
+			switch(type) {
 		
+			// Mouse has be moved inside the area
+			case "MOUSE_MOVED":
+				if(mouseClicks==0) {
+					for (int i = 0; i < previousAreaX.length; i++)
+						sum += ((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *initialSeedA)/MOUSE_MOVED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *initialSeedB)/MOUSE_MOVED;
+				} else {
+					for (int i = 0; i < previousAreaX.length; i++)
+						sum += mouseClicks*((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *initialSeedA)/MOUSE_MOVED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *initialSeedB)/MOUSE_MOVED;
+				}
+				break;
+				
+			// A mouse button has been released
+			case "MOUSE_RELEASED":
+				for (int i = 0; i < previousAreaX.length; i++)
+					sum += duration*mouseClicks*mouseButton*((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *initialSeedA)/MOUSE_RELEASED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *initialSeedB)/MOUSE_RELEASED;
+				break;
+				
+			// Mouse has entered the area
+			case "MOUSE_ENTERED":
+				if(mouseClicks==0) {
+					for (int i = 0; i < previousAreaX.length; i++)
+						sum += duration*(((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *initialSeedA)/MOUSE_ENTERED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *initialSeedB)/MOUSE_ENTERED);
+				} else {
+					for (int i = 0; i < previousAreaX.length; i++)
+						sum += duration*mouseClicks*((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *initialSeedA)/MOUSE_ENTERED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *initialSeedB)/MOUSE_ENTERED;
+				}
+				break;
+				
+			// Mouse has exited the area
+			case "MOUSE_EXITED":
+				if(mouseClicks==0) {
+					for (int i = 0; i < previousAreaX.length; i++)
+						sum += duration*((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *initialSeedA)/MOUSE_EXITED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *initialSeedB)/MOUSE_EXITED;
+				} else {
+					for (int i = 0; i < previousAreaX.length; i++)
+						sum += mouseClicks*duration*(((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *initialSeedA)/MOUSE_EXITED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *initialSeedB)/MOUSE_EXITED);
+				}
+				break;
+			
+			// Just to be safe and something is returned
+			default:
+				sum = areaX*areaY*screenX*screenY;
+				break;
+			}
+		}
 		/*
 		 * Replacing values at given position to keep the retention actual.
 		 */

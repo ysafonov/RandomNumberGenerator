@@ -425,7 +425,7 @@ public class GenerateWindowControllers implements Initializable {
 		// Use saving output into file
 		Main.generator_configuration.output_file = this.checkBox_saveOutputInTxt.isSelected();
 		// Use mouse input
-		Main.generator_configuration.use_mouse = this.checkBox_useMouseSeed.isSelected();
+		//Main.generator_configuration.use_mouse = this.checkBox_useMouseSeed.isSelected();
 		// Use time
 		Main.generator_configuration.use_time_seed = this.checkBox_useTimeAndDateAsSeed.isSelected();
 		// Use hardware sensors

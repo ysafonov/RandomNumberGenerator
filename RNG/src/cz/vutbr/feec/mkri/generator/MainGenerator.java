@@ -44,6 +44,8 @@ public class MainGenerator {
 		this.componentGenerator.start();
 	}
 	
+	public void killThread() { this.componentGenerator.run = false; }
+	
 	/*
 	 * Calculating the random number based on mouse input
 	 */
@@ -113,7 +115,7 @@ public class MainGenerator {
 	}
 	
 	private String outputFormat(String input) {
-		String output = "";
+		String output = input;
 		/*
 		 * Deciding if the number is double or integer
 		 */
@@ -180,6 +182,7 @@ public class MainGenerator {
 					output = BitSet.valueOf(bytes).toString();
 					break;
 				default:
+					
 					System.out.println("Byte output failed!");
 					break;
 				}
@@ -191,7 +194,10 @@ public class MainGenerator {
 	
 	// TODO: Randomize Time
 	private double randomizeTime() {
-		return ((double)LocalDate.now().hashCode())*((double)LocalTime.now().hashCode())*2019.0;
+		double date = (double)(LocalDate.now().getDayOfYear()*LocalDate.now().getYear()/LocalDate.now().getDayOfMonth()*LocalDate.now().getMonthValue());
+		double time = (double)(LocalTime.now().getHour()*LocalTime.now().getMinute()*LocalTime.now().getSecond());
+		System.out.println(date + "\n" + time);
+		return time/date;
 	}
 	
 	private void setHashfunction() {

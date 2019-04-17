@@ -58,6 +58,8 @@ import cz.vutbr.feec.mkri.Main;
 
 public class ComponentGenerator extends Thread {
 	
+	public boolean run = true;
+	
 	private Components components;
 	private List<Cpu> cpus;
 	private List<Gpu> gpus;
@@ -66,7 +68,7 @@ public class ComponentGenerator extends Thread {
 	@Override
 	public void run() {
 		try {
-			while(true) {
+			while(run) {
 				//System.err.println("Reloading data from HW sensors.");
 				this.reloadData();
 				Thread.sleep(100);
