@@ -82,9 +82,4 @@ public class GeneratorConfiguration {
 	// Path to a file where the output should be saved
 	public String file_path = "output/rng.txt";
 	
-	/*
-	 * Gaussian output format
-	 */
-	// ???
-	//public boolean output_gaussian = false;
 }

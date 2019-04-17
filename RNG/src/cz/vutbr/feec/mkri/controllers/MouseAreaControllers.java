@@ -59,8 +59,6 @@ public class MouseAreaControllers implements Initializable {
 	private int area_duration;
 	private int exit_duration;
 	
-	private String nofityString = "";
-	
 	/*
 	 * This method is called when the application starts.
 	 * 
@@ -123,9 +121,6 @@ public class MouseAreaControllers implements Initializable {
 			}
 		
 			System.out.println(Main.generator_configuration.OUTPUT.get(0));
-		}
-		
-		if(!this.nofityString.equals("")) {
 			if (Main.generator_configuration.output_count > 1) {
 				if (Main.generator_configuration.OUTPUT.size() == Main.generator_configuration.output_count)
 					this.notifyOutput("set is ready", event);
@@ -136,7 +131,6 @@ public class MouseAreaControllers implements Initializable {
 	
 	private void notifyOutput(String input, Event event) {
 		try {
-			this.nofityString = input;
 			System.out.println(input);
 			showResultNumber(event);
 		} catch (IOException e) {
