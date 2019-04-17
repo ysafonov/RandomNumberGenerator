@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import cz.vutbr.feec.mkri.Main;
 import cz.vutbr.feec.mkri.generator.MouseGenerator;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -58,6 +59,7 @@ public class MainControllers implements Initializable {
 		AnchorPane pane = FXMLLoader.load(getClass().getResource("/cz/vutbr/feec/mkri/views/GenerateWindow.fxml"));
 		rootWindow.getChildren().clear();
 		rootWindow.getChildren().setAll(pane);
+		Main.generator_configuration.OUTPUT.clear();
 	}
 
 	/*
@@ -68,6 +70,7 @@ public class MainControllers implements Initializable {
 		AnchorPane pane = FXMLLoader.load(getClass().getResource("/cz/vutbr/feec/mkri/views/CompareWindow.fxml"));
 		rootWindow.getChildren().clear();
 		rootWindow.getChildren().setAll(pane);
+		Main.generator_configuration.OUTPUT.clear();
 	}
 
 	/*

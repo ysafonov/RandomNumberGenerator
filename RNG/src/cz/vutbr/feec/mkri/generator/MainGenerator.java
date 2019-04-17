@@ -1,12 +1,20 @@
 package cz.vutbr.feec.mkri.generator;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.math.BigInteger;
+import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.BitSet;
 
 import javax.xml.bind.DatatypeConverter;
@@ -62,7 +70,7 @@ public class MainGenerator {
 		}
 		
 		if(Main.generator_configuration.combine_count == this.combined) {
-			if(Main.generator_configuration.output_count > 1)
+			if(Main.generator_configuration.set_items > 1)
 				Main.generator_configuration.OUTPUT.add(this.outputFormat(this.normalize(this.rng)));
 			else {
 				if(Main.generator_configuration.OUTPUT.size()==0)
@@ -93,7 +101,7 @@ public class MainGenerator {
 		return sum;
 	}
 	
-	private String normalize(double input) {
+	private double normalize(double input) {
 		
 		if(Main.generator_configuration.output_range) {
 			if(Main.generator_configuration.range_min != 0) {
@@ -108,88 +116,137 @@ public class MainGenerator {
 		}
 		
 		if(Main.generator_configuration.output_double)
-			return String.valueOf(input*Math.pow(10, -Main.generator_configuration.digits_after_comma));
+			return input*Math.pow(10, -Main.generator_configuration.digits_after_comma);
 		else
-			return String.valueOf((int)input);
+			return input;
 		
 	}
 	
-	private String outputFormat(String input) {
-		String output = input;
-		/*
-		 * Deciding if the number is double or integer
-		 */
-		// For Double
-		if(input.split(".").length == 2) {
-			
-			byte[] before_comma = input.split(".")[0].getBytes();
-			byte[] after_comma = input.split(".")[1].getBytes();
-			
-			/*
-			 * Hashing random number from the this.generate method if user wants to
-			 */
-			if(Main.generator_configuration.use_hash) {
-				this.setHashfunction();
-				before_comma = this.calculate_hash(before_comma);
-				after_comma = this.calculate_hash(after_comma);
-			}
-			
-			/*
-			 * Bytes output format
-			 */
-			if(Main.generator_configuration.output_bytes) {
-				switch(Main.generator_configuration.bytes_format) {
-				case "Hexadecimal":
-					output = DatatypeConverter.printHexBinary(before_comma) + "." + DatatypeConverter.printHexBinary(after_comma);
-					break;
-				case "Decimal":
-					output = (new BigInteger(before_comma)).toString() + "." + (new BigInteger(after_comma)).toString();
-					break;
-				case "Binary":
-					output = BitSet.valueOf(before_comma).toString() + "." + BitSet.valueOf(after_comma).toString();
-					break;
-				default:
-					System.out.println("Byte output failed!");
-					break;
+	private String outputFormat(double input) {
+		try {
+			String output = "";
+			if(Main.generator_configuration.output_double) {
+				double tmp = input;
+				
+				output = Double.toString(tmp);
+				// Converting double to an byte[]
+				byte[] bytes = this.doubleToByteArray(tmp);
+				
+				// Applying hash function
+				if(Main.generator_configuration.use_hash) {
+					this.setHashfunction();
+					bytes = this.calculate_hash(bytes);
+				}
+				
+				// Converting byte array back to double
+				tmp = this.convertByteArrayToDouble(bytes);
+				
+				if(Main.generator_configuration.digits_after_comma>0) {
+					tmp = Double.parseDouble(String.format("%."+ Main.generator_configuration.digits_after_comma +"f", tmp));
+					if(Main.generator_configuration.use_bytes_format)
+						output = this.bytesFormatDouble(tmp);
+				}
+				else if (Main.generator_configuration.digits_after_comma==0) {
+					if(Main.generator_configuration.use_bytes_format)
+						output = this.bytesFormatInt((int)tmp);
 				}
 			}
-		}
-		// For Integer
-		else {
-			// TODO: if the output is not a double but a integer
-			byte[] bytes = input.getBytes();
-			
-			/*
-			 * Hashing random number from the this.generate method if user wants to
-			 */
-			if(Main.generator_configuration.use_hash) {
-				this.setHashfunction();
-				bytes = this.calculate_hash(bytes);
-			}
-			
-			/*
-			 * Bytes output format
-			 */
-			if(Main.generator_configuration.output_bytes) {
-				switch(Main.generator_configuration.bytes_format) {
-				case "Hexadecimal":
-					output = DatatypeConverter.printHexBinary(bytes);
-					break;
-				case "Decimal":
-					output = (new BigInteger(bytes)).toString();
-					break;
-				case "Binary":
-					output = BitSet.valueOf(bytes).toString();
-					break;
-				default:
-					
-					System.out.println("Byte output failed!");
-					break;
+			else {
+				int tmp = (int) input;
+				output = Integer.toString(tmp);
+				
+				// Converting double to an byte[]
+				byte[] bytes = this.intToBytes(tmp);
+				
+				// Applying hash function
+				if(Main.generator_configuration.use_hash) {
+					this.setHashfunction();
+					bytes = this.calculate_hash(bytes);
 				}
+				
+				// Converting bytearray back to double
+				tmp = this.bytesToInt(bytes);
+				
+				if(Main.generator_configuration.use_bytes_format)
+					output = this.bytesFormatInt(tmp);
 			}
 			
+			return output;
+			
+		} catch (Exception e) { e.printStackTrace(); }
+		return null;
+	}
+	
+	// Format the output
+	private String bytesFormatDouble(double input) {
+		String output = "";
+		switch(Main.generator_configuration.bytes_format) {
+		case "Hexadecimal":
+			output = Double.toHexString(input);
+			break;
+		case "Decimal":
+			output = String.valueOf(input);
+			break;
+		case "Binary":
+			output = Long.toBinaryString(Double.doubleToLongBits(input));
+			break;
+		default:
+			System.out.println("Byte formating failed!");
+			break;
 		}
 		return output;
+	}
+	
+	private String bytesFormatInt(int input) {
+		String output = "";
+		switch(Main.generator_configuration.bytes_format) {
+		case "Hexadecimal":
+			output = Integer.toHexString(input);
+			break;
+		case "Decimal":
+			output = String.valueOf(input);
+			break;
+		case "Binary":
+			output = Integer.toBinaryString(input);
+			break;
+		default:
+			System.out.println("Byte formating failed!");
+			break;
+		}
+		return output;
+	}
+	
+	private byte[] doubleToByteArray ( final double i ) throws IOException {
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		DataOutputStream dos = new DataOutputStream(bos);
+		dos.writeDouble(i);
+		dos.flush();
+		return bos.toByteArray();
+	}
+	
+	private double convertByteArrayToDouble(byte[] doubleBytes){
+		ByteBuffer byteBuffer = ByteBuffer.allocate(Double.BYTES);
+		byteBuffer.put(doubleBytes);
+		byteBuffer.flip();
+		return byteBuffer.getDouble();
+	}
+	
+	private byte[] intToBytes(int my_int) throws IOException {
+	    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+	    ObjectOutput out = new ObjectOutputStream(bos);
+	    out.writeInt(my_int);
+	    out.close();
+	    byte[] int_bytes = bos.toByteArray();
+	    bos.close();
+	    return int_bytes;
+	}
+	
+	private int bytesToInt(byte[] int_bytes) throws IOException {
+	    ByteArrayInputStream bis = new ByteArrayInputStream(int_bytes);
+	    ObjectInputStream ois = new ObjectInputStream(bis);
+	    int my_int = ois.readInt();
+	    ois.close();
+	    return my_int;
 	}
 	
 	// TODO: Randomize Time
@@ -220,7 +277,7 @@ public class MainGenerator {
 	 */
 	private void writeFile() {
 		String output = "";
-		if(Main.generator_configuration.output_count > 1) {
+		if(Main.generator_configuration.set_items > 1) {
 			for(String s:Main.generator_configuration.OUTPUT)
 				output += s + Main.generator_configuration.set_separator;
 		}

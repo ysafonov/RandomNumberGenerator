@@ -113,11 +113,7 @@ public class GenerateWindowControllers implements Initializable {
 	@FXML
 	private CheckBox checkBox_DefineTheLengthOfInput;
 	@FXML
-	private TextField textField_lengthBits;
-	@FXML
 	private TextField textField_lengthBytes;
-	@FXML
-	private Label bits_text;
 	@FXML
 	private Label bytes_text;
 
@@ -325,10 +321,7 @@ public class GenerateWindowControllers implements Initializable {
 	 */
 	private void activateDefineTheLengthOfInput(boolean selected) {
 		textField_lengthBytes.setText("");
-		textField_lengthBits.setText("");
 		textField_lengthBytes.setDisable(!selected);
-		textField_lengthBits.setDisable(!selected);
-		bits_text.setDisable(!selected);
 		bytes_text.setDisable(!selected);
 
 	}
@@ -355,7 +348,7 @@ public class GenerateWindowControllers implements Initializable {
 		this.textField_NumberOfDigitsAfterComma.setDisable(!selected);
 
 	}
-
+	
 	/*
 	 * This function is responsible for allowing to set group's parametrs. In
 	 * case the main checkbox is selected.
@@ -373,6 +366,7 @@ public class GenerateWindowControllers implements Initializable {
 	 * This function is responsible for generating random number. Is active in
 	 * case a user presses the bottom Generate random number.
 	 */
+	@SuppressWarnings("static-access")
 	public void generateButtonPressed(ActionEvent evt) throws IOException {
 		configureGeneratorConf();
 		if(this.checkBox_useMouseSeed.isSelected()){
@@ -448,7 +442,9 @@ public class GenerateWindowControllers implements Initializable {
 		 * Byte
 		 */
 		// Use bytes output
-		Main.generator_configuration.output_bytes = this.checkBox_GenerateRandomBytes.isSelected();
+		
+		Main.generator_configuration.output_bytes = this.checkBox_DefineTheLengthOfInput.isSelected();
+		Main.generator_configuration.use_bytes_format = this.checkBox_GenerateRandomBytes.isSelected();
 		// Set byte length
 		if (!this.textField_lengthBytes.getText().equals(""))
 			Main.generator_configuration.bytes_length = Integer.parseInt(this.textField_lengthBytes.getText());
@@ -489,4 +485,5 @@ public class GenerateWindowControllers implements Initializable {
 		ap.getChildren().clear();
 		ap.getChildren().setAll(pane);
 	}
+	
 }

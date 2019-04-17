@@ -85,7 +85,7 @@ public class MouseAreaControllers implements Initializable {
 	public void mouseGenerate(Event event, int areaX, int areaY, int screenX, int screenY, int mouseClicks, int mouseButton) {
 		System.out.println("Mouse Event: " + event.getEventType().toString() + '\n' + "Mouse X:Y - " + areaX + ':' + areaY);
 		
-		if(Main.generator_configuration.OUTPUT.size()<Main.generator_configuration.output_count) {
+		if(Main.generator_configuration.OUTPUT.size()<Main.generator_configuration.set_items) {
 			switch (event.getEventType().toString()) {
 			// Used when the mouse is moved inside the area
 			case "MOUSE_MOVED":
@@ -121,8 +121,8 @@ public class MouseAreaControllers implements Initializable {
 			}
 		
 			System.out.println(Main.generator_configuration.OUTPUT.get(0));
-			if (Main.generator_configuration.output_count > 1) {
-				if (Main.generator_configuration.OUTPUT.size() == Main.generator_configuration.output_count)
+			if (Main.generator_configuration.set_items > 1) {
+				if (Main.generator_configuration.OUTPUT.size() == Main.generator_configuration.set_items)
 					this.notifyOutput("set is ready", event);
 			} else if(Main.generator_configuration.OUTPUT.size()==1)
 				this.notifyOutput("one number is ready", event);
