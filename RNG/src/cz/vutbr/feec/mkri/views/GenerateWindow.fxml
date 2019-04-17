@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" style="-fx-background-color: #d0d0d0;" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vutbr.feec.mkri.controllers.GenerateWindowControllers">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" style="-fx-background-color: #d0d0d0;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vutbr.feec.mkri.controllers.GenerateWindowControllers">
    <children>
       <Group layoutX="14.0" layoutY="34.0">
          <children>
@@ -154,6 +154,14 @@
          </font>
       </Label>
       <Button layoutX="365.0" layoutY="400.0" mnemonicParsing="false" onAction="#generateButtonPressed" prefHeight="39.0" prefWidth="220.0" style="-fx-background-color: #b5b5b5;" text="Generate">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <opaqueInsets>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+         </opaqueInsets>
+      </Button>
+      <Button layoutX="364.0" layoutY="2.0" mnemonicParsing="false" onAction="#saveSettings" prefHeight="0.0" prefWidth="220.0" style="-fx-background-color: #b5b5b5;" text="Save Settings">
          <font>
             <Font size="15.0" />
          </font>

@@ -7,17 +7,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
-import java.math.BigInteger;
 import java.nio.ByteBuffer;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Arrays;
-import java.util.BitSet;
-
-import javax.xml.bind.DatatypeConverter;
 
 import cz.vutbr.feec.mkri.Main;
 
@@ -46,26 +39,33 @@ public class MainGenerator {
 		// Initialization of the Mouse generator and setting the retention of the mouse movement data
 		this.mouseGenerator = new MouseGenerator(this.RETENTION);
 		
+		this.startThread();
+	}
+	
+	public void startThread() {
 		// Initialization of the Hardware sensor operating class
 		this.componentGenerator = new ComponentGenerator();
 		// Starting a new thread that operates a method for data retrieval from hardware sensors.
 		this.componentGenerator.start();
 	}
 	
-	public void killThread() { this.componentGenerator.run = false; }
+	public void stopThread() {
+		this.componentGenerator.run = false;
+	}
 	
 	/*
 	 * Calculating the random number based on mouse input
 	 */
 	public void doMyThing(String type, int areaX, int areaY, int screenX, int screenY, int mouseClicks, int duration, int mouseButton) {
 		Double tmp = this.generate(type, areaX, areaY, screenX, screenY, mouseClicks, duration, mouseButton);
+		System.out.println(tmp);
 		this.combined++;
 		if(Main.generator_configuration.combine_count > 1) {
 			if(this.combined < Main.generator_configuration.combine_count)
 			this.rng *= tmp;
 		}
 		else {
-			this.combined=1;
+			this.combined = 1;
 			this.rng = tmp;
 		}
 		
@@ -81,6 +81,7 @@ public class MainGenerator {
 		}
 	}
 	
+	// Random number generation
 	private Double generate(String type, int areaX, int areaY, int screenX, int screenY, int mouseClicks, int duration, int mouseButton) {
 		
 		double sum = 1;
@@ -101,6 +102,7 @@ public class MainGenerator {
 		return sum;
 	}
 	
+	// Output normalization
 	private double normalize(double input) {
 		
 		if(Main.generator_configuration.output_range) {
@@ -115,13 +117,10 @@ public class MainGenerator {
 				input = Math.abs(input) % Main.generator_configuration.range_max;
 		}
 		
-		if(Main.generator_configuration.output_double)
-			return input*Math.pow(10, -Main.generator_configuration.digits_after_comma);
-		else
-			return input;
-		
+		return input;
 	}
 	
+	// Formating output
 	private String outputFormat(double input) {
 		try {
 			String output = "";
@@ -142,13 +141,17 @@ public class MainGenerator {
 				tmp = this.convertByteArrayToDouble(bytes);
 				
 				if(Main.generator_configuration.digits_after_comma>0) {
-					tmp = Double.parseDouble(String.format("%."+ Main.generator_configuration.digits_after_comma +"f", tmp));
+					tmp = Double.parseDouble(String.format("%."+ Main.generator_configuration.digits_after_comma +"f", tmp).replace(',', '.'));
 					if(Main.generator_configuration.use_bytes_format)
 						output = this.bytesFormatDouble(tmp);
+					else
+						output = Double.toString(tmp);
 				}
 				else if (Main.generator_configuration.digits_after_comma==0) {
 					if(Main.generator_configuration.use_bytes_format)
 						output = this.bytesFormatInt((int)tmp);
+					else
+						output = Double.toString(tmp);
 				}
 			}
 			else {
@@ -164,7 +167,7 @@ public class MainGenerator {
 					bytes = this.calculate_hash(bytes);
 				}
 				
-				// Converting bytearray back to double
+				// Converting byte array back to double
 				tmp = this.bytesToInt(bytes);
 				
 				if(Main.generator_configuration.use_bytes_format)
@@ -177,7 +180,7 @@ public class MainGenerator {
 		return null;
 	}
 	
-	// Format the output
+	// Formating double input to desired bytes output
 	private String bytesFormatDouble(double input) {
 		String output = "";
 		switch(Main.generator_configuration.bytes_format) {
@@ -197,6 +200,7 @@ public class MainGenerator {
 		return output;
 	}
 	
+	// Formating int input to desired bytes output
 	private String bytesFormatInt(int input) {
 		String output = "";
 		switch(Main.generator_configuration.bytes_format) {
@@ -216,6 +220,7 @@ public class MainGenerator {
 		return output;
 	}
 	
+	// Converting double to byte array
 	private byte[] doubleToByteArray ( final double i ) throws IOException {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		DataOutputStream dos = new DataOutputStream(bos);
@@ -224,6 +229,7 @@ public class MainGenerator {
 		return bos.toByteArray();
 	}
 	
+	// Converting byte array back to double
 	private double convertByteArrayToDouble(byte[] doubleBytes){
 		ByteBuffer byteBuffer = ByteBuffer.allocate(Double.BYTES);
 		byteBuffer.put(doubleBytes);
@@ -231,6 +237,7 @@ public class MainGenerator {
 		return byteBuffer.getDouble();
 	}
 	
+	// Converting int to byte array
 	private byte[] intToBytes(int my_int) throws IOException {
 	    ByteArrayOutputStream bos = new ByteArrayOutputStream();
 	    ObjectOutput out = new ObjectOutputStream(bos);
@@ -241,6 +248,7 @@ public class MainGenerator {
 	    return int_bytes;
 	}
 	
+	// Converting byte array back to int
 	private int bytesToInt(byte[] int_bytes) throws IOException {
 	    ByteArrayInputStream bis = new ByteArrayInputStream(int_bytes);
 	    ObjectInputStream ois = new ObjectInputStream(bis);
@@ -249,7 +257,7 @@ public class MainGenerator {
 	    return my_int;
 	}
 	
-	// TODO: Randomize Time
+	// Time randomization
 	private double randomizeTime() {
 		double date = (double)(LocalDate.now().getDayOfYear()*LocalDate.now().getYear()/LocalDate.now().getDayOfMonth()*LocalDate.now().getMonthValue());
 		double time = (double)(LocalTime.now().getHour()*LocalTime.now().getMinute()*LocalTime.now().getSecond());
@@ -257,8 +265,9 @@ public class MainGenerator {
 		return time/date;
 	}
 	
+	// Setting the hashing algorithm
 	private void setHashfunction() {
-		// Setting the hashing algorithm
+		
 		try { this.md = MessageDigest.getInstance(Main.generator_configuration.hash_function); }
 		catch(Exception e) { e.printStackTrace(); }
 	}
@@ -270,25 +279,5 @@ public class MainGenerator {
 		try { return this.md.digest(input); }
 		catch(Exception e) { e.printStackTrace(); }
 		return null;
-	}
-	
-	/*
-	 * Write the RNGs into a file
-	 */
-	private void writeFile() {
-		String output = "";
-		if(Main.generator_configuration.set_items > 1) {
-			for(String s:Main.generator_configuration.OUTPUT)
-				output += s + Main.generator_configuration.set_separator;
-		}
-		else
-			output = Main.generator_configuration.OUTPUT.get(0);
-		
-		try {
-            Files.write(Paths.get(Main.generator_configuration.file_path), output.getBytes());
-        } catch (IOException e) {
-        	System.err.println("WRONG FILE PATH!!!");
-            e.printStackTrace();
-        }
 	}
 }

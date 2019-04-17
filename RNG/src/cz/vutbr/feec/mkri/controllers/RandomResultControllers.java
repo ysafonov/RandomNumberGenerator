@@ -3,8 +3,6 @@ package cz.vutbr.feec.mkri.controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 import cz.vutbr.feec.mkri.Main;
-import cz.vutbr.feec.mkri.generator.MainGenerator;
-import cz.vutbr.feec.mkri.generator.GeneratorConfiguration;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.text.Text;

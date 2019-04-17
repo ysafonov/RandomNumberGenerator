@@ -8,16 +8,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import cz.vutbr.feec.mkri.Main;
-import cz.vutbr.feec.mkri.generator.MouseGenerator;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Rectangle;
 
 /**
  * This java class represents project's main controller class. The class
@@ -56,10 +50,10 @@ public class MainControllers implements Initializable {
 	 * number.
 	 */
 	public void generateMenu() throws IOException {
+		Main.generator_configuration.OUTPUT.clear();
 		AnchorPane pane = FXMLLoader.load(getClass().getResource("/cz/vutbr/feec/mkri/views/GenerateWindow.fxml"));
 		rootWindow.getChildren().clear();
 		rootWindow.getChildren().setAll(pane);
-		Main.generator_configuration.OUTPUT.clear();
 	}
 
 	/*
@@ -67,10 +61,16 @@ public class MainControllers implements Initializable {
 	 * item). After the click a user should be able to compare different RNGs.
 	 */
 	public void compareMenu() throws IOException {
+		Main.generator_configuration.OUTPUT.clear();
+		this.configureGeneratorForCompare();
+		if(Main.generator_configuration.use_mouse) {
+			AnchorPane mouse = FXMLLoader.load(getClass().getResource("/cz/vutbr/feec/mkri/views/MouseArea.fxml"));
+			rootWindow.getChildren().clear();
+			rootWindow.getChildren().setAll(mouse);
+		}
 		AnchorPane pane = FXMLLoader.load(getClass().getResource("/cz/vutbr/feec/mkri/views/CompareWindow.fxml"));
 		rootWindow.getChildren().clear();
 		rootWindow.getChildren().setAll(pane);
-		Main.generator_configuration.OUTPUT.clear();
 	}
 
 	/*
@@ -89,5 +89,14 @@ public class MainControllers implements Initializable {
 	 */
 	public void helpMenu() throws IOException, URISyntaxException {
 		Desktop.getDesktop().browse(new URI("https://github.com/ysafonov/RandomNumberGenerator/wiki"));
+	}
+	
+	private void configureGeneratorForCompare() {
+		Main.generator_configuration.output_range = true;
+		Main.generator_configuration.range_min = 0;
+		Main.generator_configuration.range_max = 1;
+		Main.generator_configuration.output_file = false;
+		Main.generator_configuration.output_bytes = false;
+		Main.generator_configuration.output_double = false;
 	}
 }

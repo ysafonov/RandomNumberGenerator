@@ -2,6 +2,8 @@ package cz.vutbr.feec.mkri.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 import cz.vutbr.feec.mkri.Main;
@@ -13,7 +15,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -21,7 +22,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Window;
 
 /**
  * This java class represents project's main generator class. The class
@@ -157,7 +157,7 @@ public class GenerateWindowControllers implements Initializable {
 		this.setSeparator();
 		this.setListenersForMainCheckBox();
 	}
-
+	
 	/*
 	 * This method is used for setting choiseBox and its default values
 	 */
@@ -165,7 +165,7 @@ public class GenerateWindowControllers implements Initializable {
 		choiceBox_seperatorInSet.setItems(FXCollections.observableArrayList(";", "#", "&", "@"));
 		choiceBox_seperatorInSet.getSelectionModel().selectFirst();
 	}
-
+	
 	/*
 	 * This function is responsible for grouping existing radioButtom to one
 	 * group toggleGroupTypeOfHash and applying internal ids for internal
@@ -275,9 +275,8 @@ public class GenerateWindowControllers implements Initializable {
 		choiceBox_seperatorInSet.getSelectionModel().clearSelection();
 		countOfItems_text.setDisable(!selected);
 		separator_text.setDisable(!selected);
-
 	}
-
+	
 	/*
 	 * This function is responsible for allowing to set group's parametrs. In
 	 * case the main checkbox is selected.
@@ -291,7 +290,7 @@ public class GenerateWindowControllers implements Initializable {
 		checkBox_useMouseSeed.setSelected(true);
 		checkBox_useTimeAndDateAsSeed.setSelected(true);
 	}
-
+	
 	/*
 	 * This function is responsible for allowing to set group's parametrs. In
 	 * case the main checkbox is selected.
@@ -300,7 +299,7 @@ public class GenerateWindowControllers implements Initializable {
 		textField_customSeed.setDisable(!selected);
 		textField_customSeed.setText(null);
 	}
-
+	
 	/*
 	 * This function is responsible for allowing to set group's parametrs. In
 	 * case the main checkbox is selected.
@@ -368,16 +367,18 @@ public class GenerateWindowControllers implements Initializable {
 	 */
 	@SuppressWarnings("static-access")
 	public void generateButtonPressed(ActionEvent evt) throws IOException {
-		configureGeneratorConf();
+		this.RNG.startThread();
+		this.saveSettings(evt);
 		if(this.checkBox_useMouseSeed.isSelected()){
 			showMouseArea(evt);
 		}else {
 			this.RNG.doMyThing("-1", 0, 0, 0, 0, 0, 0, 0);
 			showResult(evt);
 		}
+		this.RNG.stopThread();
 	}
 	
-	private void configureGeneratorConf() {
+	public void saveSettings(ActionEvent evt) {
 		/*
 		 * Range
 		 */
@@ -401,7 +402,7 @@ public class GenerateWindowControllers implements Initializable {
 		Main.generator_configuration.use_hash = this.checkBox_UseHashFunctions.isSelected();
 		// Set the hash function
 		Main.generator_configuration.hash_function = ((RadioButton) this.toggleGroupTypeOfHash.getSelectedToggle()).getText();
-
+		
 		/*
 		 * Set
 		 */
@@ -437,12 +438,11 @@ public class GenerateWindowControllers implements Initializable {
 			Main.generator_configuration.custom_seed = Integer.parseInt(this.textField_customSeed.getText());
 		else
 			Main.generator_configuration.custom_seed = Integer.MIN_VALUE;
-
+		
 		/*
 		 * Byte
 		 */
 		// Use bytes output
-		
 		Main.generator_configuration.output_bytes = this.checkBox_DefineTheLengthOfInput.isSelected();
 		Main.generator_configuration.use_bytes_format = this.checkBox_GenerateRandomBytes.isSelected();
 		// Set byte length
@@ -452,7 +452,7 @@ public class GenerateWindowControllers implements Initializable {
 			Main.generator_configuration.bytes_length = Integer.MAX_VALUE;
 		// Set bytes output format
 		Main.generator_configuration.bytes_format = ((RadioButton) this.toggleGroupOutPutFormat.getSelectedToggle()).getText();
-
+		
 		/*
 		 * Double
 		 */
@@ -463,11 +463,11 @@ public class GenerateWindowControllers implements Initializable {
 			Main.generator_configuration.digits_after_comma = Integer.parseInt(this.textField_NumberOfDigitsAfterComma.getText());
 		
 	}
-
+	
 	/*
 	 * Finding and changing scene
 	 */
-	private void showMouseArea(ActionEvent event) throws IOException {
+	public void showMouseArea(ActionEvent event) throws IOException {
 		Parent tmp = ((Node) event.getTarget()).getScene().getRoot();
 		AnchorPane ap = (AnchorPane) tmp.lookup("#rootWindow");
 		AnchorPane pane = FXMLLoader.load(getClass().getResource("/cz/vutbr/feec/mkri/views/MouseArea.fxml"));
@@ -479,6 +479,10 @@ public class GenerateWindowControllers implements Initializable {
 	 * Finding and changing scene 
 	 */
 	private void showResult(ActionEvent event) throws IOException {
+		
+		if(Main.generator_configuration.output_file)
+			this.writeFile();
+		
 		Parent tmp = ((Node) event.getTarget()).getScene().getRoot();
 		AnchorPane ap = (AnchorPane) tmp.lookup("#rootWindow");
 		AnchorPane pane = FXMLLoader.load(getClass().getResource("/cz/vutbr/feec/mkri/views/RandomResult.fxml"));
@@ -486,4 +490,25 @@ public class GenerateWindowControllers implements Initializable {
 		ap.getChildren().setAll(pane);
 	}
 	
+	/*
+	 * Write the RNGs into a file
+	 */
+	private void writeFile() {
+		try {
+			
+			String output = "";
+			if(Main.generator_configuration.set_items > 1) {
+				for(String s:Main.generator_configuration.OUTPUT)
+					output += s + Main.generator_configuration.set_separator;
+			}
+			else
+				output = Main.generator_configuration.OUTPUT.get(0);
+			
+            Files.write(Paths.get(Main.generator_configuration.file_path), output.getBytes());
+            
+    		Main.generator_configuration.OUTPUT.clear();
+    		Main.generator_configuration.OUTPUT.add("Data writen to file.");
+    		
+        } catch (Exception e) { e.printStackTrace(); }
+	}
 }
