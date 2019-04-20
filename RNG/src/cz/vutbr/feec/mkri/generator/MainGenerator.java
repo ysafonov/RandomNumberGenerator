@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 import java.time.LocalDate;
@@ -39,18 +40,12 @@ public class MainGenerator {
 		// Initialization of the Mouse generator and setting the retention of the mouse movement data
 		this.mouseGenerator = new MouseGenerator(this.RETENTION);
 		
-		this.startThread();
-	}
-	
-	public void startThread() {
 		// Initialization of the Hardware sensor operating class
 		this.componentGenerator = new ComponentGenerator();
-		// Starting a new thread that operates a method for data retrieval from hardware sensors.
-		this.componentGenerator.start();
-	}
-	
-	public void stopThread() {
-		this.componentGenerator.run = false;
+		// Starting a new thread that operates a method for data retrieval from hardware sensors
+		//this.componentGenerator.start();
+		// Setting for the thread to be shutdown after the program ends
+		this.componentGenerator.setDaemon(true);
 	}
 	
 	/*
@@ -58,7 +53,6 @@ public class MainGenerator {
 	 */
 	public void doMyThing(String type, int areaX, int areaY, int screenX, int screenY, int mouseClicks, int duration, int mouseButton) {
 		Double tmp = this.generate(type, areaX, areaY, screenX, screenY, mouseClicks, duration, mouseButton);
-		System.out.println(tmp);
 		this.combined++;
 		if(Main.generator_configuration.combine_count > 1) {
 			if(this.combined < Main.generator_configuration.combine_count)
@@ -105,17 +99,15 @@ public class MainGenerator {
 	// Output normalization
 	private double normalize(double input) {
 		
-		if(Main.generator_configuration.output_range) {
-			if(Main.generator_configuration.range_min != 0) {
-				if(input > Main.generator_configuration.range_min)
-					input = input % Main.generator_configuration.range_max;
-				if(input < Main.generator_configuration.range_min)
-					while(input < Main.generator_configuration.range_min)
-						input += Math.abs(Main.generator_configuration.range_min);
-			}
-			else
-				input = Math.abs(input) % Main.generator_configuration.range_max;
+		if(Main.generator_configuration.range_min != 0) {
+			if(input > (double)Main.generator_configuration.range_min)
+				input = input % (((double)Main.generator_configuration.range_max)+1);
+			if(input < (double)Main.generator_configuration.range_min)
+				while(input < (double)Main.generator_configuration.range_min)
+					input += Math.abs((double)Main.generator_configuration.range_min);
 		}
+		else
+			input = Math.abs(input) % (((double)Main.generator_configuration.range_max)+1);
 		
 		return input;
 	}
@@ -135,10 +127,11 @@ public class MainGenerator {
 				if(Main.generator_configuration.use_hash) {
 					this.setHashfunction();
 					bytes = this.calculate_hash(bytes);
+					tmp = (new BigInteger(bytes)).intValue();
 				}
-				
-				// Converting byte array back to double
-				tmp = this.convertByteArrayToDouble(bytes);
+				else
+					// Converting byte array back to double
+					tmp = this.convertByteArrayToDouble(bytes);
 				
 				if(Main.generator_configuration.digits_after_comma>0) {
 					tmp = Double.parseDouble(String.format("%."+ Main.generator_configuration.digits_after_comma +"f", tmp).replace(',', '.'));
@@ -165,10 +158,11 @@ public class MainGenerator {
 				if(Main.generator_configuration.use_hash) {
 					this.setHashfunction();
 					bytes = this.calculate_hash(bytes);
+					tmp = (new BigInteger(bytes)).intValue();
 				}
-				
-				// Converting byte array back to double
-				tmp = this.bytesToInt(bytes);
+				else
+					// Converting byte array back to double
+					tmp = this.bytesToInt(bytes);
 				
 				if(Main.generator_configuration.use_bytes_format)
 					output = this.bytesFormatInt(tmp);

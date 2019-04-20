@@ -29,6 +29,7 @@ public class MouseGenerator {
 	private final int MOUSE_MOVED = 722;
 	private final int MOUSE_ENTERED = 441;
 	private final int MOUSE_EXITED = 327;
+	private final int MOUSE_DRAGGED = 177;
 	
 	/*
 	 * Arrays to have numbers based on previous mouse locations.
@@ -110,6 +111,17 @@ public class MouseGenerator {
 				}
 				break;
 			
+			// Mouse has exited the area
+			case "MOUSE_DRAGGED":
+				if(mouseClicks==0) {
+					for (int i = 0; i < previousAreaX.length; i++)
+						sum += duration*((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *initialSeedA)/MOUSE_DRAGGED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *initialSeedB)/MOUSE_DRAGGED;
+					} else {
+						for (int i = 0; i < previousAreaX.length; i++)
+							sum += mouseClicks*duration*(((areaX*previousScreenY[i] + areaY*previousScreenX[i]) *initialSeedA)/MOUSE_DRAGGED - ((screenY*previousAreaX[i] + screenX*previousAreaY[i]) *initialSeedB)/MOUSE_DRAGGED);
+				}
+				break;
+				
 			// Just to be safe and something is returned
 			default:
 				sum = areaX*areaY*screenX*screenY;

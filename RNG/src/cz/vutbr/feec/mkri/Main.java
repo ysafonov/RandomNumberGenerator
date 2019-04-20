@@ -3,6 +3,7 @@ package cz.vutbr.feec.mkri;
 import java.io.IOException;
 
 import cz.vutbr.feec.mkri.generator.GeneratorConfiguration;
+import cz.vutbr.feec.mkri.generator.MainGenerator;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,7 +21,10 @@ import javafx.stage.Stage;
 
 public class Main extends Application{
 	
+	// Generators configuration
 	public static GeneratorConfiguration generator_configuration = new GeneratorConfiguration();
+	// RNG generator
+	public static MainGenerator RNG = new MainGenerator();
 	
 	@Override
 	public void start(Stage primaryStage) {

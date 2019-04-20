@@ -32,9 +32,6 @@ import javafx.scene.layout.AnchorPane;
 
 public class GenerateWindowControllers implements Initializable {
 	
-	// RNG generator
-	public static MainGenerator RNG = new MainGenerator();
-	
 	/*
 	 * Variables for individual GUI components. About applying minimum and
 	 * maximum range
@@ -367,15 +364,13 @@ public class GenerateWindowControllers implements Initializable {
 	 */
 	@SuppressWarnings("static-access")
 	public void generateButtonPressed(ActionEvent evt) throws IOException {
-		this.RNG.startThread();
 		this.saveSettings(evt);
 		if(this.checkBox_useMouseSeed.isSelected()){
 			showMouseArea(evt);
 		}else {
-			this.RNG.doMyThing("-1", 0, 0, 0, 0, 0, 0, 0);
+			Main.RNG.doMyThing("-1", 0, 0, 0, 0, 0, 0, 0);
 			showResult(evt);
 		}
-		this.RNG.stopThread();
 	}
 	
 	public void saveSettings(ActionEvent evt) {
@@ -383,17 +378,24 @@ public class GenerateWindowControllers implements Initializable {
 		 * Range
 		 */
 		// Use range min-max
-		Main.generator_configuration.output_range = this.checkBox_ApplyMinimumAndMaximumRange.isSelected();
-		// Set minimum
-		if (!this.minNumber.getText().equals(""))
-			Main.generator_configuration.range_min = Integer.parseInt(this.minNumber.getText());
-		else
+		if(this.checkBox_ApplyMinimumAndMaximumRange.isSelected()) {
+			// Set minimum
+			if (!this.minNumber.getText().equals(""))
+				try { Main.generator_configuration.range_min = Integer.parseInt(this.minNumber.getText()); } catch (Exception e) { e.printStackTrace(); }
+			// Set maximum
+			if (!this.maxNumber.getText().equals(""))
+				try { Main.generator_configuration.range_max = Integer.parseInt(this.maxNumber.getText()); } catch (Exception e) { e.printStackTrace(); }
+		}
+		else {
 			Main.generator_configuration.range_min = Integer.MIN_VALUE;
-		// Set maximum
-		if (!this.maxNumber.getText().equals(""))
-			Main.generator_configuration.range_max = Integer.parseInt(this.maxNumber.getText());
-		else
 			Main.generator_configuration.range_max = Integer.MAX_VALUE;
+		}
+		
+		if(Main.generator_configuration.range_max<Main.generator_configuration.range_min) {
+			int tmp = Main.generator_configuration.range_max;
+			Main.generator_configuration.range_max = Main.generator_configuration.range_min;
+			Main.generator_configuration.range_min = tmp;
+		}
 		
 		/*
 		 * Hash Function

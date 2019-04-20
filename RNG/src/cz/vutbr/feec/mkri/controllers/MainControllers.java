@@ -29,6 +29,8 @@ public class MainControllers implements Initializable {
 	@FXML
 	private AnchorPane rootWindow;
 	
+	public static String nextScene;
+	
 	/*
 	 * This method is called when the application starts. It calls a generate menu method.
 	 * 
@@ -50,6 +52,7 @@ public class MainControllers implements Initializable {
 	 * number.
 	 */
 	public void generateMenu() throws IOException {
+		this.nextScene = "result";
 		Main.generator_configuration.OUTPUT.clear();
 		AnchorPane pane = FXMLLoader.load(getClass().getResource("/cz/vutbr/feec/mkri/views/GenerateWindow.fxml"));
 		rootWindow.getChildren().clear();
@@ -64,13 +67,16 @@ public class MainControllers implements Initializable {
 		Main.generator_configuration.OUTPUT.clear();
 		this.configureGeneratorForCompare();
 		if(Main.generator_configuration.use_mouse) {
+			this.nextScene = "compare";
 			AnchorPane mouse = FXMLLoader.load(getClass().getResource("/cz/vutbr/feec/mkri/views/MouseArea.fxml"));
 			rootWindow.getChildren().clear();
 			rootWindow.getChildren().setAll(mouse);
 		}
-		AnchorPane pane = FXMLLoader.load(getClass().getResource("/cz/vutbr/feec/mkri/views/CompareWindow.fxml"));
-		rootWindow.getChildren().clear();
-		rootWindow.getChildren().setAll(pane);
+		else {
+			AnchorPane pane = FXMLLoader.load(getClass().getResource("/cz/vutbr/feec/mkri/views/CompareWindow.fxml"));
+			rootWindow.getChildren().clear();
+			rootWindow.getChildren().setAll(pane);
+		}
 	}
 
 	/*
@@ -92,7 +98,7 @@ public class MainControllers implements Initializable {
 	}
 	
 	private void configureGeneratorForCompare() {
-		Main.generator_configuration.output_range = true;
+		Main.generator_configuration.set_items = 65000;
 		Main.generator_configuration.range_min = 0;
 		Main.generator_configuration.range_max = 1;
 		Main.generator_configuration.output_file = false;

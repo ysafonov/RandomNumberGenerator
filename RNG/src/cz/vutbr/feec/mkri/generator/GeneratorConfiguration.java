@@ -18,14 +18,9 @@ public class GeneratorConfiguration {
 	
 	public int combine_count = 1;
 	
-	/*
-	 * Default and only primes output format
-	 * Only maximum is used in the only primes output
-	 */
-	public boolean output_range = false;
 	// Configuration of the minimum and maximum
-	public int range_min = -100;
-	public int range_max = 100;
+	public int range_min = Integer.MIN_VALUE;
+	public int range_max = Integer.MAX_VALUE;
 	
 	/*
 	 * Hash function configuration
