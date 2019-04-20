@@ -1,13 +1,19 @@
 package cz.vutbr.feec.mkri.controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import cz.vutbr.feec.mkri.Main;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -30,27 +36,17 @@ public class MouseAreaControllers implements Initializable {
 	private EventHandler<MouseEvent> mouseHandler = new EventHandler<MouseEvent>() {
 		@Override
 		public void handle(MouseEvent mouseEvent) {
-			mouseGenerate(mouseEvent.getEventType().toString(), // The triggered
-																// mouse event
-																// (Example:
-																// MOUSE_MOVED
-																// when the
-																// mouse moves)
+			mouseGenerate(mouseEvent, // The triggered mouse event (Example: MOUSE_MOVED when the mouse moves)
 					(int) mouseEvent.getX(), // The X coordinate in the Area
 					(int) mouseEvent.getY(), // The Y coordinate in the Area
-					(int) mouseEvent.getScreenX(), // The X coordinate in the
-													// User's screen
-					(int) mouseEvent.getScreenY(), // The Y coordinate in the
-													// User's screen
-					mouseEvent.getClickCount(), // How many times the mouse was
-												// clicked
-					mouseEvent.getButton().name().hashCode() // Hash code of the
-																// clicked
-																// button
+					(int) mouseEvent.getScreenX(), // The X coordinate in the User's screen
+					(int) mouseEvent.getScreenY(), // The Y coordinate in the User's screen
+					mouseEvent.getClickCount(), // How many times the mouse was clicked
+					mouseEvent.getButton().name().hashCode() // Hash code of the clicked button
 			);
 		}
 	};
-	
+
 	@FXML
 	private Rectangle mouseArea;
 	
@@ -78,63 +74,76 @@ public class MouseAreaControllers implements Initializable {
 		this.mouseArea.setOnMouseMoved(mouseHandler);
 		this.mouseArea.setOnMousePressed(mouseHandler);
 		this.mouseArea.setOnMouseReleased(mouseHandler);
-
-		this.exit_duration = (int)System.currentTimeMillis();
+		
+		this.exit_duration = (int) System.currentTimeMillis();
 	}
-	
+
 	/*
 	 * This method is called when a user moves his mouse on the generate button.
 	 * While calling a new instance of the class Generator is created.
 	 */
-	public void mouseGenerate(String eventType, int areaX, int areaY, int screenX, int screenY, int mouseClicks,
-			int mouseButton) {
-		System.out.println("Mouse Event: " + eventType + '\n' + "Mouse X:Y - " + areaX + ':' + areaY);
+	public void mouseGenerate(Event event, int areaX, int areaY, int screenX, int screenY, int mouseClicks, int mouseButton) {
+		System.out.println("Mouse Event: " + event.getEventType().toString() + '\n' + "Mouse X:Y - " + areaX + ':' + areaY);
 		
-		// IDEA: how long was the mouse of the area
-		switch (eventType) {
-		// Used when the mouse is moved inside the area
-		case "MOUSE_MOVED":
-			GenerateWindowControllers.RNG.doMyThing(eventType, areaX, areaY, screenX, screenY, mouseClicks, 0, 0);
-			break;
-			
-		// Used when a button is pressed down inside the area
-		case "MOUSE_PRESSED":
-			this.click_duration = (int) System.currentTimeMillis();
-			break;
-			
-		// Used when the pressed button is released inside the area
-		case "MOUSE_RELEASED":
-			GenerateWindowControllers.RNG.doMyThing(eventType, areaX, areaY, screenX, screenY, mouseClicks,(int) System.currentTimeMillis() - click_duration, mouseButton);
-			break;
-			
-		// Used when the mouse leaves the area
-		case "MOUSE_EXITED":
-			this.exit_duration = (int) System.currentTimeMillis();
-			GenerateWindowControllers.RNG.doMyThing(eventType, areaX, areaY, screenX, screenY, mouseClicks,(int) System.currentTimeMillis() - area_duration, 0);
-			break;
-			
-		// Used when the mouse enters the area
-		case "MOUSE_ENTERED":
-			this.area_duration = (int) System.currentTimeMillis();
-			GenerateWindowControllers.RNG.doMyThing(eventType, areaX, areaY, screenX, screenY, mouseClicks,(int) System.currentTimeMillis() - exit_duration, 0);
-			break;
-			
-		// Just to be safe that something is generated
-		default:
-			GenerateWindowControllers.RNG.doMyThing(eventType, areaX, areaY, screenX, screenY, mouseClicks, 0, 0);
-			break;
-		}
+		if(Main.generator_configuration.OUTPUT.size()<Main.generator_configuration.set_items) {
+			switch (event.getEventType().toString()) {
+			// Used when the mouse is moved inside the area
+			case "MOUSE_MOVED":
+				GenerateWindowControllers.RNG.doMyThing(event.getEventType().toString(), areaX, areaY, screenX, screenY, mouseClicks, 0, 0);
+				break;
+				
+			// Used when a button is pressed down inside the area
+			case "MOUSE_PRESSED":
+				this.click_duration = (int) System.currentTimeMillis();
+				break;
+				
+			// Used when the pressed button is released inside the area
+			case "MOUSE_RELEASED":
+				GenerateWindowControllers.RNG.doMyThing(event.getEventType().toString(), areaX, areaY, screenX, screenY, mouseClicks, (int) System.currentTimeMillis() - click_duration, mouseButton);
+				break;
+				
+			// Used when the mouse leaves the area
+			case "MOUSE_EXITED":
+				this.exit_duration = (int) System.currentTimeMillis();
+				GenerateWindowControllers.RNG.doMyThing(event.getEventType().toString(), areaX, areaY, screenX, screenY, mouseClicks, (int) System.currentTimeMillis() - area_duration, 0);
+				break;
+				
+			// Used when the mouse enters the area
+			case "MOUSE_ENTERED":
+				this.area_duration = (int) System.currentTimeMillis();
+				GenerateWindowControllers.RNG.doMyThing(event.getEventType().toString(), areaX, areaY, screenX, screenY, mouseClicks, (int) System.currentTimeMillis() - exit_duration, 0);
+				break;
+				
+			// Just to be safe that something is generated
+			default:
+				GenerateWindowControllers.RNG.doMyThing(event.getEventType().toString(), areaX, areaY, screenX, screenY, mouseClicks, 0, 0);
+				break;
+			}
 		
-		if(Main.generator_configuration.output_count > 1) {
-			if(Main.generator_configuration.OUTPUT.size() == Main.generator_configuration.output_count)
-				// End generator window
-				this.notifyOutput("set is ready");
+			System.out.println(Main.generator_configuration.OUTPUT.get(0));
+			if (Main.generator_configuration.set_items > 1) {
+				if (Main.generator_configuration.OUTPUT.size() == Main.generator_configuration.set_items)
+					this.notifyOutput("set is ready", event);
+			} else if(Main.generator_configuration.OUTPUT.size()==1)
+				this.notifyOutput("one number is ready", event);
 		}
-		else
-			this.notifyOutput("one number is ready");
 	}
 	
-	private void notifyOutput(String input) {
-		// Notify the number output window that one number or the hole set is ready.
+	private void notifyOutput(String input, Event event) {
+		try {
+			System.out.println(input);
+			showResultNumber(event);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	private void showResultNumber(Event event) throws IOException {
+		Parent tmp = ((Node) event.getTarget()).getScene().getRoot();
+		AnchorPane ap = (AnchorPane) tmp.lookup("#rootWindow");
+		AnchorPane pane = FXMLLoader.load(getClass().getResource("/cz/vutbr/feec/mkri/views/RandomResult.fxml"));
+	    ap.getChildren().clear();
+		ap.getChildren().setAll(pane);
 	}
 }
