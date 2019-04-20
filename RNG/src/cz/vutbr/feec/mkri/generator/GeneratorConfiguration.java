@@ -15,7 +15,6 @@ public class GeneratorConfiguration {
 	 * Output of the generator in case needing more than 1 number
 	 */
 	public ArrayList<String> OUTPUT = new ArrayList<>();
-	public int output_count = 1;
 	
 	public int combine_count = 1;
 	
@@ -72,6 +71,7 @@ public class GeneratorConfiguration {
 	public boolean output_bytes = false;
 	// Configuration of output length
 	public int bytes_length = 16;
+	public boolean use_bytes_format = false;
 	// Formats: Hex | Decimal | Binary
 	public String bytes_format = "Hex";
 	
@@ -82,9 +82,4 @@ public class GeneratorConfiguration {
 	// Path to a file where the output should be saved
 	public String file_path = "output/rng.txt";
 	
-	/*
-	 * Gaussian output format
-	 */
-	// ???
-	//public boolean output_gaussian = false;
 }
