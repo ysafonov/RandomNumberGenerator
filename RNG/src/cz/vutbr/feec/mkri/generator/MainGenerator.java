@@ -22,6 +22,7 @@ public class MainGenerator {
 	
 	// rng number for combining
 	private double rng = 0;
+	private double previous = 0;
 	private int combined = 1;
 	
 	/*
@@ -64,7 +65,7 @@ public class MainGenerator {
 		}
 		
 		if(Main.generator_configuration.combine_count == this.combined) {
-			if(Main.generator_configuration.set_items > 1)
+			if(Main.generator_configuration.array_size > 1)
 				Main.generator_configuration.OUTPUT.add(this.outputFormat(this.normalize(this.rng)));
 			else {
 				if(Main.generator_configuration.OUTPUT.size()==0)
@@ -72,7 +73,15 @@ public class MainGenerator {
 				else
 					Main.generator_configuration.OUTPUT.set(0,this.outputFormat(this.normalize(this.rng)));
 			}
+			if(Main.generator_configuration.OUTPUT.size()>1) {
+				if(Main.generator_configuration.OUTPUT.size()<Main.generator_configuration.array_size) {
+					double c = Double.longBitsToDouble(Double.doubleToRawLongBits(this.rng) ^ Double.doubleToRawLongBits(this.previous));
+					Main.generator_configuration.OUTPUT.add(this.outputFormat(this.normalize(c)));
+				}
+			}
+			this.previous = this.rng;
 		}
+		
 	}
 	
 	// Random number generation

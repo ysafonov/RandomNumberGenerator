@@ -412,7 +412,7 @@ public class GenerateWindowControllers implements Initializable {
 		Main.generator_configuration.output_sets = this.checkBox_GenerateRandomSet.isSelected();
 		// Items in set
 		if(!this.textField_numberOfItemsInsideSet.getText().equals(""))
-			Main.generator_configuration.set_items = Integer.parseInt(this.textField_numberOfItemsInsideSet.getText());
+			Main.generator_configuration.array_size = Integer.parseInt(this.textField_numberOfItemsInsideSet.getText());
 		// Set separator
 		Main.generator_configuration.set_separator = this.choiceBox_seperatorInSet.getValue();
 
@@ -499,7 +499,7 @@ public class GenerateWindowControllers implements Initializable {
 		try {
 			
 			String output = "";
-			if(Main.generator_configuration.set_items > 1) {
+			if(Main.generator_configuration.array_size > 1) {
 				for(String s:Main.generator_configuration.OUTPUT)
 					output += s + Main.generator_configuration.set_separator;
 			}

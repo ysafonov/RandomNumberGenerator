@@ -16,6 +16,13 @@ public class GeneratorConfiguration {
 	 */
 	public ArrayList<String> OUTPUT = new ArrayList<>();
 	
+	/*
+	 * Array for the comparison
+	 */
+	public ArrayList<String> COMPARE = new ArrayList<>();
+	
+	public int imageSize = 250;
+	
 	public int combine_count = 1;
 	
 	// Configuration of the minimum and maximum
@@ -34,7 +41,7 @@ public class GeneratorConfiguration {
 	 */
 	public boolean output_sets = false;
 	// How many items in a set
-	public int set_items = 1;
+	public int array_size = 1;
 	// Item separator
 	public String set_separator = ";";
 	
