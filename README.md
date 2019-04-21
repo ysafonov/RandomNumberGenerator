@@ -25,6 +25,8 @@ git clone https://github.com/ysafonov/RandomNumberGenerator.git
 
 ## Application usage
 
+For detailed information see a wiki page [Application usage](https://github.com/ysafonov/RandomNumberGenerator/wiki/Application-usage)
+
 #### Window contining main setting of the random number generator, where a user is able to change and combine different techniques:
 ![Class diagram](https://github.com/ysafonov/RandomNumberGenerator/blob/master/Diagrams/config.png)
 
