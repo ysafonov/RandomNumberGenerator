@@ -116,8 +116,6 @@ public class MainControllers implements Initializable {
 	private void tryToLoadData() {
 		try {
 			
-			String input = "";
-			
 			if(Files.exists(Paths.get("output/compare.txt"))) {
 				List<String> read = Files.readAllLines(Paths.get("output/compare.txt"));
 				for(String s : read) {

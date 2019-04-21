@@ -24,7 +24,7 @@ public class MainGenerator {
 	// rng number for combining
 	private double rng = 0;
 	private double previous = 0;
-	private int combined = 1;
+	private int combined = 0;
 	
 	/*
 	 * Variable used for operating the hardware sensors
@@ -57,8 +57,13 @@ public class MainGenerator {
 		Double tmp = this.generate(type, areaX, areaY, screenX, screenY, mouseClicks, duration, mouseButton);
 		this.combined++;
 		if(Main.generator_configuration.combine_count > 1) {
-			if(this.combined < Main.generator_configuration.combine_count)
-			this.rng *= tmp;
+			System.out.println("Combine tmp: " + tmp);
+			if(this.combined <= Main.generator_configuration.combine_count) {
+				if(combined%2 == 0)
+					this.rng += tmp;
+				else
+					this.rng -= tmp;
+			}
 		}
 		else {
 			this.combined = 1;
@@ -66,6 +71,7 @@ public class MainGenerator {
 		}
 		
 		if(Main.generator_configuration.combine_count == this.combined) {
+			System.out.println("RNG: " + this.rng);
 			if(Main.generator_configuration.array_size > 1)
 				Main.generator_configuration.OUTPUT.add(this.outputFormat(this.normalize(this.rng)));
 			else {
@@ -137,7 +143,7 @@ public class MainGenerator {
 				if(Main.generator_configuration.use_hash) {
 					this.setHashfunction();
 					bytes = this.calculate_hash(bytes);
-					tmp = (new BigInteger(bytes)).intValue();
+					tmp = (new BigInteger(bytes.toString().getBytes())).intValue();
 				}
 				else
 					// Converting byte array back to double
@@ -168,7 +174,7 @@ public class MainGenerator {
 				if(Main.generator_configuration.use_hash) {
 					this.setHashfunction();
 					bytes = this.calculate_hash(bytes);
-					tmp = (new BigInteger(bytes)).intValue();
+					tmp = (new BigInteger(bytes.toString().getBytes())).intValue();
 				}
 				else
 					// Converting byte array back to double

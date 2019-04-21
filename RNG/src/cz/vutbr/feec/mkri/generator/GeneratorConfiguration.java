@@ -30,7 +30,7 @@ public class GeneratorConfiguration {
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	
-	public int combine_count = 1;
+	public int combine_count = 5;
 	
 	// Configuration of the minimum and maximum
 	public int range_min = Integer.MIN_VALUE;

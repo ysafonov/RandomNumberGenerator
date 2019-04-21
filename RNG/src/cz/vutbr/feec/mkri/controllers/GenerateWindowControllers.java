@@ -7,7 +7,6 @@ import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 import cz.vutbr.feec.mkri.Main;
-import cz.vutbr.feec.mkri.generator.MainGenerator;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -367,7 +366,7 @@ public class GenerateWindowControllers implements Initializable {
 	 */
 	@SuppressWarnings("static-access")
 	public void generateButtonPressed(ActionEvent evt) throws IOException {
-		// this.saveSettings(evt);
+		this.saveSettings(null);
 		if(this.checkBox_useMouseSeed.isSelected()){
 			showMouseArea(evt);
 		}else {
@@ -377,8 +376,10 @@ public class GenerateWindowControllers implements Initializable {
 	}
 	
 	public void saveSettings(ActionEvent evt) {
-		System.out.println("Save setting button pressed");
-		generateButton.setDisable(true);
+		if(evt != null) {
+			System.out.println("Save setting button pressed");
+			generateButton.setDisable(true);
+		}
 		/*
 		 * Range
 		 */
@@ -395,7 +396,7 @@ public class GenerateWindowControllers implements Initializable {
 			Main.generator_configuration.range_min = Integer.MIN_VALUE;
 			Main.generator_configuration.range_max = Integer.MAX_VALUE;
 		}
-		
+			
 		if(Main.generator_configuration.range_max<Main.generator_configuration.range_min) {
 			int tmp = Main.generator_configuration.range_max;
 			Main.generator_configuration.range_max = Main.generator_configuration.range_min;
@@ -445,6 +446,8 @@ public class GenerateWindowControllers implements Initializable {
 			Main.generator_configuration.custom_seed = Integer.parseInt(this.textField_customSeed.getText());
 		else
 			Main.generator_configuration.custom_seed = Integer.MIN_VALUE;
+		
+		System.out.println(Main.generator_configuration.custom_seed);
 		
 		/*
 		 * Byte
