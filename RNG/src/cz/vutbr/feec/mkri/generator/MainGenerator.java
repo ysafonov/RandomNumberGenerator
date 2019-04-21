@@ -69,7 +69,7 @@ public class MainGenerator {
 			this.combined = 1;
 			this.rng = tmp;
 		}
-		
+		System.out.println("Combined " + this.combined);
 		if(Main.generator_configuration.combine_count == this.combined) {
 			System.out.println("RNG: " + this.rng);
 			if(Main.generator_configuration.array_size > 1)
@@ -87,6 +87,7 @@ public class MainGenerator {
 				}
 			}
 			this.previous = this.rng;
+			this.combined = 0;
 		}
 		
 	}
