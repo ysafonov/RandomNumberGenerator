@@ -86,6 +86,8 @@ public class MouseAreaControllers implements Initializable {
 		this.mouseArea.setOnMouseReleased(mouseHandler);
 		
 		this.exit_duration = (int) System.currentTimeMillis();
+		
+		if(Main.generator_configuration.array_size == 1) previousSize = Main.generator_configuration.combine_count;
 	}
 
 	/*
@@ -175,9 +177,12 @@ public class MouseAreaControllers implements Initializable {
 	}
 	
 	private void notifyIfSizeChanged(int size){
-		if(size > previousSize){
+		if(size > previousSize && Main.generator_configuration.array_size != 1){
 			previousSize  = size;
 			progressBar.setProgress(size/(double)Main.generator_configuration.array_size);
+		} 
+		if(Main.generator_configuration.array_size == 1){
+			progressBar.setProgress(1 - (--previousSize/(double)Main.generator_configuration.combine_count));
 		}
 	}
 	
