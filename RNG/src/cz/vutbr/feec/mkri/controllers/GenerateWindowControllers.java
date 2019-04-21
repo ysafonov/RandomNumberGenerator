@@ -89,6 +89,8 @@ public class GenerateWindowControllers implements Initializable {
 	private CheckBox checkBox_useMouseSeed;
 	@FXML
 	private CheckBox checkBox_useTimeAndDateAsSeed;
+	@FXML
+	private TextField combine_countTextField;
 
 	@FXML
 	private CheckBox checkBox_UseHardwareSeeds;
@@ -155,6 +157,7 @@ public class GenerateWindowControllers implements Initializable {
 		this.groupOutPutFormats();
 		this.setSeparator();
 		this.setListenersForMainCheckBox();
+		this.combine_countTextField.setText(Integer.toString(Main.generator_configuration.combine_count));
 	}
 	
 	/*
@@ -249,6 +252,11 @@ public class GenerateWindowControllers implements Initializable {
 		checkBox_GenerateDoubleOutput.setOnAction((ActionEvent e) -> {
 			activateGenerateDoubleOutput(checkBox_GenerateDoubleOutput.isSelected());
 		});
+		
+		
+		checkBox_useMouseSeed.setOnAction((ActionEvent e) -> {
+			combine_countTextField.setDisable(!	combine_countTextField.isDisable());
+		});
 
 	}
 
@@ -284,12 +292,18 @@ public class GenerateWindowControllers implements Initializable {
 		checkBox_saveOutputInTxt.setDisable(!selected);
 		checkBox_useMouseSeed.setDisable(!selected);
 		checkBox_useTimeAndDateAsSeed.setDisable(!selected);
+		
+
+		combine_countTextField.setDisable(!selected);
+		combine_countTextField.setText(Integer.toString(Main.generator_configuration.combine_count));
 
 		checkBox_saveOutputInTxt.setSelected(false);
 		checkBox_useMouseSeed.setSelected(true);
 		checkBox_useTimeAndDateAsSeed.setSelected(true);
 	}
 	
+	
+
 	/*
 	 * This function is responsible for allowing to set group's parametrs. In
 	 * case the main checkbox is selected.
@@ -380,6 +394,11 @@ public class GenerateWindowControllers implements Initializable {
 			System.out.println("Save setting button pressed");
 			generateButton.setDisable(true);
 		}
+		
+		try { 
+			Main.generator_configuration.combine_count = Integer.parseInt(this.combine_countTextField.getText()); 
+			} catch (Exception e) { e.printStackTrace(); }
+		
 		/*
 		 * Range
 		 */

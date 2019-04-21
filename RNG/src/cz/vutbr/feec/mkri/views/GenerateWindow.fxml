@@ -133,7 +133,7 @@
                </font>
             </CheckBox>
             <CheckBox fx:id="checkBox_useMouseSeed" disable="true" layoutX="6.0" layoutY="33.0" mnemonicParsing="false" selected="true" text="Use mouse seed" />
-            <CheckBox fx:id="checkBox_useTimeAndDateAsSeed" disable="true" layoutX="6.0" layoutY="59.0" mnemonicParsing="false" selected="true" text="Use time" />
+            <CheckBox fx:id="checkBox_useTimeAndDateAsSeed" disable="true" layoutX="5.0" layoutY="100.0" mnemonicParsing="false" selected="true" text="Use time" />
             <CheckBox fx:id="checkBox_useCPUSeed" disable="true" layoutX="163.0" layoutY="35.0" mnemonicParsing="false" text="CPU" />
             <CheckBox fx:id="checkBox_useDisksSeed" disable="true" layoutX="279.0" layoutY="34.0" mnemonicParsing="false" text="Disks" />
             <CheckBox fx:id="checkBox_useGPUSeed" disable="true" layoutX="222.0" layoutY="35.0" mnemonicParsing="false" text="GPU" />
@@ -147,7 +147,12 @@
                   <Font size="11.0" />
                </font>
             </TextField>
-            <CheckBox fx:id="checkBox_saveOutputInTxt" disable="true" layoutX="6.0" layoutY="80.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="136.0" text="Save output in txt" wrapText="true" />
+            <CheckBox fx:id="checkBox_saveOutputInTxt" disable="true" layoutX="5.0" layoutY="121.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="136.0" text="Save output in txt" wrapText="true" />
+            <TextField fx:id="combine_countTextField" alignment="CENTER_RIGHT" disable="true" layoutX="8.0" layoutY="62.0" prefHeight="25.0" prefWidth="128.0">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </TextField>
          </children>
       </Group>
       <Label layoutX="16.0" layoutY="7.0" prefHeight="19.0" prefWidth="270.0" text="Define generator parameters:">
