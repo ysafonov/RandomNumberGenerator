@@ -21,7 +21,7 @@ See [project's  wiki description](https://github.com/ysafonov/RandomNumberGenera
 ```
 git clone https://github.com/ysafonov/RandomNumberGenerator.git
 ```
-2) Then build a project and it via Main.java class.
+2) Then build a project and run it via Main.java class.
 
 ## Application usage
 
