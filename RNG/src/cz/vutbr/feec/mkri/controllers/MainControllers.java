@@ -111,6 +111,7 @@ public class MainControllers implements Initializable {
 		Main.generator_configuration.output_file = false;
 		Main.generator_configuration.output_bytes = false;
 		Main.generator_configuration.output_double = false;
+		Main.generator_configuration.combine_count = 1;
 	}
 	
 	private void tryToLoadData() {
