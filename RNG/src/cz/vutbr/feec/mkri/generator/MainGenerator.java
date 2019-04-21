@@ -57,7 +57,6 @@ public class MainGenerator {
 		Double tmp = this.generate(type, areaX, areaY, screenX, screenY, mouseClicks, duration, mouseButton);
 		this.combined++;
 		if(Main.generator_configuration.combine_count > 1) {
-			System.out.println("Combine tmp: " + tmp);
 			if(this.combined <= Main.generator_configuration.combine_count) {
 				if(combined%2 == 0)
 					this.rng += tmp;
@@ -69,9 +68,7 @@ public class MainGenerator {
 			this.combined = 1;
 			this.rng = tmp;
 		}
-		System.out.println("Combined " + this.combined);
 		if(Main.generator_configuration.combine_count == this.combined) {
-			System.out.println("RNG: " + this.rng);
 			if(Main.generator_configuration.array_size > 1)
 				Main.generator_configuration.OUTPUT.add(this.outputFormat(this.normalize(this.rng)));
 			else {
@@ -82,8 +79,14 @@ public class MainGenerator {
 			}
 			if(Main.generator_configuration.OUTPUT.size()>1) {
 				if(Main.generator_configuration.OUTPUT.size()<Main.generator_configuration.array_size) {
-					double c = Double.longBitsToDouble(Double.doubleToRawLongBits(this.rng) ^ Double.doubleToRawLongBits(this.previous));
-					Main.generator_configuration.OUTPUT.add(this.outputFormat(this.normalize(c)));
+					if(Main.generator_configuration.output_double) {
+						double c = Double.longBitsToDouble(Double.doubleToRawLongBits(this.rng) ^ Double.doubleToRawLongBits(this.previous));
+						Main.generator_configuration.OUTPUT.add(this.outputFormat(this.normalize(c)));
+					}
+					else {
+						int c = ((int)this.rng)^((int)this.previous);
+						Main.generator_configuration.OUTPUT.add(this.outputFormat(this.normalize(c)));
+					}
 				}
 			}
 			this.previous = this.rng;
@@ -117,14 +120,14 @@ public class MainGenerator {
 	private double normalize(double input) {
 		
 		if(Main.generator_configuration.range_min != 0) {
-			if(input > (double)Main.generator_configuration.range_min)
-				input = input % (((double)Main.generator_configuration.range_max)+1);
 			if(input < (double)Main.generator_configuration.range_min)
 				while(input < (double)Main.generator_configuration.range_min)
 					input += Math.abs((double)Main.generator_configuration.range_min);
+			if(input > (double)Main.generator_configuration.range_max)
+				input = input % (((double)Main.generator_configuration.range_max)+1.0);
 		}
 		else
-			input = Math.abs(input) % (((double)Main.generator_configuration.range_max)+1);
+			input = Math.abs(input) % (((double)Main.generator_configuration.range_max)+1.0);
 		
 		return input;
 	}
@@ -272,7 +275,6 @@ public class MainGenerator {
 	private double randomizeTime() {
 		double date = (double)(LocalDate.now().getDayOfYear()*LocalDate.now().getYear()/LocalDate.now().getDayOfMonth()*LocalDate.now().getMonthValue());
 		double time = (double)(LocalTime.now().getHour()*LocalTime.now().getMinute()*LocalTime.now().getSecond());
-		System.out.println(date + "\n" + time);
 		return time/date;
 	}
 	
