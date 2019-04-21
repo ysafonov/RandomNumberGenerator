@@ -59,9 +59,9 @@ public class MainGenerator {
 		if(Main.generator_configuration.combine_count > 1) {
 			if(this.combined <= Main.generator_configuration.combine_count) {
 				if(combined%2 == 0)
-					this.rng += tmp;
+					this.rng += this.normalize(tmp);
 				else
-					this.rng -= tmp;
+					this.rng -= this.normalize(tmp);
 			}
 		}
 		else {
