@@ -3,6 +3,10 @@ package cz.vutbr.feec.mkri.generator;
 import java.util.ArrayList;
 import java.util.Random;
 
+/* 
+* @author Yehor Safonov; id: 185942
+*/
+
 public abstract class GeneratorJavaRandom {
 
 	public static void setArray(ArrayList<Integer> input, int size ) {

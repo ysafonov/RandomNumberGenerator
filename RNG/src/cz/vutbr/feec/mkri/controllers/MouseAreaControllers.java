@@ -6,6 +6,7 @@ import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import cz.vutbr.feec.mkri.Main;
@@ -16,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
@@ -54,6 +56,8 @@ public class MouseAreaControllers implements Initializable {
 	@FXML
 	private Rectangle mouseArea;
 	
+	@FXML
+	private ProgressBar progressBar;
 	/*
 	 * Variables for timing the duration of: - how long was the button pressed
 	 * down - how long was the mouse inside the area - how long was the mouse
@@ -62,6 +66,8 @@ public class MouseAreaControllers implements Initializable {
 	private int click_duration;
 	private int area_duration;
 	private int exit_duration;
+	
+	private int previousSize = 0;
 	
 	/*
 	 * This method is called when the application starts.
@@ -89,7 +95,7 @@ public class MouseAreaControllers implements Initializable {
 	public void mouseGenerate(Event event, int areaX, int areaY, int screenX, int screenY, int mouseClicks, int mouseButton) {
 		System.out.println("Mouse Event: " + event.getEventType().toString() + '\n' + "Mouse X:Y - " + areaX + ':' + areaY);
 		
-		if(Main.generator_configuration.OUTPUT.size()<Main.generator_configuration.set_items) {
+		if(Main.generator_configuration.OUTPUT.size()<Main.generator_configuration.array_size) {
 			switch (event.getEventType().toString()) {
 			// Used when the mouse is moved inside the area
 			case "MOUSE_MOVED":
@@ -129,10 +135,12 @@ public class MouseAreaControllers implements Initializable {
 				break;
 			}
 			
-			System.out.println(Main.generator_configuration.OUTPUT.get(Main.generator_configuration.OUTPUT.size()-1));
+			this.notifyIfSizeChanged(Main.generator_configuration.OUTPUT.size());
+			
+			//System.out.println(Main.generator_configuration.OUTPUT.get(Main.generator_configuration.OUTPUT.size()-1));
 			System.out.println(Main.generator_configuration.OUTPUT.size());
-			if (Main.generator_configuration.set_items > 1) {
-				if (Main.generator_configuration.OUTPUT.size() == Main.generator_configuration.set_items)
+			if (Main.generator_configuration.array_size > 1) {
+				if (Main.generator_configuration.OUTPUT.size() == Main.generator_configuration.array_size)
 					this.notifyOutput("set is ready", event);
 			} else if(Main.generator_configuration.OUTPUT.size()==1)
 				this.notifyOutput("one number is ready", event);
@@ -150,17 +158,27 @@ public class MouseAreaControllers implements Initializable {
 		}
 
 	}
-
+	@SuppressWarnings("unchecked")
 	private void showResultNumber(Event event) throws IOException {
 		Parent tmp = ((Node) event.getTarget()).getScene().getRoot();
 		AnchorPane ap = (AnchorPane) tmp.lookup("#rootWindow");
 		AnchorPane pane;
 		if(MainControllers.nextScene.equals("result"))
 			pane = FXMLLoader.load(getClass().getResource("/cz/vutbr/feec/mkri/views/RandomResult.fxml"));
-		else
+		else {
+			Main.generator_configuration.COMPARE = (ArrayList<String>) Main.generator_configuration.OUTPUT.clone();
+			this.compareDataSave();
 			pane = FXMLLoader.load(getClass().getResource("/cz/vutbr/feec/mkri/views/CompareWindow.fxml"));
+		}
 	    ap.getChildren().clear();
 		ap.getChildren().setAll(pane);
+	}
+	
+	private void notifyIfSizeChanged(int size){
+		if(size > previousSize){
+			previousSize  = size;
+			progressBar.setProgress(size/(double)Main.generator_configuration.array_size);
+		}
 	}
 	
 	/*
@@ -170,7 +188,7 @@ public class MouseAreaControllers implements Initializable {
 		try {
 			
 			String output = "";
-			if(Main.generator_configuration.set_items > 1) {
+			if(Main.generator_configuration.array_size > 1) {
 				for(String s:Main.generator_configuration.OUTPUT)
 					output += s + Main.generator_configuration.set_separator;
 			}
@@ -183,6 +201,27 @@ public class MouseAreaControllers implements Initializable {
     		Main.generator_configuration.OUTPUT.clear();
     		Main.generator_configuration.OUTPUT.add("Data writen to file.");
     		
+        } catch (Exception e) { e.printStackTrace(); }
+	}
+	
+	private void compareDataSave() {
+		try {
+			
+			String output = "";
+			if(Main.generator_configuration.array_size > 1) {
+				for(String s:Main.generator_configuration.COMPARE)
+					output += s;
+			}
+			else
+				output = Main.generator_configuration.OUTPUT.get(0);
+			
+			try { Files.createDirectories(Paths.get("output")); } catch (FileAlreadyExistsException e) { /* No problem here */ }
+			Files.write(Paths.get(Main.generator_configuration.file_path), output.getBytes());
+			
+			System.out.println("Compare Data saved to file!");
+			Main.generator_configuration.OUTPUT.clear();
+			Main.generator_configuration.OUTPUT.add(".");
+			
         } catch (Exception e) { e.printStackTrace(); }
 	}
 }

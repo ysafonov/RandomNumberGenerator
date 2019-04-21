@@ -2,7 +2,12 @@ package cz.vutbr.feec.mkri.tests;
 
 import java.util.ArrayList;
 
-public abstract class LongRunTest {
+/* 
+* @author Pavel Mazanek; id: 185933
+* @author Yehor Safonov; id: 185942
+*/
+
+public abstract class LongRunsTest {
 
 	private static int requiredCountOfValues = 20000;
 	

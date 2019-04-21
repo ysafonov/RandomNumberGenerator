@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -140,6 +141,8 @@ public class GenerateWindowControllers implements Initializable {
 	private TextField textField_NumberOfDigitsAfterComma;
 	@FXML
 	private Label numberOfDigitsAfterComma_text;
+	@FXML
+	private Button generateButton;
 
 	/*
 	 * This method is called when the application starts.
@@ -364,7 +367,7 @@ public class GenerateWindowControllers implements Initializable {
 	 */
 	@SuppressWarnings("static-access")
 	public void generateButtonPressed(ActionEvent evt) throws IOException {
-		this.saveSettings(evt);
+		// this.saveSettings(evt);
 		if(this.checkBox_useMouseSeed.isSelected()){
 			showMouseArea(evt);
 		}else {
@@ -374,6 +377,8 @@ public class GenerateWindowControllers implements Initializable {
 	}
 	
 	public void saveSettings(ActionEvent evt) {
+		System.out.println("Save setting button pressed");
+		generateButton.setDisable(true);
 		/*
 		 * Range
 		 */
@@ -412,7 +417,7 @@ public class GenerateWindowControllers implements Initializable {
 		Main.generator_configuration.output_sets = this.checkBox_GenerateRandomSet.isSelected();
 		// Items in set
 		if(!this.textField_numberOfItemsInsideSet.getText().equals(""))
-			Main.generator_configuration.set_items = Integer.parseInt(this.textField_numberOfItemsInsideSet.getText());
+			Main.generator_configuration.array_size = Integer.parseInt(this.textField_numberOfItemsInsideSet.getText());
 		// Set separator
 		Main.generator_configuration.set_separator = this.choiceBox_seperatorInSet.getValue();
 
@@ -499,7 +504,7 @@ public class GenerateWindowControllers implements Initializable {
 		try {
 			
 			String output = "";
-			if(Main.generator_configuration.set_items > 1) {
+			if(Main.generator_configuration.array_size > 1) {
 				for(String s:Main.generator_configuration.OUTPUT)
 					output += s + Main.generator_configuration.set_separator;
 			}

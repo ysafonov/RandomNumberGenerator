@@ -2,6 +2,10 @@ package cz.vutbr.feec.mkri.generator;
 
 import java.util.ArrayList;
 
+/* 
+* @author Yehor Safonov; id: 185942
+*/
+
 public abstract class GeneratorMath {
 
 	public static void setArray(ArrayList<Integer> input, int size ) {

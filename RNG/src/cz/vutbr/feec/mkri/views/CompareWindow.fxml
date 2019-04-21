@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--
-	@author Yehor Safonov; id: 185942
--->
+<!-- @author Yehor Safonov; id: 185942 -->
 
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -16,504 +14,732 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="600.0" style="-fx-background-color: #d0d0d0;" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vutbr.feec.mkri.controllers.CompareWindowControllers">
-   <children>
-      <TabPane prefHeight="465.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Generator Mouse Movement">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebebeb" height="439.0" stroke="#ffffff00" strokeType="INSIDE" strokeWidth="0.0" width="305.0" />
-                        <Group layoutX="16.0" layoutY="13.8134765625">
-                           <children>
-                              <ImageView fx:id="firstImageView" fitHeight="250.0" fitWidth="250.0" layoutX="15.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
-                              <TabPane layoutX="289.0" layoutY="-17.0" prefHeight="438.0" prefWidth="296.0" side="LEFT" tabClosingPolicy="UNAVAILABLE">
-                                <tabs>
-                                    <Tab text="Summary">
-                                       <content>
-                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                             <children>
-                                                <Group layoutX="16.0" layoutY="50.0">
-                                                   <children>
-                                                      <Group layoutX="186.0">
-                                                         <children>
-                                                            <ImageView fx:id="yesMonobitFirst" fitHeight="32.0" fitWidth="32.0" layoutX="9.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                                               <image>
-                                                                  <Image url="@../../../../../../images/yes.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                            <ImageView fx:id="noMonobitFirst" fitHeight="32.0" fitWidth="32.0" focusTraversable="true" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-                                                               <image>
-                                                                  <Image url="@../../../../../../images/no.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                            <Rectangle fx:id="rectangleMonobitFirst" arcHeight="5.0" arcWidth="5.0" fill="#37f07800" height="50.0" stroke="#f5541a" strokeType="INSIDE" width="51.0" />
-                                                         </children>
-                                                      </Group>
-                                                      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eeeeee" height="50.0" stroke="#9a9a9a" strokeType="INSIDE" width="188.0" />
-                                                      <Text layoutX="44.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Monobit test" wrappingWidth="129.998046875">
-                                                         <font>
-                                                            <Font size="15.0" />
-                                                         </font>
-                                                      </Text>
-                                                   </children>
-                                                </Group>
-                                                <Text fill="#4d4d4d" layoutX="16.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tests under FIPS 140-2: " textAlignment="CENTER" wrappingWidth="235.998046875">
-                                                   <font>
-                                                      <Font size="15.0" />
-                                                   </font>
-                                                </Text>
-                                                <Group layoutX="16.0" layoutY="116.0">
-                                                   <children>
-                                                      <Group layoutX="186.0">
-                                                         <children>
-                                                            <ImageView fx:id="yesPockerFirst" fitHeight="32.0" fitWidth="32.0" layoutX="9.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                                               <image>
-                                                                  <Image url="@../../../../../../images/yes.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                            <ImageView fx:id="noPockerFirst" fitHeight="32.0" fitWidth="32.0" focusTraversable="true" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-                                                               <image>
-                                                                  <Image url="@../../../../../../images/no.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                            <Rectangle fx:id="rectanglePockerFirst" arcHeight="5.0" arcWidth="5.0" fill="#37f07800" height="50.0" stroke="#f5541a" strokeType="INSIDE" width="51.0" />
-                                                         </children>
-                                                      </Group>
-                                                      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eeeeee" height="50.0" stroke="#9a9a9a" strokeType="INSIDE" width="188.0" />
-                                                      <Text layoutX="54.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Poker test" wrappingWidth="129.998046875">
-                                                         <font>
-                                                            <Font size="15.0" />
-                                                         </font>
-                                                      </Text>
-                                                   </children>
-                                                </Group>
-                                                <Group layoutX="16.0" layoutY="184.0">
-                                                   <children>
-                                                      <Group layoutX="186.0">
-                                                         <children>
-                                                            <ImageView fx:id="yesRunFirst" fitHeight="32.0" fitWidth="32.0" layoutX="9.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                                               <image>
-                                                                  <Image url="@../../../../../../images/yes.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                            <ImageView fx:id="noRunFirst" fitHeight="32.0" fitWidth="32.0" focusTraversable="true" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-                                                               <image>
-                                                                  <Image url="@../../../../../../images/no.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                            <Rectangle fx:id="rectangleRunFirst" arcHeight="5.0" arcWidth="5.0" fill="#37f07800" height="50.0" stroke="#f5541a" strokeType="INSIDE" width="51.0" />
-                                                         </children>
-                                                      </Group>
-                                                      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eeeeee" height="50.0" stroke="#9a9a9a" strokeType="INSIDE" width="188.0" />
-                                                      <Text layoutX="58.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Run test" wrappingWidth="129.998046875">
-                                                         <font>
-                                                            <Font size="15.0" />
-                                                         </font>
-                                                      </Text>
-                                                   </children>
-                                                </Group>
-                                                <Group layoutX="16.0" layoutY="255.0">
-                                                   <children>
-                                                      <Group layoutX="186.0">
-                                                         <children>
-                                                            <ImageView fx:id="yesRunLongFirst" fitHeight="32.0" fitWidth="32.0" layoutX="9.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                                               <image>
-                                                                  <Image url="@../../../../../../images/yes.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                            <ImageView fx:id="noRunLongFirst" fitHeight="32.0" fitWidth="32.0" focusTraversable="true" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-                                                               <image>
-                                                                  <Image url="@../../../../../../images/no.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                            <Rectangle fx:id="rectangleRunLongFirst" arcHeight="5.0" arcWidth="5.0" fill="#37f07800" height="50.0" stroke="#f5541a" strokeType="INSIDE" width="51.0" />
-                                                         </children>
-                                                      </Group>
-                                                      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eeeeee" height="50.0" stroke="#9a9a9a" strokeType="INSIDE" width="188.0" />
-                                                      <Text layoutX="38.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Long Run test" wrappingWidth="129.998046875">
-                                                         <font>
-                                                            <Font size="15.0" />
-                                                         </font>
-                                                      </Text>
-                                                   </children>
-                                                </Group>
-                                             </children>
-                                          </AnchorPane>
-                                       </content>
-                                    </Tab>
-                                    <Tab text="RNG Probabilty">
-                                       <content>
-                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                             <children>
-                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8e8e8" height="118.0" layoutX="-1.0" layoutY="-3.0" stroke="#bfbfbfd0" strokeType="INSIDE" strokeWidth="0.0" width="269.0" />
-                                                <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="244.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                                   <image>
-                                                      <Image url="@../../../../../../images/yes.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text layoutX="21.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description: Description: Lorem Ips1Ipsum has been the industry's standard dummy text ever since the 1500." textAlignment="JUSTIFY" wrappingWidth="225.99999763222877">
-                                                   <font>
-                                                      <Font name="System Italic" size="12.0" />
-                                                   </font>
-                                                </Text>
-                                                <Text fill="#515151" layoutX="51.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generator's probability:" wrappingWidth="235.998046875">
-                                                   <font>
-                                                      <Font size="15.0" />
-                                                   </font>
-                                                </Text>
-                                                <Text fx:id="entropyFirst" layoutX="16.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="235.99804653797764">
-                                                   <font>
-                                                      <Font size="29.0" />
-                                                   </font>
-                                                </Text>
-                                             </children>
-                                          </AnchorPane>
-                                       </content>
-                                    </Tab>
-                                  <Tab text="Monobit">
-                                       <content>
-                                          <AnchorPane prefHeight="438.0" prefWidth="261.0">
-                                             <children>
-                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c9c9c9" height="143.0" layoutY="-3.0" stroke="#bfbfbfd0" strokeType="INSIDE" strokeWidth="0.0" width="264.0" />
-                                                <TextArea fx:id="monobitFirst" editable="false" focusTraversable="false" layoutY="140.0" opacity="0.78" prefHeight="284.0" prefWidth="266.0" scrollTop="1.0" style="-fx-background-color: #A8A8A8;" wrapText="true" />
-                                                <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="244.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                                   <image>
-                                                      <Image url="@../../../../../../images/yes.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text layoutX="18.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description: Description: Lorem Ipsum is simply dummy text of the prinIpsum has been the industry's standard dummy text ever since the 1500." textAlignment="JUSTIFY" wrappingWidth="225.99999763222877">
-                                                   <font>
-                                                      <Font name="System Italic" size="12.0" />
-                                                   </font>
-                                                </Text>
-                                             </children>
-                                          </AnchorPane>
-                                       </content>
-                                    </Tab>
-                                    <Tab text="Pocker">
-                                       <content>
-                                          <AnchorPane prefHeight="438.0" prefWidth="261.0">
-                                             <children>
-                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c9c9c9" height="143.0" layoutY="-3.0" stroke="#bfbfbfd0" strokeType="INSIDE" strokeWidth="0.0" width="264.0" />
-                                                <TextArea fx:id="pokerFirst" editable="false" focusTraversable="false" layoutY="140.0" opacity="0.78" prefHeight="284.0" prefWidth="266.0" scrollTop="1.0" style="-fx-background-color: #A8A8A8;" wrapText="true" />
-                                                <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="244.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                                   <image>
-                                                      <Image url="@../../../../../../images/yes.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text layoutX="18.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description: Description: Lorem Ipsum is simply dummy text of the prinIpsum has been the industry's standard dummy text ever since the 1500." textAlignment="JUSTIFY" wrappingWidth="225.99999763222877">
-                                                   <font>
-                                                      <Font name="System Italic" size="12.0" />
-                                                   </font>
-                                                </Text>
-                                             </children>
-                                          </AnchorPane>
-                                       </content>
-                                    </Tab>
-                                    <Tab text="Run">
-                                       <content>
-                                          <AnchorPane prefHeight="438.0" prefWidth="261.0">
-                                             <children>
-                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c9c9c9" height="143.0" layoutY="-3.0" stroke="#bfbfbfd0" strokeType="INSIDE" strokeWidth="0.0" width="264.0" />
-                                                <TextArea fx:id="runFirst" editable="false" focusTraversable="false" layoutY="140.0" opacity="0.78" prefHeight="284.0" prefWidth="266.0" scrollTop="1.0" style="-fx-background-color: #A8A8A8;" wrapText="true" />
-                                                <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="244.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                                   <image>
-                                                      <Image url="@../../../../../../images/yes.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text layoutX="18.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description: Description: Lorem Ipsum is simply dummy text of the prinIpsum has been the industry's standard dummy text ever since the 1500." textAlignment="JUSTIFY" wrappingWidth="225.99999763222877">
-                                                   <font>
-                                                      <Font name="System Italic" size="12.0" />
-                                                   </font>
-                                                </Text>
-                                             </children>
-                                          </AnchorPane>
-                                       </content>
-                                    </Tab>
-                                    <Tab text="Long Run">
-                                       <content>
-                                          <AnchorPane prefHeight="438.0" prefWidth="261.0">
-                                             <children>
-                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c9c9c9" height="143.0" layoutY="-3.0" stroke="#bfbfbfd0" strokeType="INSIDE" strokeWidth="0.0" width="264.0" />
-                                                <TextArea fx:id="longRunFirst" editable="false" focusTraversable="false" layoutY="140.0" opacity="0.78" prefHeight="284.0" prefWidth="266.0" scrollTop="1.0" style="-fx-background-color: #A8A8A8;" wrapText="true" />
-                                                <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="244.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                                   <image>
-                                                      <Image url="@../../../../../../images/yes.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text layoutX="18.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description: Description: Lorem Ipsum is simply dummy text of the prinIpsum has been the industry's standard dummy text ever since the 1500." textAlignment="JUSTIFY" wrappingWidth="225.99999763222877">
-                                                   <font>
-                                                      <Font name="System Italic" size="12.0" />
-                                                   </font>
-                                                </Text>
-                                             </children>
-                                          </AnchorPane>
-                                       </content>
-                                    </Tab>
-                                </tabs>
-                              </TabPane>
-                              <Text layoutX="17.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " textAlignment="JUSTIFY" wrappingWidth="247.419921875" />
-                              <Text layoutX="24.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generator uses mouse movements:" wrappingWidth="235.998046875">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </Group>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-            <Tab text="External Java Generators">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebebeb" height="439.0" stroke="#ffffff00" strokeType="INSIDE" strokeWidth="0.0" width="305.0" />
-                        <Group layoutX="16.0" layoutY="13.8134765625">
-                           <children>
-                              <ImageView fx:id="secondImageView" fitHeight="250.0" fitWidth="250.0" layoutX="15.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
-                              <TabPane layoutX="289.0" layoutY="-17.0" prefHeight="438.0" prefWidth="296.0" side="LEFT" tabClosingPolicy="UNAVAILABLE">
-                                 <tabs>
-                                    <Tab fx:id="summaryTabSecond" disable="true" text="Summary">
-                                       <content>
-                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                             <children>
-                                                <Group layoutX="16.0" layoutY="50.0">
-                                                   <children>
-                                                      <Group layoutX="186.0">
-                                                         <children>
-                                                            <ImageView fx:id="yesMonobitSecond" fitHeight="32.0" fitWidth="32.0" layoutX="9.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                                               <image>
-                                                                  <Image url="@../../../../../../images/yes.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                            <ImageView fx:id="noMonobitSecond" fitHeight="32.0" fitWidth="32.0" focusTraversable="true" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-                                                               <image>
-                                                                  <Image url="@../../../../../../images/no.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                            <Rectangle fx:id="rectangleMonobitSecond" arcHeight="5.0" arcWidth="5.0" fill="#37f07800" height="50.0" stroke="#f5541a" strokeType="INSIDE" width="51.0" />
-                                                         </children>
-                                                      </Group>
-                                                      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eeeeee" height="50.0" stroke="#9a9a9a" strokeType="INSIDE" width="188.0" />
-                                                      <Text layoutX="44.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Monobit test" wrappingWidth="129.998046875">
-                                                         <font>
-                                                            <Font size="15.0" />
-                                                         </font>
-                                                      </Text>
-                                                   </children>
-                                                </Group>
-                                                <Text fill="#4d4d4d" layoutX="16.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tests under FIPS 140-2: " textAlignment="CENTER" wrappingWidth="235.998046875">
-                                                   <font>
-                                                      <Font size="15.0" />
-                                                   </font>
-                                                </Text>
-                                                <Group layoutX="16.0" layoutY="116.0">
-                                                   <children>
-                                                      <Group layoutX="186.0">
-                                                         <children>
-                                                            <ImageView fx:id="yesPockerSecond" fitHeight="32.0" fitWidth="32.0" layoutX="9.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                                               <image>
-                                                                  <Image url="@../../../../../../images/yes.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                            <ImageView fx:id="noPockerSecond" fitHeight="32.0" fitWidth="32.0" focusTraversable="true" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-                                                               <image>
-                                                                  <Image url="@../../../../../../images/no.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                            <Rectangle fx:id="rectanglePockerSecond" arcHeight="5.0" arcWidth="5.0" fill="#37f07800" height="50.0" stroke="#f5541a" strokeType="INSIDE" width="51.0" />
-                                                         </children>
-                                                      </Group>
-                                                      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eeeeee" height="50.0" stroke="#9a9a9a" strokeType="INSIDE" width="188.0" />
-                                                      <Text layoutX="54.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Poker test" wrappingWidth="129.998046875">
-                                                         <font>
-                                                            <Font size="15.0" />
-                                                         </font>
-                                                      </Text>
-                                                   </children>
-                                                </Group>
-                                                <Group layoutX="16.0" layoutY="184.0">
-                                                   <children>
-                                                      <Group layoutX="186.0">
-                                                         <children>
-                                                            <ImageView fx:id="yesRunSecond" fitHeight="32.0" fitWidth="32.0" layoutX="9.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                                               <image>
-                                                                  <Image url="@../../../../../../images/yes.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                            <ImageView fx:id="noRunSecond" fitHeight="32.0" fitWidth="32.0" focusTraversable="true" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-                                                               <image>
-                                                                  <Image url="@../../../../../../images/no.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                            <Rectangle fx:id="rectangleRunSecond" arcHeight="5.0" arcWidth="5.0" fill="#37f07800" height="50.0" stroke="#f5541a" strokeType="INSIDE" width="51.0" />
-                                                         </children>
-                                                      </Group>
-                                                      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eeeeee" height="50.0" stroke="#9a9a9a" strokeType="INSIDE" width="188.0" />
-                                                      <Text layoutX="58.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Run test" wrappingWidth="129.998046875">
-                                                         <font>
-                                                            <Font size="15.0" />
-                                                         </font>
-                                                      </Text>
-                                                   </children>
-                                                </Group>
-                                                <Group layoutX="16.0" layoutY="255.0">
-                                                   <children>
-                                                      <Group layoutX="186.0">
-                                                         <children>
-                                                            <ImageView fx:id="yesRunLongSecond" fitHeight="32.0" fitWidth="32.0" layoutX="9.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                                               <image>
-                                                                  <Image url="@../../../../../../images/yes.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                            <ImageView fx:id="noRunLongSecond" fitHeight="32.0" fitWidth="32.0" focusTraversable="true" layoutX="10.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-                                                               <image>
-                                                                  <Image url="@../../../../../../images/no.png" />
-                                                               </image>
-                                                            </ImageView>
-                                                            <Rectangle fx:id="rectangleRunLongSecond" arcHeight="5.0" arcWidth="5.0" fill="#37f07800" height="50.0" stroke="#f5541a" strokeType="INSIDE" width="51.0" />
-                                                         </children>
-                                                      </Group>
-                                                      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eeeeee" height="50.0" stroke="#9a9a9a" strokeType="INSIDE" width="188.0" />
-                                                      <Text layoutX="38.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Long Run test" wrappingWidth="129.998046875">
-                                                         <font>
-                                                            <Font size="15.0" />
-                                                         </font>
-                                                      </Text>
-                                                   </children>
-                                                </Group>
-                                             </children>
-                                          </AnchorPane>
-                                       </content>
-                                    </Tab>
-                                    <Tab fx:id="entropyTabSecond" disable="true" text="RNG Probabilty">
-                                       <content>
-                                          <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                             <children>
-                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8e8e8" height="118.0" layoutX="-1.0" layoutY="-3.0" stroke="#bfbfbfd0" strokeType="INSIDE" strokeWidth="0.0" width="269.0" />
-                                                <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="244.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                                   <image>
-                                                      <Image url="@../../../../../../images/yes.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text layoutX="21.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description: Description: Lorem Ips1Ipsum has been the industry's standard dummy text ever since the 1500." textAlignment="JUSTIFY" wrappingWidth="225.99999763222877">
-                                                   <font>
-                                                      <Font name="System Italic" size="12.0" />
-                                                   </font>
-                                                </Text>
-                                                <Text fill="#515151" layoutX="51.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generator's probability:" wrappingWidth="235.998046875">
-                                                   <font>
-                                                      <Font size="15.0" />
-                                                   </font>
-                                                </Text>
-                                                <Text fx:id="entropySecond" layoutX="16.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="235.99804653797764">
-                                                   <font>
-                                                      <Font size="29.0" />
-                                                   </font>
-                                                </Text>
-                                             </children>
-                                          </AnchorPane>
-                                       </content>
-                                    </Tab>
-                                    <Tab fx:id="monobitTabSecond" disable="true" text="Monobit">
-                                       <content>
-                                          <AnchorPane prefHeight="438.0" prefWidth="261.0">
-                                             <children>
-                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c9c9c9" height="143.0" layoutY="-3.0" stroke="#bfbfbfd0" strokeType="INSIDE" strokeWidth="0.0" width="264.0" />
-                                                <TextArea fx:id="monobitSecond" editable="false" focusTraversable="false" layoutY="140.0" opacity="0.78" prefHeight="284.0" prefWidth="266.0" scrollTop="1.0" style="-fx-background-color: #A8A8A8;" wrapText="true" />
-                                                <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="244.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                                   <image>
-                                                      <Image url="@../../../../../../images/yes.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text layoutX="18.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description: Description: Lorem Ipsum is simply dummy text of the prinIpsum has been the industry's standard dummy text ever since the 1500." textAlignment="JUSTIFY" wrappingWidth="225.99999763222877">
-                                                   <font>
-                                                      <Font name="System Italic" size="12.0" />
-                                                   </font>
-                                                </Text>
-                                             </children>
-                                          </AnchorPane>
-                                       </content>
-                                    </Tab>
-                                    <Tab fx:id="pockerTabSecond" disable="true" text="Pocker">
-                                       <content>
-                                          <AnchorPane prefHeight="438.0" prefWidth="261.0">
-                                             <children>
-                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c9c9c9" height="143.0" layoutY="-3.0" stroke="#bfbfbfd0" strokeType="INSIDE" strokeWidth="0.0" width="264.0" />
-                                                <TextArea fx:id="pokerSecond" editable="false" focusTraversable="false" layoutY="140.0" opacity="0.78" prefHeight="284.0" prefWidth="266.0" scrollTop="1.0" style="-fx-background-color: #A8A8A8;" wrapText="true" />
-                                                <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="244.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                                   <image>
-                                                      <Image url="@../../../../../../images/yes.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text layoutX="18.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description: Description: Lorem Ipsum is simply dummy text of the prinIpsum has been the industry's standard dummy text ever since the 1500." textAlignment="JUSTIFY" wrappingWidth="225.99999763222877">
-                                                   <font>
-                                                      <Font name="System Italic" size="12.0" />
-                                                   </font>
-                                                </Text>
-                                             </children>
-                                          </AnchorPane>
-                                       </content>
-                                    </Tab>
-                                    <Tab fx:id="runTabSecond" disable="true" text="Run">
-                                       <content>
-                                          <AnchorPane prefHeight="438.0" prefWidth="261.0">
-                                             <children>
-                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c9c9c9" height="143.0" layoutY="-3.0" stroke="#bfbfbfd0" strokeType="INSIDE" strokeWidth="0.0" width="264.0" />
-                                                <TextArea fx:id="runSecond" editable="false" focusTraversable="false" layoutY="140.0" opacity="0.78" prefHeight="284.0" prefWidth="266.0" scrollTop="1.0" style="-fx-background-color: #A8A8A8;" wrapText="true" />
-                                                <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="244.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                                   <image>
-                                                      <Image url="@../../../../../../images/yes.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text layoutX="18.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description: Description: Lorem Ipsum is simply dummy text of the prinIpsum has been the industry's standard dummy text ever since the 1500." textAlignment="JUSTIFY" wrappingWidth="225.99999763222877">
-                                                   <font>
-                                                      <Font name="System Italic" size="12.0" />
-                                                   </font>
-                                                </Text>
-                                             </children>
-                                          </AnchorPane>
-                                       </content>
-                                    </Tab>
-                                    <Tab fx:id="longRunTabSecond" disable="true" text="Long Run">
-                                       <content>
-                                          <AnchorPane prefHeight="438.0" prefWidth="261.0">
-                                             <children>
-                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c9c9c9" height="143.0" layoutY="-3.0" stroke="#bfbfbfd0" strokeType="INSIDE" strokeWidth="0.0" width="264.0" />
-                                                <TextArea fx:id="longRunSecond" editable="false" focusTraversable="false" layoutY="140.0" opacity="0.78" prefHeight="284.0" prefWidth="266.0" scrollTop="1.0" style="-fx-background-color: #A8A8A8;" wrapText="true" />
-                                                <ImageView fitHeight="32.0" fitWidth="32.0" layoutX="244.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                                   <image>
-                                                      <Image url="@../../../../../../images/yes.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <Text layoutX="18.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description: Description: Lorem Ipsum is simply dummy text of the prinIpsum has been the industry's standard dummy text ever since the 1500." textAlignment="JUSTIFY" wrappingWidth="225.99999763222877">
-                                                   <font>
-                                                      <Font name="System Italic" size="12.0" />
-                                                   </font>
-                                                </Text>
-                                             </children>
-                                          </AnchorPane>
-                                       </content>
-                                    </Tab>
-                                 </tabs>
-                              </TabPane>
-                              <Text layoutX="17.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " textAlignment="JUSTIFY" wrappingWidth="247.419921875" />
-                              <Text layoutX="-7.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generator:" wrappingWidth="84.998046875">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Text>
-                              <ChoiceBox fx:id="generatorType" layoutX="72.0" layoutY="-5.0" prefHeight="25.0" prefWidth="210.0" />
-                           </children>
-                        </Group>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-        </tabs>
-      </TabPane>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0"
+	prefWidth="600.0" style="-fx-background-color: #d0d0d0;" xmlns="http://javafx.com/javafx/9"
+	xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vutbr.feec.mkri.controllers.CompareWindowControllers">
+	<children>
+		<TabPane prefHeight="465.0" prefWidth="600.0"
+			tabClosingPolicy="UNAVAILABLE">
+			<tabs>
+				<Tab text="Generator Mouse Movement">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0"
+							prefWidth="200.0">
+							<children>
+								<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebebeb"
+									height="439.0" stroke="#ffffff00" strokeType="INSIDE"
+									strokeWidth="0.0" width="305.0" />
+								<Group layoutX="16.0" layoutY="13.8134765625">
+									<children>
+										<ImageView fx:id="firstImageView" fitHeight="250.0"
+											fitWidth="250.0" layoutX="15.0" layoutY="24.0" pickOnBounds="true"
+											preserveRatio="true" />
+										<TabPane layoutX="289.0" layoutY="-17.0" prefHeight="438.0"
+											prefWidth="296.0" side="LEFT" tabClosingPolicy="UNAVAILABLE">
+											<tabs>
+												<Tab text="Summary">
+													<content>
+														<AnchorPane prefHeight="200.0" prefWidth="200.0">
+															<children>
+																<Group layoutX="16.0" layoutY="50.0">
+																	<children>
+																		<Group layoutX="186.0">
+																			<children>
+																				<ImageView fx:id="yesMonobitFirst"
+																					fitHeight="32.0" fitWidth="32.0" layoutX="9.0"
+																					layoutY="9.0" pickOnBounds="true" preserveRatio="true"
+																					visible="false">
+																					<image>
+																						<Image url="@../../../../../../images/yes.png" />
+																					</image>
+																				</ImageView>
+																				<ImageView fx:id="noMonobitFirst"
+																					fitHeight="32.0" fitWidth="32.0" focusTraversable="true"
+																					layoutX="10.0" layoutY="9.0" pickOnBounds="true"
+																					preserveRatio="true">
+																					<image>
+																						<Image url="@../../../../../../images/no.png" />
+																					</image>
+																				</ImageView>
+																				<Rectangle fx:id="rectangleMonobitFirst"
+																					arcHeight="5.0" arcWidth="5.0" fill="#37f07800"
+																					height="50.0" stroke="#f5541a" strokeType="INSIDE"
+																					width="51.0" />
+																			</children>
+																		</Group>
+																		<Rectangle arcHeight="5.0" arcWidth="5.0"
+																			fill="#eeeeee" height="50.0" stroke="#9a9a9a"
+																			strokeType="INSIDE" width="188.0" />
+																		<Text layoutX="44.0" layoutY="29.0" strokeType="OUTSIDE"
+																			strokeWidth="0.0" text="Monobit test" wrappingWidth="129.998046875">
+																			<font>
+																				<Font size="15.0" />
+																			</font>
+																		</Text>
+																	</children>
+																</Group>
+																<Text fill="#4d4d4d" layoutX="16.0" layoutY="27.0"
+																	strokeType="OUTSIDE" strokeWidth="0.0"
+																	text="Tests under FIPS 140-2: " textAlignment="CENTER"
+																	wrappingWidth="235.998046875">
+																	<font>
+																		<Font size="15.0" />
+																	</font>
+																</Text>
+																<Group layoutX="16.0" layoutY="116.0">
+																	<children>
+																		<Group layoutX="186.0">
+																			<children>
+																				<ImageView fx:id="yesPokerFirst"
+																					fitHeight="32.0" fitWidth="32.0" layoutX="9.0"
+																					layoutY="9.0" pickOnBounds="true" preserveRatio="true"
+																					visible="false">
+																					<image>
+																						<Image url="@../../../../../../images/yes.png" />
+																					</image>
+																				</ImageView>
+																				<ImageView fx:id="noPokerFirst" fitHeight="32.0"
+																					fitWidth="32.0" focusTraversable="true" layoutX="10.0"
+																					layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+																					<image>
+																						<Image url="@../../../../../../images/no.png" />
+																					</image>
+																				</ImageView>
+																				<Rectangle fx:id="rectanglePokerFirst"
+																					arcHeight="5.0" arcWidth="5.0" fill="#37f07800"
+																					height="50.0" stroke="#f5541a" strokeType="INSIDE"
+																					width="51.0" />
+																			</children>
+																		</Group>
+																		<Rectangle arcHeight="5.0" arcWidth="5.0"
+																			fill="#eeeeee" height="50.0" stroke="#9a9a9a"
+																			strokeType="INSIDE" width="188.0" />
+																		<Text layoutX="54.0" layoutY="31.0" strokeType="OUTSIDE"
+																			strokeWidth="0.0" text="Poker test" wrappingWidth="129.998046875">
+																			<font>
+																				<Font size="15.0" />
+																			</font>
+																		</Text>
+																	</children>
+																</Group>
+																<Group layoutX="16.0" layoutY="184.0">
+																	<children>
+																		<Group layoutX="186.0">
+																			<children>
+																				<ImageView fx:id="yesRunsFirst" fitHeight="32.0"
+																					fitWidth="32.0" layoutX="9.0" layoutY="9.0"
+																					pickOnBounds="true" preserveRatio="true" visible="false">
+																					<image>
+																						<Image url="@../../../../../../images/yes.png" />
+																					</image>
+																				</ImageView>
+																				<ImageView fx:id="noRunsFirst" fitHeight="32.0"
+																					fitWidth="32.0" focusTraversable="true" layoutX="10.0"
+																					layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+																					<image>
+																						<Image url="@../../../../../../images/no.png" />
+																					</image>
+																				</ImageView>
+																				<Rectangle fx:id="rectangleRunsFirst"
+																					arcHeight="5.0" arcWidth="5.0" fill="#37f07800"
+																					height="50.0" stroke="#f5541a" strokeType="INSIDE"
+																					width="51.0" />
+																			</children>
+																		</Group>
+																		<Rectangle arcHeight="5.0" arcWidth="5.0"
+																			fill="#eeeeee" height="50.0" stroke="#9a9a9a"
+																			strokeType="INSIDE" width="188.0" />
+																		<Text layoutX="58.0" layoutY="31.0" strokeType="OUTSIDE"
+																			strokeWidth="0.0" text="Run test" wrappingWidth="129.998046875">
+																			<font>
+																				<Font size="15.0" />
+																			</font>
+																		</Text>
+																	</children>
+																</Group>
+																<Group layoutX="16.0" layoutY="255.0">
+																	<children>
+																		<Group layoutX="186.0">
+																			<children>
+																				<ImageView fx:id="yesLongRunsFirst"
+																					fitHeight="32.0" fitWidth="32.0" layoutX="9.0"
+																					layoutY="9.0" pickOnBounds="true" preserveRatio="true"
+																					visible="false">
+																					<image>
+																						<Image url="@../../../../../../images/yes.png" />
+																					</image>
+																				</ImageView>
+																				<ImageView fx:id="noLongRunsFirst"
+																					fitHeight="32.0" fitWidth="32.0" focusTraversable="true"
+																					layoutX="10.0" layoutY="9.0" pickOnBounds="true"
+																					preserveRatio="true">
+																					<image>
+																						<Image url="@../../../../../../images/no.png" />
+																					</image>
+																				</ImageView>
+																				<Rectangle fx:id="rectangleLongRunsFirst"
+																					arcHeight="5.0" arcWidth="5.0" fill="#37f07800"
+																					height="50.0" stroke="#f5541a" strokeType="INSIDE"
+																					width="51.0" />
+																			</children>
+																		</Group>
+																		<Rectangle arcHeight="5.0" arcWidth="5.0"
+																			fill="#eeeeee" height="50.0" stroke="#9a9a9a"
+																			strokeType="INSIDE" width="188.0" />
+																		<Text layoutX="38.0" layoutY="31.0" strokeType="OUTSIDE"
+																			strokeWidth="0.0" text="Long Run test" wrappingWidth="129.998046875">
+																			<font>
+																				<Font size="15.0" />
+																			</font>
+																		</Text>
+																	</children>
+																</Group>
+															</children>
+														</AnchorPane>
+													</content>
+												</Tab>
+												<Tab text="RNG Probability">
+													<content>
+														<AnchorPane prefHeight="200.0" prefWidth="200.0">
+															<children>
+																<Rectangle arcHeight="5.0" arcWidth="5.0"
+																	fill="#e8e8e8" height="118.0" layoutX="-1.0" layoutY="-3.0"
+																	stroke="#bfbfbfd0" strokeType="INSIDE" strokeWidth="0.0"
+																	width="269.0" />
+																<ImageView fitHeight="32.0" fitWidth="32.0"
+																	layoutX="244.0" layoutY="37.0" pickOnBounds="true"
+																	preserveRatio="true" visible="false">
+																	<image>
+																		<Image url="@../../../../../../images/yes.png" />
+																	</image>
+																</ImageView>
+																<Text layoutX="21.0" layoutY="26.0" strokeType="OUTSIDE"
+																	strokeWidth="0.0"
+																	text="Description: The probability of the output of the generator being a one or a zero. Should be as close as possible to 0.5 for the best entropy to be achieved."
+																	textAlignment="JUSTIFY" wrappingWidth="225.99999763222877">
+																	<font>
+																		<Font name="System Italic" size="12.0" />
+																	</font>
+																</Text>
+																<Text fill="#515151" layoutX="51.0" layoutY="155.0"
+																	strokeType="OUTSIDE" strokeWidth="0.0"
+																	text="Generator's probability:" wrappingWidth="235.998046875">
+																	<font>
+																		<Font size="15.0" />
+																	</font>
+																</Text>
+																<Text fx:id="entropyFirst" layoutX="16.0" layoutY="200.0"
+																	strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER"
+																	wrappingWidth="235.99804653797764">
+																	<font>
+																		<Font size="29.0" />
+																	</font>
+																</Text>
+															</children>
+														</AnchorPane>
+													</content>
+												</Tab>
+												<Tab text="Monobit">
+													<content>
+														<AnchorPane prefHeight="438.0" prefWidth="261.0">
+															<children>
+																<Rectangle arcHeight="5.0" arcWidth="5.0"
+																	fill="#c9c9c9" height="143.0" layoutY="-3.0" stroke="#bfbfbfd0"
+																	strokeType="INSIDE" strokeWidth="0.0" width="264.0" />
+																<TextArea fx:id="monobitFirst" editable="false"
+																	focusTraversable="false" layoutY="140.0" opacity="0.78"
+																	prefHeight="284.0" prefWidth="266.0" scrollTop="1.0"
+																	style="-fx-background-color: #A8A8A8;" wrapText="true" />
+																<ImageView fitHeight="32.0" fitWidth="32.0"
+																	layoutX="244.0" layoutY="37.0" pickOnBounds="true"
+																	preserveRatio="true" visible="false">
+																	<image>
+																		<Image url="@../../../../../../images/yes.png" />
+																	</image>
+																</ImageView>
+																<Text layoutX="18.0" layoutY="27.0" strokeType="OUTSIDE"
+																	strokeWidth="0.0"
+																	text="Description: The Monobit test is a simple test by FIPS 140-2 that takes a sample of 20 000 generated bits and makes a sum of all ones, which should follow these criteria."
+																	textAlignment="JUSTIFY" wrappingWidth="225.99999763222877">
+																	<font>
+																		<Font name="System Italic" size="12.0" />
+																	</font>
+																</Text>
+															</children>
+														</AnchorPane>
+													</content>
+												</Tab>
+												<Tab text="Poker">
+													<content>
+														<AnchorPane prefHeight="438.0" prefWidth="261.0">
+															<children>
+																<Rectangle arcHeight="5.0" arcWidth="5.0"
+																	fill="#c9c9c9" height="143.0" layoutY="-3.0" stroke="#bfbfbfd0"
+																	strokeType="INSIDE" strokeWidth="0.0" width="264.0" />
+																<TextArea fx:id="pokerFirst" editable="false"
+																	focusTraversable="false" layoutY="140.0" opacity="0.78"
+																	prefHeight="284.0" prefWidth="266.0" scrollTop="1.0"
+																	style="-fx-background-color: #A8A8A8;" wrapText="true" />
+																<ImageView fitHeight="32.0" fitWidth="32.0"
+																	layoutX="244.0" layoutY="37.0" pickOnBounds="true"
+																	preserveRatio="true" visible="false">
+																	<image>
+																		<Image url="@../../../../../../images/yes.png" />
+																	</image>
+																</ImageView>
+																<Text layoutX="18.0" layoutY="27.0" strokeType="OUTSIDE"
+																	strokeWidth="0.0"
+																	text="Description: The Poker test is a test by FIPS 140-2 that takes inspiration in the card game Poker. This test counts the occurences of variations of 4-bit segments (16 of them) and processes them in a formula. This test is designed to recognize short patterns."
+																	textAlignment="JUSTIFY" wrappingWidth="225.99999763222877">
+																	<font>
+																		<Font name="System Italic" size="12.0" />
+																	</font>
+																</Text>
+															</children>
+														</AnchorPane>
+													</content>
+												</Tab>
+												<Tab text="Runs">
+													<content>
+														<AnchorPane prefHeight="438.0" prefWidth="261.0">
+															<children>
+																<Rectangle arcHeight="5.0" arcWidth="5.0"
+																	fill="#c9c9c9" height="143.0" layoutY="-3.0" stroke="#bfbfbfd0"
+																	strokeType="INSIDE" strokeWidth="0.0" width="264.0" />
+																<TextArea fx:id="runsFirst" editable="false"
+																	focusTraversable="false" layoutY="140.0" opacity="0.78"
+																	prefHeight="284.0" prefWidth="266.0" scrollTop="1.0"
+																	style="-fx-background-color: #A8A8A8;" wrapText="true" />
+																<ImageView fitHeight="32.0" fitWidth="32.0"
+																	layoutX="244.0" layoutY="37.0" pickOnBounds="true"
+																	preserveRatio="true" visible="false">
+																	<image>
+																		<Image url="@../../../../../../images/yes.png" />
+																	</image>
+																</ImageView>
+																<Text layoutX="18.0" layoutY="27.0" strokeType="OUTSIDE"
+																	strokeWidth="0.0"
+																	text="Description: The Runs test is a test by FIPS 140-2 designed to count the number of runs which should meet certain criteria, where a run is defined as a maximal sequence of consecutive bits of either all ones or all zeros."
+																	textAlignment="JUSTIFY" wrappingWidth="225.99999763222877">
+																	<font>
+																		<Font name="System Italic" size="12.0" />
+																	</font>
+																</Text>
+															</children>
+														</AnchorPane>
+													</content>
+												</Tab>
+												<Tab text="Long Runs">
+													<content>
+														<AnchorPane prefHeight="438.0" prefWidth="261.0">
+															<children>
+																<Rectangle arcHeight="5.0" arcWidth="5.0"
+																	fill="#c9c9c9" height="143.0" layoutY="-3.0" stroke="#bfbfbfd0"
+																	strokeType="INSIDE" strokeWidth="0.0" width="264.0" />
+																<TextArea fx:id="longRunsFirst" editable="false"
+																	focusTraversable="false" layoutY="140.0" opacity="0.78"
+																	prefHeight="284.0" prefWidth="266.0" scrollTop="1.0"
+																	style="-fx-background-color: #A8A8A8;" wrapText="true" />
+																<ImageView fitHeight="32.0" fitWidth="32.0"
+																	layoutX="244.0" layoutY="37.0" pickOnBounds="true"
+																	preserveRatio="true" visible="false">
+																	<image>
+																		<Image url="@../../../../../../images/yes.png" />
+																	</image>
+																</ImageView>
+																<Text layoutX="18.0" layoutY="27.0" strokeType="OUTSIDE"
+																	strokeWidth="0.0"
+																	text="Description: The Long Runs test is a test by FIPS 140-2 designed to recognize the longest run in a certain sequence, where a run is defined as a maximal sequence of consecutive bits of either all ones or all zeros.  "
+																	textAlignment="JUSTIFY" wrappingWidth="225.99999763222877">
+																	<font>
+																		<Font name="System Italic" size="12.0" />
+																	</font>
+																</Text>
+															</children>
+														</AnchorPane>
+													</content>
+												</Tab>
+											</tabs>
+										</TabPane>
+										<Text layoutX="17.0" layoutY="301.0" strokeType="OUTSIDE"
+											strokeWidth="0.0"
+											text="Description: This picture has been generated by the chosen random number generator. Each pixel of this picture represents one generated bit, where ones and zeroes are represented by different colors. No patterns should be visible if the generator is well-made."
+											textAlignment="JUSTIFY" wrappingWidth="247.419921875" />
+										<Text layoutX="24.0" layoutY="13.0" strokeType="OUTSIDE"
+											strokeWidth="0.0" text="Generator uses mouse movements:"
+											wrappingWidth="235.998046875">
+											<font>
+												<Font size="15.0" />
+											</font>
+										</Text>
+									</children>
+								</Group>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+				<Tab text="External Java Generators">
+					<content>
+						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0"
+							prefWidth="200.0">
+							<children>
+								<Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebebeb"
+									height="439.0" stroke="#ffffff00" strokeType="INSIDE"
+									strokeWidth="0.0" width="305.0" />
+								<Group layoutX="16.0" layoutY="13.8134765625">
+									<children>
+										<ImageView fx:id="secondImageView" fitHeight="250.0"
+											fitWidth="250.0" layoutX="15.0" layoutY="24.0" pickOnBounds="true"
+											preserveRatio="true" />
+										<TabPane layoutX="289.0" layoutY="-17.0" prefHeight="438.0"
+											prefWidth="296.0" side="LEFT" tabClosingPolicy="UNAVAILABLE">
+											<tabs>
+												<Tab fx:id="summaryTabSecond" disable="true" text="Summary">
+													<content>
+														<AnchorPane prefHeight="200.0" prefWidth="200.0">
+															<children>
+																<Group layoutX="16.0" layoutY="50.0">
+																	<children>
+																		<Group layoutX="186.0">
+																			<children>
+																				<ImageView fx:id="yesMonobitSecond"
+																					fitHeight="32.0" fitWidth="32.0" layoutX="9.0"
+																					layoutY="9.0" pickOnBounds="true" preserveRatio="true"
+																					visible="false">
+																					<image>
+																						<Image url="@../../../../../../images/yes.png" />
+																					</image>
+																				</ImageView>
+																				<ImageView fx:id="noMonobitSecond"
+																					fitHeight="32.0" fitWidth="32.0" focusTraversable="true"
+																					layoutX="10.0" layoutY="9.0" pickOnBounds="true"
+																					preserveRatio="true">
+																					<image>
+																						<Image url="@../../../../../../images/no.png" />
+																					</image>
+																				</ImageView>
+																				<Rectangle fx:id="rectangleMonobitSecond"
+																					arcHeight="5.0" arcWidth="5.0" fill="#37f07800"
+																					height="50.0" stroke="#f5541a" strokeType="INSIDE"
+																					width="51.0" />
+																			</children>
+																		</Group>
+																		<Rectangle arcHeight="5.0" arcWidth="5.0"
+																			fill="#eeeeee" height="50.0" stroke="#9a9a9a"
+																			strokeType="INSIDE" width="188.0" />
+																		<Text layoutX="44.0" layoutY="29.0" strokeType="OUTSIDE"
+																			strokeWidth="0.0" text="Monobit test" wrappingWidth="129.998046875">
+																			<font>
+																				<Font size="15.0" />
+																			</font>
+																		</Text>
+																	</children>
+																</Group>
+																<Text fill="#4d4d4d" layoutX="16.0" layoutY="27.0"
+																	strokeType="OUTSIDE" strokeWidth="0.0"
+																	text="Tests under FIPS 140-2: " textAlignment="CENTER"
+																	wrappingWidth="235.998046875">
+																	<font>
+																		<Font size="15.0" />
+																	</font>
+																</Text>
+																<Group layoutX="16.0" layoutY="116.0">
+																	<children>
+																		<Group layoutX="186.0">
+																			<children>
+																				<ImageView fx:id="yesPokerSecond"
+																					fitHeight="32.0" fitWidth="32.0" layoutX="9.0"
+																					layoutY="9.0" pickOnBounds="true" preserveRatio="true"
+																					visible="false">
+																					<image>
+																						<Image url="@../../../../../../images/yes.png" />
+																					</image>
+																				</ImageView>
+																				<ImageView fx:id="noPokerSecond"
+																					fitHeight="32.0" fitWidth="32.0" focusTraversable="true"
+																					layoutX="10.0" layoutY="9.0" pickOnBounds="true"
+																					preserveRatio="true">
+																					<image>
+																						<Image url="@../../../../../../images/no.png" />
+																					</image>
+																				</ImageView>
+																				<Rectangle fx:id="rectanglePokerSecond"
+																					arcHeight="5.0" arcWidth="5.0" fill="#37f07800"
+																					height="50.0" stroke="#f5541a" strokeType="INSIDE"
+																					width="51.0" />
+																			</children>
+																		</Group>
+																		<Rectangle arcHeight="5.0" arcWidth="5.0"
+																			fill="#eeeeee" height="50.0" stroke="#9a9a9a"
+																			strokeType="INSIDE" width="188.0" />
+																		<Text layoutX="54.0" layoutY="31.0" strokeType="OUTSIDE"
+																			strokeWidth="0.0" text="Poker test" wrappingWidth="129.998046875">
+																			<font>
+																				<Font size="15.0" />
+																			</font>
+																		</Text>
+																	</children>
+																</Group>
+																<Group layoutX="16.0" layoutY="184.0">
+																	<children>
+																		<Group layoutX="186.0">
+																			<children>
+																				<ImageView fx:id="yesRunsSecond"
+																					fitHeight="32.0" fitWidth="32.0" layoutX="9.0"
+																					layoutY="9.0" pickOnBounds="true" preserveRatio="true"
+																					visible="false">
+																					<image>
+																						<Image url="@../../../../../../images/yes.png" />
+																					</image>
+																				</ImageView>
+																				<ImageView fx:id="noRunsSecond" fitHeight="32.0"
+																					fitWidth="32.0" focusTraversable="true" layoutX="10.0"
+																					layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+																					<image>
+																						<Image url="@../../../../../../images/no.png" />
+																					</image>
+																				</ImageView>
+																				<Rectangle fx:id="rectangleRunsSecond"
+																					arcHeight="5.0" arcWidth="5.0" fill="#37f07800"
+																					height="50.0" stroke="#f5541a" strokeType="INSIDE"
+																					width="51.0" />
+																			</children>
+																		</Group>
+																		<Rectangle arcHeight="5.0" arcWidth="5.0"
+																			fill="#eeeeee" height="50.0" stroke="#9a9a9a"
+																			strokeType="INSIDE" width="188.0" />
+																		<Text layoutX="58.0" layoutY="31.0" strokeType="OUTSIDE"
+																			strokeWidth="0.0" text="Run test" wrappingWidth="129.998046875">
+																			<font>
+																				<Font size="15.0" />
+																			</font>
+																		</Text>
+																	</children>
+																</Group>
+																<Group layoutX="16.0" layoutY="255.0">
+																	<children>
+																		<Group layoutX="186.0">
+																			<children>
+																				<ImageView fx:id="yesLongRunsSecond"
+																					fitHeight="32.0" fitWidth="32.0" layoutX="9.0"
+																					layoutY="9.0" pickOnBounds="true" preserveRatio="true"
+																					visible="false">
+																					<image>
+																						<Image url="@../../../../../../images/yes.png" />
+																					</image>
+																				</ImageView>
+																				<ImageView fx:id="noLongRunsSecond"
+																					fitHeight="32.0" fitWidth="32.0" focusTraversable="true"
+																					layoutX="10.0" layoutY="9.0" pickOnBounds="true"
+																					preserveRatio="true">
+																					<image>
+																						<Image url="@../../../../../../images/no.png" />
+																					</image>
+																				</ImageView>
+																				<Rectangle fx:id="rectangleLongRunsSecond"
+																					arcHeight="5.0" arcWidth="5.0" fill="#37f07800"
+																					height="50.0" stroke="#f5541a" strokeType="INSIDE"
+																					width="51.0" />
+																			</children>
+																		</Group>
+																		<Rectangle arcHeight="5.0" arcWidth="5.0"
+																			fill="#eeeeee" height="50.0" stroke="#9a9a9a"
+																			strokeType="INSIDE" width="188.0" />
+																		<Text layoutX="38.0" layoutY="31.0" strokeType="OUTSIDE"
+																			strokeWidth="0.0" text="Long Run test" wrappingWidth="129.998046875">
+																			<font>
+																				<Font size="15.0" />
+																			</font>
+																		</Text>
+																	</children>
+																</Group>
+															</children>
+														</AnchorPane>
+													</content>
+												</Tab>
+												<Tab fx:id="entropyTabSecond" disable="true" text="RNG Probability">
+													<content>
+														<AnchorPane prefHeight="200.0" prefWidth="200.0">
+															<children>
+																<Rectangle arcHeight="5.0" arcWidth="5.0"
+																	fill="#e8e8e8" height="118.0" layoutX="-1.0" layoutY="-3.0"
+																	stroke="#bfbfbfd0" strokeType="INSIDE" strokeWidth="0.0"
+																	width="269.0" />
+																<ImageView fitHeight="32.0" fitWidth="32.0"
+																	layoutX="244.0" layoutY="37.0" pickOnBounds="true"
+																	preserveRatio="true" visible="false">
+																	<image>
+																		<Image url="@../../../../../../images/yes.png" />
+																	</image>
+																</ImageView>
+																<Text layoutX="21.0" layoutY="26.0" strokeType="OUTSIDE"
+																	strokeWidth="0.0"
+																	text="Description: The probability of the output of the generator being a one or a zero. Should be as close as possible to 0.5 for the best entropy to be achieved."
+																	textAlignment="JUSTIFY" wrappingWidth="225.99999763222877">
+																	<font>
+																		<Font name="System Italic" size="12.0" />
+																	</font>
+																</Text>
+																<Text fill="#515151" layoutX="51.0" layoutY="155.0"
+																	strokeType="OUTSIDE" strokeWidth="0.0"
+																	text="Generator's probability:" wrappingWidth="235.998046875">
+																	<font>
+																		<Font size="15.0" />
+																	</font>
+																</Text>
+																<Text fx:id="entropySecond" layoutX="16.0" layoutY="200.0"
+																	strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER"
+																	wrappingWidth="235.99804653797764">
+																	<font>
+																		<Font size="29.0" />
+																	</font>
+																</Text>
+															</children>
+														</AnchorPane>
+													</content>
+												</Tab>
+												<Tab fx:id="monobitTabSecond" disable="true" text="Monobit">
+													<content>
+														<AnchorPane prefHeight="438.0" prefWidth="261.0">
+															<children>
+																<Rectangle arcHeight="5.0" arcWidth="5.0"
+																	fill="#c9c9c9" height="143.0" layoutY="-3.0" stroke="#bfbfbfd0"
+																	strokeType="INSIDE" strokeWidth="0.0" width="264.0" />
+																<TextArea fx:id="monobitSecond" editable="false"
+																	focusTraversable="false" layoutY="140.0" opacity="0.78"
+																	prefHeight="284.0" prefWidth="266.0" scrollTop="1.0"
+																	style="-fx-background-color: #A8A8A8;" wrapText="true" />
+																<ImageView fitHeight="32.0" fitWidth="32.0"
+																	layoutX="244.0" layoutY="37.0" pickOnBounds="true"
+																	preserveRatio="true" visible="false">
+																	<image>
+																		<Image url="@../../../../../../images/yes.png" />
+																	</image>
+																</ImageView>
+																<Text layoutX="18.0" layoutY="27.0" strokeType="OUTSIDE"
+																	strokeWidth="0.0"
+																	text="Description: The Monobit test is a simple test by FIPS 140-2 that takes a sample of 20 000 generated bits and makes a sum of all ones, which should follow these criteria."
+																	textAlignment="JUSTIFY" wrappingWidth="225.99999763222877">
+																	<font>
+																		<Font name="System Italic" size="12.0" />
+																	</font>
+																</Text>
+															</children>
+														</AnchorPane>
+													</content>
+												</Tab>
+												<Tab fx:id="pokerTabSecond" disable="true" text="Poker">
+													<content>
+														<AnchorPane prefHeight="438.0" prefWidth="261.0">
+															<children>
+																<Rectangle arcHeight="5.0" arcWidth="5.0"
+																	fill="#c9c9c9" height="143.0" layoutY="-3.0" stroke="#bfbfbfd0"
+																	strokeType="INSIDE" strokeWidth="0.0" width="264.0" />
+																<TextArea fx:id="pokerSecond" editable="false"
+																	focusTraversable="false" layoutY="140.0" opacity="0.78"
+																	prefHeight="284.0" prefWidth="266.0" scrollTop="1.0"
+																	style="-fx-background-color: #A8A8A8;" wrapText="true" />
+																<ImageView fitHeight="32.0" fitWidth="32.0"
+																	layoutX="244.0" layoutY="37.0" pickOnBounds="true"
+																	preserveRatio="true" visible="false">
+																	<image>
+																		<Image url="@../../../../../../images/yes.png" />
+																	</image>
+																</ImageView>
+																<Text layoutX="18.0" layoutY="27.0" strokeType="OUTSIDE"
+																	strokeWidth="0.0"
+																	text="Description: The Poker test is a test by FIPS 140-2 that takes inspiration in the card game Poker. This test counts the occurences of variations of 4-bit segments (16 of them) and processes them in a formula. This test is designed to recognize short patterns."
+																	textAlignment="JUSTIFY" wrappingWidth="225.99999763222877">
+																	<font>
+																		<Font name="System Italic" size="12.0" />
+																	</font>
+																</Text>
+															</children>
+														</AnchorPane>
+													</content>
+												</Tab>
+												<Tab fx:id="runsTabSecond" disable="true" text="Runs">
+													<content>
+														<AnchorPane prefHeight="438.0" prefWidth="261.0">
+															<children>
+																<Rectangle arcHeight="5.0" arcWidth="5.0"
+																	fill="#c9c9c9" height="143.0" layoutY="-3.0" stroke="#bfbfbfd0"
+																	strokeType="INSIDE" strokeWidth="0.0" width="264.0" />
+																<TextArea fx:id="runsSecond" editable="false"
+																	focusTraversable="false" layoutY="140.0" opacity="0.78"
+																	prefHeight="284.0" prefWidth="266.0" scrollTop="1.0"
+																	style="-fx-background-color: #A8A8A8;" wrapText="true" />
+																<ImageView fitHeight="32.0" fitWidth="32.0"
+																	layoutX="244.0" layoutY="37.0" pickOnBounds="true"
+																	preserveRatio="true" visible="false">
+																	<image>
+																		<Image url="@../../../../../../images/yes.png" />
+																	</image>
+																</ImageView>
+																<Text layoutX="18.0" layoutY="27.0" strokeType="OUTSIDE"
+																	strokeWidth="0.0"
+																	text="Description: The Runs test is a test by FIPS 140-2 designed to count the number of runs which should meet certain criteria, where a run is defined as a maximal sequence of consecutive bits of either all ones or all zeros."
+																	textAlignment="JUSTIFY" wrappingWidth="225.99999763222877">
+																	<font>
+																		<Font name="System Italic" size="12.0" />
+																	</font>
+																</Text>
+															</children>
+														</AnchorPane>
+													</content>
+												</Tab>
+												<Tab fx:id="longRunsTabSecond" disable="true" text="Long Runs">
+													<content>
+														<AnchorPane prefHeight="438.0" prefWidth="261.0">
+															<children>
+																<Rectangle arcHeight="5.0" arcWidth="5.0"
+																	fill="#c9c9c9" height="143.0" layoutY="-3.0" stroke="#bfbfbfd0"
+																	strokeType="INSIDE" strokeWidth="0.0" width="264.0" />
+																<TextArea fx:id="longRunsSecond" editable="false"
+																	focusTraversable="false" layoutY="140.0" opacity="0.78"
+																	prefHeight="284.0" prefWidth="266.0" scrollTop="1.0"
+																	style="-fx-background-color: #A8A8A8;" wrapText="true" />
+																<ImageView fitHeight="32.0" fitWidth="32.0"
+																	layoutX="244.0" layoutY="37.0" pickOnBounds="true"
+																	preserveRatio="true" visible="false">
+																	<image>
+																		<Image url="@../../../../../../images/yes.png" />
+																	</image>
+																</ImageView>
+																<Text layoutX="18.0" layoutY="27.0" strokeType="OUTSIDE"
+																	strokeWidth="0.0"
+																	text="Description: The Long Runs test is a test by FIPS 140-2 designed to recognize the longest run in a certain sequence, where a run is defined as a maximal sequence of consecutive bits of either all ones or all zeros.  "
+																	textAlignment="JUSTIFY" wrappingWidth="225.99999763222877">
+																	<font>
+																		<Font name="System Italic" size="12.0" />
+																	</font>
+																</Text>
+															</children>
+														</AnchorPane>
+													</content>
+												</Tab>
+											</tabs>
+										</TabPane>
+										<Text layoutX="17.0" layoutY="301.0" strokeType="OUTSIDE"
+											strokeWidth="0.0"
+											text="Description: This picture has been generated by the chosen random number generator. Each pixel of this picture represents one generated bit, where ones and zeroes are represented by different colors. No patterns should be visible if the generator is well-made."
+											textAlignment="JUSTIFY" wrappingWidth="247.419921875" />
+										<Text layoutX="-7.0" layoutY="13.0" strokeType="OUTSIDE"
+											strokeWidth="0.0" text="Generator:" wrappingWidth="84.998046875">
+											<font>
+												<Font size="15.0" />
+											</font>
+										</Text>
+										<ChoiceBox fx:id="generatorType" layoutX="72.0"
+											layoutY="-5.0" prefHeight="25.0" prefWidth="210.0" />
+									</children>
+								</Group>
+							</children>
+						</AnchorPane>
+					</content>
+				</Tab>
+			</tabs>
+		</TabPane>
+	</children>
 </AnchorPane>

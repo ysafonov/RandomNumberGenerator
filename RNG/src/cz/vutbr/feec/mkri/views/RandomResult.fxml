@@ -5,21 +5,53 @@
 -->
 
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vutbr.feec.mkri.controllers.RandomResultControllers">
    <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8e8e8" height="47.0" layoutX="57.0" layoutY="82.0" stroke="#b2b0b0" strokeType="INSIDE" width="498.0" />
+      <Text fx:id="randomNumberResult" layoutX="36.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="525.13671875">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Text>
       <Text layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generated random number is:" wrappingWidth="199.13671875">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Text fx:id="randomNumberResult" layoutX="37.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TODO: BINDING" textAlignment="CENTER" wrappingWidth="525.13671875">
+      <Text fx:id="randomNumberResult1" fill="#727070" layoutX="37.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="525.13671875">
          <font>
             <Font size="33.0" />
          </font>
       </Text>
+      <Text fx:id="randomNumberResult2" fill="#8c8c8c" layoutX="37.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="525.13671875">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Text>
+      <Text fx:id="randomNumberResult3" fill="#8c8c8c" layoutX="37.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="525.13671875">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Text>
+      <Text fx:id="randomNumberResult4" fill="#aeaeae" layoutX="37.0" layoutY="314.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="525.13671875">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Text>
+      <Text fx:id="randomNumberResult5" fill="#bcbcbc" layoutX="37.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="525.13671875">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Text>
+      <Text fx:id="randomNumberResult6" fill="#c9c8c8" layoutX="36.0" layoutY="397.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="525.13671875">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="rectangleResult" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="431.0" layoutY="34.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
    </children>
 </AnchorPane>

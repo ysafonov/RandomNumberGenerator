@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * This class is a configuration class.
  * Used for the Main Random Numbers Generator class.
  * 
- * @author xkarge02
+ * @author David Karger; id: 186526
  */
 
 public class GeneratorConfiguration {
@@ -15,6 +15,20 @@ public class GeneratorConfiguration {
 	 * Output of the generator in case needing more than 1 number
 	 */
 	public ArrayList<String> OUTPUT = new ArrayList<>();
+	
+	/*
+	 * Array for the comparison
+	 */
+	public ArrayList<String> COMPARE = new ArrayList<>();
+	
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	// 145 pouze pro testovaci ucely!!!!
+	public int imageSize = 145;
+	// POKUD DOKAZEME GENEROVAT RYCHLE TAK ZMENIT NA 250!!!!!!!!!!!!!!!!!! 
+	//////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	
 	public int combine_count = 1;
 	
@@ -34,7 +48,7 @@ public class GeneratorConfiguration {
 	 */
 	public boolean output_sets = false;
 	// How many items in a set
-	public int set_items = 1;
+	public int array_size = 1;
 	// Item separator
 	public String set_separator = ";";
 	
