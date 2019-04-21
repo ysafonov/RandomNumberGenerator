@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" style="-fx-background-color: #d0d0d0;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vutbr.feec.mkri.controllers.GenerateWindowControllers">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" style="-fx-background-color: #d0d0d0;" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.vutbr.feec.mkri.controllers.GenerateWindowControllers">
    <children>
       <Group layoutX="14.0" layoutY="34.0">
          <children>
@@ -55,21 +55,21 @@
       </Group>
       <Group layoutX="365.0" layoutY="34.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e0" height="100.0" stroke="#616161" strokeType="INSIDE" width="220.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e0" height="63.0" stroke="#616161" strokeType="INSIDE" width="220.0" />
             <CheckBox fx:id="checkBox_DefineTheLengthOfInput" layoutX="7.0" layoutY="6.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="203.0" text="Define the length of the output">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </CheckBox>
-            <Label fx:id="bytes_text" disable="true" layoutX="7.0" layoutY="63.0" prefHeight="19.0" prefWidth="38.0" text="Bytes:" />
-            <TextField fx:id="textField_lengthBytes" alignment="CENTER_RIGHT" disable="true" layoutX="57.0" layoutY="61.0" prefHeight="25.0" prefWidth="150.0">
+            <Label fx:id="bytes_text" disable="true" layoutX="7.0" layoutY="31.0" prefHeight="19.0" prefWidth="38.0" text="Bytes:" />
+            <TextField fx:id="textField_lengthBytes" alignment="CENTER_RIGHT" disable="true" layoutX="57.0" layoutY="29.0" prefHeight="25.0" prefWidth="150.0">
                <font>
                   <Font size="11.0" />
                </font>
             </TextField>
          </children>
       </Group>
-      <Group layoutX="364.0" layoutY="140.0">
+      <Group layoutX="365.0" layoutY="105.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e0" height="141.0" stroke="#616161" strokeType="INSIDE" width="220.0" />
             <CheckBox fx:id="checkBox_GenerateRandomBytes" layoutX="9.0" layoutY="8.0" mnemonicParsing="false" text="Generate random bytes">
@@ -101,7 +101,7 @@
             <ChoiceBox fx:id="choiceBox_seperatorInSet" disable="true" layoutX="254.0" layoutY="34.0" prefHeight="25.0" prefWidth="78.0" />
          </children>
       </Group>
-      <Group layoutX="374.0" layoutY="296.0">
+      <Group layoutX="374.0" layoutY="259.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e0" height="100.0" layoutX="-9.0" layoutY="-5.0" stroke="#616161" strokeType="INSIDE" width="220.0" />
             <CheckBox fx:id="checkBox_GenerateDoubleOutput" layoutX="1.0" layoutY="2.0" mnemonicParsing="false" text="Generate double output">
@@ -109,51 +109,53 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </CheckBox>
-            <TextField fx:id="textField_NumberOfDigitsAfterComma" alignment="CENTER_RIGHT" disable="true" layoutX="6.0" layoutY="50.0" prefHeight="25.0" prefWidth="90.0">
+            <TextField fx:id="textField_NumberOfDigitsAfterComma" alignment="CENTER_RIGHT" disable="true" layoutX="6.0" layoutY="55.0" prefHeight="25.0" prefWidth="163.0">
                <font>
                   <Font size="11.0" />
                </font>
             </TextField>
-            <Label fx:id="numberOfDigitsAfterComma_text" disable="true" layoutX="5.0" layoutY="23.0" prefHeight="19.0" prefWidth="179.0" text="Number of digits after comma:" />
+            <Label fx:id="numberOfDigitsAfterComma_text" disable="true" layoutX="5.0" layoutY="28.0" prefHeight="19.0" prefWidth="179.0" text="Number of digits after comma:" />
          </children>
       </Group>
       <Group layoutX="14.0" layoutY="289.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="#e0e0e0" height="152.0" stroke="#616161" strokeType="INSIDE" width="342.0" />
-            <CheckBox fx:id="checkBox_AllowAdvancedOptions" layoutX="10.0" layoutY="7.0" mnemonicParsing="false" text="Advanced options:">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="#e0e0e0" height="152.0" stroke="#616161" strokeType="INSIDE" width="146.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="#e0e0e0" height="78.0" layoutX="155.0" layoutY="74.0" stroke="#616161" strokeType="INSIDE" width="187.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="#e0e0e0" height="65.0" layoutX="155.0" stroke="#616161" strokeType="INSIDE" width="187.0" />
+            <CheckBox fx:id="checkBox_AllowAdvancedOptions" layoutX="6.0" layoutY="7.0" mnemonicParsing="false" text="Advanced options:">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </CheckBox>
-            <CheckBox fx:id="checkBox_saveOutputInTxt" disable="true" layoutX="10.0" layoutY="59.0" mnemonicParsing="false" text="Save output in txt format" />
-            <CheckBox fx:id="checkBox_UseHardwareSeeds" layoutX="10.0" layoutY="86.0" mnemonicParsing="false" text="Use hardware seeds:">
+            <CheckBox fx:id="checkBox_UseHardwareSeeds" layoutX="163.0" layoutY="7.0" mnemonicParsing="false" text="Use hardware seeds:">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </CheckBox>
-            <CheckBox fx:id="checkBox_useMouseSeed" disable="true" layoutX="10.0" layoutY="33.0" mnemonicParsing="false" selected="true" text="Use mouse seed" />
-            <CheckBox fx:id="checkBox_useTimeAndDateAsSeed" disable="true" layoutX="171.0" layoutY="59.0" mnemonicParsing="false" selected="true" text="Use time" />
-            <CheckBox fx:id="checkBox_useCPUSeed" disable="true" layoutX="10.0" layoutY="120.0" mnemonicParsing="false" text="CPU" />
-            <CheckBox fx:id="checkBox_useDisksSeed" disable="true" layoutX="57.0" layoutY="120.0" mnemonicParsing="false" text="Disks" />
-            <CheckBox fx:id="checkBox_useGPUSeed" disable="true" layoutX="112.0" layoutY="120.0" mnemonicParsing="false" text="GPU" />
-            <CheckBox fx:id="checkBox_UseCustomSeed" layoutX="172.0" layoutY="85.0" mnemonicParsing="false" text="Use custom seed:">
+            <CheckBox fx:id="checkBox_useMouseSeed" disable="true" layoutX="6.0" layoutY="33.0" mnemonicParsing="false" selected="true" text="Use mouse seed" />
+            <CheckBox fx:id="checkBox_useTimeAndDateAsSeed" disable="true" layoutX="6.0" layoutY="59.0" mnemonicParsing="false" selected="true" text="Use time" />
+            <CheckBox fx:id="checkBox_useCPUSeed" disable="true" layoutX="163.0" layoutY="35.0" mnemonicParsing="false" text="CPU" />
+            <CheckBox fx:id="checkBox_useDisksSeed" disable="true" layoutX="279.0" layoutY="34.0" mnemonicParsing="false" text="Disks" />
+            <CheckBox fx:id="checkBox_useGPUSeed" disable="true" layoutX="222.0" layoutY="35.0" mnemonicParsing="false" text="GPU" />
+            <CheckBox fx:id="checkBox_UseCustomSeed" layoutX="164.0" layoutY="82.0" mnemonicParsing="false" text="Use custom seed:">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </CheckBox>
-            <TextField fx:id="textField_customSeed" alignment="TOP_RIGHT" disable="true" layoutX="171.0" layoutY="116.0" prefHeight="25.0" prefWidth="150.0">
+            <TextField fx:id="textField_customSeed" alignment="TOP_RIGHT" disable="true" layoutX="163.0" layoutY="113.0" prefHeight="25.0" prefWidth="170.0">
                <font>
                   <Font size="11.0" />
                </font>
             </TextField>
+            <CheckBox fx:id="checkBox_saveOutputInTxt" disable="true" layoutX="6.0" layoutY="80.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="136.0" text="Save output in txt" wrapText="true" />
          </children>
       </Group>
-      <Label layoutX="16.0" layoutY="7.0" prefHeight="19.0" prefWidth="270.0" text="Define generator parametrs:">
+      <Label layoutX="16.0" layoutY="7.0" prefHeight="19.0" prefWidth="270.0" text="Define generator parameters:">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Button layoutX="365.0" layoutY="400.0" mnemonicParsing="false" onAction="#generateButtonPressed" prefHeight="39.0" prefWidth="220.0" style="-fx-background-color: #b5b5b5;" text="Generate">
+      <Button fx:id="generateButton" layoutX="365.0" layoutY="400.0" mnemonicParsing="false" onAction="#generateButtonPressed" prefHeight="39.0" prefWidth="220.0" style="-fx-background-color: #b5b5b5;" text="Generate">
          <font>
             <Font size="15.0" />
          </font>
@@ -161,13 +163,13 @@
             <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
          </opaqueInsets>
       </Button>
-      <Button layoutX="364.0" layoutY="2.0" mnemonicParsing="false" onAction="#saveSettings" prefHeight="0.0" prefWidth="220.0" style="-fx-background-color: #b5b5b5;" text="Save Settings">
-         <font>
-            <Font size="15.0" />
-         </font>
+      <Button layoutX="365.0" layoutY="363.0" mnemonicParsing="false" onAction="#saveSettings" prefHeight="25.0" prefWidth="220.0" style="-fx-background-color: #b5b5b5;" text="Save settings for comparison">
          <opaqueInsets>
             <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
          </opaqueInsets>
+         <font>
+            <Font size="11.0" />
+         </font>
       </Button>
    </children>
 </AnchorPane>

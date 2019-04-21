@@ -7,7 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.text.Text;
 
 /**
- * 
+ * Class prepresent controllers which gives information about project.
  * @author Yehor Safonov; id: 185942
  */
 

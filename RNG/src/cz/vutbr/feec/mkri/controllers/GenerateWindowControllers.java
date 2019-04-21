@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -140,6 +141,8 @@ public class GenerateWindowControllers implements Initializable {
 	private TextField textField_NumberOfDigitsAfterComma;
 	@FXML
 	private Label numberOfDigitsAfterComma_text;
+	@FXML
+	private Button generateButton;
 
 	/*
 	 * This method is called when the application starts.
@@ -364,7 +367,7 @@ public class GenerateWindowControllers implements Initializable {
 	 */
 	@SuppressWarnings("static-access")
 	public void generateButtonPressed(ActionEvent evt) throws IOException {
-		this.saveSettings(evt);
+		// this.saveSettings(evt);
 		if(this.checkBox_useMouseSeed.isSelected()){
 			showMouseArea(evt);
 		}else {
@@ -374,6 +377,8 @@ public class GenerateWindowControllers implements Initializable {
 	}
 	
 	public void saveSettings(ActionEvent evt) {
+		System.out.println("Save setting button pressed");
+		generateButton.setDisable(true);
 		/*
 		 * Range
 		 */

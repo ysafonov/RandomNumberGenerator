@@ -3,14 +3,19 @@ package cz.vutbr.feec.mkri.tests;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public abstract class PockerTest {
-	// Monobit test
+/* 
+* @author Pavel Mazanek; id: 185933
+* @author Yehor Safonov; id: 185942
+*/
+
+public abstract class PokerTest {
+	// Poker test
 	
 	private static int requiredCountOfValues = 20000;
 	
 		public static double pokerTest(ArrayList<Integer> outputofRNG) {
 
-			// možnosti 4 bitových segmentù
+			// 4 bit segment variations
 			int[] i0 = { 0, 0, 0, 0 };
 			int[] i1 = { 0, 0, 0, 1 };
 			int[] i2 = { 0, 0, 1, 0 };
@@ -28,7 +33,7 @@ public abstract class PockerTest {
 			int[] i14 = { 1, 1, 1, 0 };
 			int[] i15 = { 1, 1, 1, 1 };
 
-			// counter výskytù
+			// 4 bit segment appearance counter
 			int f0 = 0;
 			int f1 = 0;
 			int f2 = 0;
@@ -104,13 +109,14 @@ public abstract class PockerTest {
 				}
 			}
 
+			//formula by FIPS 140-2
 			double pokerTestOutput = (0.0032 * ((f0 * f0) + (f1 * f1) + (f2 * f2) + (f3 * f3) + (f4 * f4) + (f5 * f5) + (f6 * f6)
 					+ (f7 * f7) + (f8 * f8) + (f9 * f9) + (f10 * f10) + (f11 * f11) + (f12 * f12) + (f13 * f13)
 					+ (f14 * f14) + (f15 * f15))) - 5000;
 			return pokerTestOutput;
 		}
 
-		
+		//Poker test pass check - comparing the result value with values from FIPS 140-2
 		public static boolean isPokerTestPassed(double toCompare) {
 			if ((2.16 < toCompare) && (toCompare < 46.17)) {
 				return true;
@@ -118,3 +124,4 @@ public abstract class PockerTest {
 				return false;
 		}
 }
+

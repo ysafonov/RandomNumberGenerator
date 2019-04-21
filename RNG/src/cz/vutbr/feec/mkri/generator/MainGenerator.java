@@ -15,6 +15,7 @@ import java.time.LocalTime;
 
 import cz.vutbr.feec.mkri.Main;
 
+
 public class MainGenerator {
 	
 	// Retention of the mouse generator

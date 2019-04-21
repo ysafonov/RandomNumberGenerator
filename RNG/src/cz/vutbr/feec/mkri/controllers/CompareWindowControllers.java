@@ -6,16 +6,17 @@ import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.ResourceBundle;
+
+import cz.vutbr.feec.mkri.Main;
 import cz.vutbr.feec.mkri.generator.GeneratorJavaRandom;
 import cz.vutbr.feec.mkri.generator.GeneratorMath;
 import cz.vutbr.feec.mkri.generator.GeneratorSecureRandom;
 import cz.vutbr.feec.mkri.tests.Entropy;
-import cz.vutbr.feec.mkri.tests.LongRunTest;
+import cz.vutbr.feec.mkri.tests.LongRunsTest;
 import cz.vutbr.feec.mkri.tests.MonobitTest;
-import cz.vutbr.feec.mkri.tests.PockerTest;
-import cz.vutbr.feec.mkri.tests.RunTest;
+import cz.vutbr.feec.mkri.tests.PokerTest;
+import cz.vutbr.feec.mkri.tests.RunsTest;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
@@ -35,13 +36,13 @@ import javafx.scene.text.Text;
  * This java class represents project's Compare Pane controller class.
  * 
  * @author Yehor Safonov; id: 185942
+ * @author Pavel Mazanek; id: 185933
  */
 
 public class CompareWindowControllers implements Initializable {
 
-	private int imageSize = 250;
-
-	private int maximumSizeOfArray = imageSize * imageSize;
+	private int maximumSizeOfArray = Main.generator_configuration.imageSize * Main.generator_configuration.imageSize;
+	
 	private ArrayList<Integer> arrayForAnalyzing;
 
 	/*********
@@ -50,13 +51,13 @@ public class CompareWindowControllers implements Initializable {
 	@FXML
 	private ImageView firstImageView;
 	@FXML
-	private TextArea runFirst;
+	private TextArea runsFirst;
 	@FXML
 	private TextArea pokerFirst;
 	@FXML
 	private TextArea monobitFirst;
 	@FXML
-	private TextArea longRunFirst;
+	private TextArea longRunsFirst;
 	@FXML
 	private Text entropyFirst;
 
@@ -71,34 +72,34 @@ public class CompareWindowControllers implements Initializable {
 	private Rectangle rectangleMonobitFirst;
 
 	/*
-	 * Pocker test summary
+	 * Poker test summary
 	 */
 	@FXML
-	private ImageView noPockerFirst;
+	private ImageView noPokerFirst;
 	@FXML
-	private ImageView yesPockerFirst;
+	private ImageView yesPokerFirst;
 	@FXML
-	private Rectangle rectanglePockerFirst;
+	private Rectangle rectanglePokerFirst;
 
 	/*
 	 * Run test summary
 	 */
 	@FXML
-	private ImageView noRunFirst;
+	private ImageView noRunsFirst;
 	@FXML
-	private ImageView yesRunFirst;
+	private ImageView yesRunsFirst;
 	@FXML
-	private Rectangle rectangleRunFirst;
+	private Rectangle rectangleRunsFirst;
 
 	/*
 	 * RunLong test summary
 	 */
 	@FXML
-	private ImageView noRunLongFirst;
+	private ImageView noLongRunsFirst;
 	@FXML
-	private ImageView yesRunLongFirst;
+	private ImageView yesLongRunsFirst;
 	@FXML
-	private Rectangle rectangleRunLongFirst;
+	private Rectangle rectangleLongRunsFirst;
 
 	/*
 	 * 
@@ -110,17 +111,17 @@ public class CompareWindowControllers implements Initializable {
 	 */
 	@FXML
 	private ChoiceBox<String> generatorType;
-	
+
 	@FXML
 	private ImageView secondImageView;
 	@FXML
-	private TextArea runSecond;
+	private TextArea runsSecond;
 	@FXML
 	private TextArea pokerSecond;
 	@FXML
 	private TextArea monobitSecond;
 	@FXML
-	private TextArea longRunSecond;
+	private TextArea longRunsSecond;
 	@FXML
 	private Text entropySecond;
 
@@ -135,51 +136,50 @@ public class CompareWindowControllers implements Initializable {
 	private Rectangle rectangleMonobitSecond;
 
 	/*
-	 * Pocker test summary
+	 * Poker test summary
 	 */
 	@FXML
-	private ImageView noPockerSecond;
+	private ImageView noPokerSecond;
 	@FXML
-	private ImageView yesPockerSecond;
+	private ImageView yesPokerSecond;
 	@FXML
-	private Rectangle rectanglePockerSecond;
+	private Rectangle rectanglePokerSecond;
 
 	/*
 	 * Run test summary
 	 */
 	@FXML
-	private ImageView noRunSecond;
+	private ImageView noRunsSecond;
 	@FXML
-	private ImageView yesRunSecond;
+	private ImageView yesRunsSecond;
 	@FXML
-	private Rectangle rectangleRunSecond;
+	private Rectangle rectangleRunsSecond;
 
 	/*
 	 * RunLong test summary
 	 */
 	@FXML
-	private ImageView noRunLongSecond;
+	private ImageView noLongRunsSecond;
 	@FXML
-	private ImageView yesRunLongSecond;
+	private ImageView yesLongRunsSecond;
 	@FXML
-	private Rectangle rectangleRunLongSecond;
-	
+	private Rectangle rectangleLongRunsSecond;
+
 	/*
 	 * Tab variables
 	 */
 	@FXML
 	private Tab summaryTabSecond;
 	@FXML
-	private Tab runTabSecond;
+	private Tab runsTabSecond;
 	@FXML
-	private Tab pockerTabSecond;
+	private Tab pokerTabSecond;
 	@FXML
-	private Tab longRunTabSecond;
+	private Tab longRunsTabSecond;
 	@FXML
 	private Tab monobitTabSecond;
 	@FXML
 	private Tab entropyTabSecond;
-	
 
 	/*
 	 * This method is called when the application starts.
@@ -190,71 +190,72 @@ public class CompareWindowControllers implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		generateArrayListFirstGenerator();
-		setComparePane("Generator Mouse Area", "First", firstImageView, monobitFirst, pokerFirst, runFirst, longRunFirst, entropyFirst);
+		setComparePane("Generator Mouse Area", "First", firstImageView, monobitFirst, pokerFirst, runsFirst,
+				longRunsFirst, entropyFirst);
 		setGenerators();
 	}
 
 	private void generateArrayListFirstGenerator() {
-		Random rand = new Random();
 		arrayForAnalyzing = new ArrayList<>();
 		for (int i = 0; i < maximumSizeOfArray; i++) {
-			arrayForAnalyzing.add(rand.nextInt(50));
+			arrayForAnalyzing.add(Integer.parseInt(Main.generator_configuration.COMPARE.get(i))%2);
 		}
 	}
 
-	private void setComparePane(String rnd, String page, ImageView imageViewToSet, TextArea monobitText, TextArea pockerText, TextArea runText, TextArea longRunText, Text entropy) {
+	private void setComparePane(String rnd, String page, ImageView imageViewToSet, TextArea monobitText,
+			TextArea pokerText, TextArea runsText, TextArea longRunsText, Text entropy) {
 		// Visual comparation
-		setImageView(generateRandomImage(imageSize), imageViewToSet);
+		setImageView(generateRandomImage(Main.generator_configuration.imageSize), imageViewToSet);
 
 		// Monobit test
 		double monobit = MonobitTest.applyMonobitTest(arrayForAnalyzing);
 		setMonobitTestImage(MonobitTest.isMonobitTestPassed(monobit), page);
 		showText(monobitText,
-				"Output of Monobit test for generator " + rnd + "\n is X = " + monobit
-						+ "\n which should meet the requirements 9725 < X < 10275\n therefore the output of the test is: "
-						+ MonobitTest.isMonobitTestPassed(monobit));
+				"Output of the Monobit test for\n" + rnd + " is:\n\n"+"X = " + monobit + "\n"
+						+ "which should meet the requirements\n" + "9725 < X < 10275\n"
+						+ "therefore the output of the test is\n" + MonobitTest.isMonobitTestPassed(monobit));
 
-		// Pocker test
-		double pocker = PockerTest.pokerTest(arrayForAnalyzing);
-		setPockerTestImage(PockerTest.isPokerTestPassed(pocker), page);
-		showText(pockerText,
-				"Output of Poker test for generator " + rnd + "\n is X = " + pocker
-						+ "\n which should meet the requirements 2.16 < X < 46.17"
-						+ "\n therefore the output of the test is: " + PockerTest.isPokerTestPassed(pocker));
+		// Poker test
+		double poker = PokerTest.pokerTest(arrayForAnalyzing);
+		setPokerTestImage(PokerTest.isPokerTestPassed(poker), page);
+		showText(pokerText,
+				"Output of the Poker test for\n" + rnd + " is:\n\n"+"X = " + poker + "\n"
+						+ "which should meet the requirements\n" + "2.16 < X < 46.17\n"
+						+ "therefore the output of the test is\n" + PokerTest.isPokerTestPassed(poker));
 
 		// Run test
-		int[] runsTestOutput = RunTest.runsTest(arrayForAnalyzing);
-		setRunTestImage(RunTest.isRunsTestPassed(runsTestOutput), page);
-		showText(runText,
-				"Outputs of Runs test for generator " + rnd + "\n NO of size 1 gaps and blocks: " + runsTestOutput[0]
-						+ " and " + runsTestOutput[6] + "\n which should meet the requirements 2343 < X < 2657"
-						+ "\n \n NO of size 2 gaps and blocks: " + runsTestOutput[1] + " and " + runsTestOutput[7]
-						+ "\n which should meet the requirements 1135 < X < 1365"
-						+ "\n \n NO of size 3 gaps and blocks: " + runsTestOutput[2] + " and " + runsTestOutput[8]
-						+ "\n which should meet the requirements 542 < X < 708" + "\n \n NO of size 4 gaps and blocks: "
-						+ runsTestOutput[3] + " and " + runsTestOutput[9]
-						+ "\n which should meet the requirements 251 < X < 373" + "\n \n NO of size 5 gaps and blocks: "
-						+ runsTestOutput[4] + " and " + runsTestOutput[10]
-						+ "\n which should meet the requirements 111 < X < 201"
-						+ "\n \n NO of size 6+ gaps and blocks: " + runsTestOutput[5] + " and " + runsTestOutput[11]
-						+ "\n which should meet the requirements 111 < X < 201"
-						+ "\n \n therefore the output of the test is: " + RunTest.isRunsTestPassed(runsTestOutput));
+		int[] runsTestOutput = RunsTest.runsTest(arrayForAnalyzing);
+		setRunTestImage(RunsTest.isRunsTestPassed(runsTestOutput), page);
+		showText(runsText, "Output of the Runs test for\n" + rnd +" is:\n \n" + "NO of size 1 gaps and blocks:\n"
+				+ runsTestOutput[0] + " and " + runsTestOutput[6] + "\n" + "which should meet the requirements\n"
+				+ "2343 < X < 2657" + "\n \n"+"NO of size 2 gaps and blocks:\n" + runsTestOutput[1] + " and "
+				+ runsTestOutput[7] + "\n" + "which should meet the requirements\n" + "1135 < X < 1365"
+				+ "\n \n"+"NO of size 3 gaps and blocks:\n" + runsTestOutput[2] + " and " + runsTestOutput[8] + "\n"
+				+ "which should meet the requirements\n" + "542 < X < 708" + "\n \n"+"NO of size 4 gaps and blocks:\n"
+				+ runsTestOutput[3] + " and " + runsTestOutput[9]
+				+ "\n"+"which should meet the requirements\n"+"251 < X < 373" + "\n \n"+"NO of size 5 gaps and blocks:\n"
+				+ runsTestOutput[4] + " and " + runsTestOutput[10]
+				+ "\n"+"which should meet the requirements\n"+"111 < X < 201" + "\n \n"+"NO of size 6+ gaps and blocks:\n"
+				+ runsTestOutput[5] + " and " + runsTestOutput[11]
+				+ "\n"+"which should meet the requirements\n"+"111 < X < 201" + "\n \n"+"therefore the output of the test is\n"
+				+ RunsTest.isRunsTestPassed(runsTestOutput));
 
 		// Long run test
-		double outputofRNGglobal = LongRunTest.longRunsTest(arrayForAnalyzing);
-		setRunLongTestImage(LongRunTest.islongRunsTestPassed(outputofRNGglobal), page);
-		showText(longRunText,
-				"Output of Long Runs test for generator " + rnd + "\n is X = " + outputofRNGglobal
-						+ "\n which should meet the requirements  X < 26" + "\n therefore the output of the test is: "
-						+ LongRunTest.islongRunsTestPassed(outputofRNGglobal));
+		double outputofRNGglobal = LongRunsTest.longRunsTest(arrayForAnalyzing);
+		setRunLongTestImage(LongRunsTest.islongRunsTestPassed(outputofRNGglobal), page);
+		showText(longRunsText,
+				"Output of the Long Runs test for\n" + rnd + " is:\n\n"+"X = " +  outputofRNGglobal + "\n"
+						+ "which should meet the requirements\n" + "X < 26\n" + "therefore the output of the test is\n"
+						+ LongRunsTest.islongRunsTestPassed(outputofRNGglobal));
 
 		// Entropy
 		entropy.setText(Double.toString(Entropy.chanceOfOneOrZero(arrayForAnalyzing)));
 	}
 
 	private void setGenerators() {
-		generatorType.setItems(FXCollections.observableArrayList("JavaRandom RNG", "JavaMath RNG", "JavaSecureRandom RNG"));
-		
+		generatorType
+				.setItems(FXCollections.observableArrayList("JavaRandom RNG", "JavaMath RNG", "JavaSecureRandom RNG"));
+
 		generatorType.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
 			@Override
 			public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
@@ -285,13 +286,12 @@ public class CompareWindowControllers implements Initializable {
 			GeneratorSecureRandom.setArray(arrayForAnalyzing, maximumSizeOfArray);
 			break;
 		default:
-				throw new Exception("There is no correct id provided!");
+			throw new Exception("There is no correct id provided!");
 		}
-		setComparePane("Generator Mouse Area", "Second", secondImageView, monobitSecond, pokerSecond, runSecond, longRunSecond, entropySecond);
+		setComparePane("Generator Mouse Area", "Second", secondImageView, monobitSecond, pokerSecond, runsSecond,
+				longRunsSecond, entropySecond);
 		enableSecondTabs();
 	}
-
-
 
 	private void setMonobitTestImage(boolean state, String page) {
 		if (state && page.equals("First")) {
@@ -305,39 +305,39 @@ public class CompareWindowControllers implements Initializable {
 		}
 	}
 
-	private void setPockerTestImage(boolean state, String page) {
+	private void setPokerTestImage(boolean state, String page) {
 		if (state && page.equals("First")) {
-			yesPockerFirst.setVisible(state);
-			noPockerFirst.setVisible(!state);
-			rectanglePockerFirst.setStroke(javafx.scene.paint.Color.GREEN);
+			yesPokerFirst.setVisible(state);
+			noPokerFirst.setVisible(!state);
+			rectanglePokerFirst.setStroke(javafx.scene.paint.Color.GREEN);
 		} else if (state && page.equals("Second")) {
-			yesPockerSecond.setVisible(state);
-			noPockerSecond.setVisible(!state);
-			rectanglePockerSecond.setStroke(javafx.scene.paint.Color.GREEN);
+			yesPokerSecond.setVisible(state);
+			noPokerSecond.setVisible(!state);
+			rectanglePokerSecond.setStroke(javafx.scene.paint.Color.GREEN);
 		}
 	}
 
 	private void setRunTestImage(boolean state, String page) {
 		if (state && page.equals("First")) {
-			yesRunFirst.setVisible(state);
-			noRunFirst.setVisible(!state);
-			rectangleRunFirst.setStroke(javafx.scene.paint.Color.GREEN);
+			yesRunsFirst.setVisible(state);
+			noRunsFirst.setVisible(!state);
+			rectangleRunsFirst.setStroke(javafx.scene.paint.Color.GREEN);
 		} else if (state && page.equals("Second")) {
-			yesRunSecond.setVisible(state);
-			noRunSecond.setVisible(!state);
-			rectangleRunSecond.setStroke(javafx.scene.paint.Color.GREEN);
+			yesRunsSecond.setVisible(state);
+			noRunsSecond.setVisible(!state);
+			rectangleRunsSecond.setStroke(javafx.scene.paint.Color.GREEN);
 		}
 	}
 
 	private void setRunLongTestImage(boolean state, String page) {
 		if (state && page.equals("First")) {
-			yesRunLongFirst.setVisible(state);
-			noRunLongFirst.setVisible(!state);
-			rectangleRunLongFirst.setStroke(javafx.scene.paint.Color.GREEN);
+			yesLongRunsFirst.setVisible(state);
+			noLongRunsFirst.setVisible(!state);
+			rectangleLongRunsFirst.setStroke(javafx.scene.paint.Color.GREEN);
 		} else if (state && page.equals("Second")) {
-			yesRunLongSecond.setVisible(state);
-			noRunLongSecond.setVisible(!state);
-			rectangleRunLongSecond.setStroke(javafx.scene.paint.Color.GREEN);
+			yesLongRunsSecond.setVisible(state);
+			noLongRunsSecond.setVisible(!state);
+			rectangleLongRunsSecond.setStroke(javafx.scene.paint.Color.GREEN);
 		}
 	}
 
@@ -374,12 +374,12 @@ public class CompareWindowControllers implements Initializable {
 			return true;
 		return false;
 	}
-	
+
 	private void enableSecondTabs() {
 		summaryTabSecond.setDisable(false);
-		runTabSecond.setDisable(false);
-		pockerTabSecond.setDisable(false);
-		longRunTabSecond.setDisable(false);
+		runsTabSecond.setDisable(false);
+		pokerTabSecond.setDisable(false);
+		longRunsTabSecond.setDisable(false);
 		monobitTabSecond.setDisable(false);
 		entropyTabSecond.setDisable(false);
 	}
